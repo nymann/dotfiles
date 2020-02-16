@@ -1,0 +1,11 @@
+#!/bin/sh
+raw="$(curl -fGsk "https://lichess.org/api/user/$1")"
+
+online="$(echo $raw | jq '.online?')"
+if [ "$online" = false ]
+then
+    echo "%{F#666666}%{F-}"
+    exit
+fi
+echo "%{F#FFFFFF}%{F-}"
+

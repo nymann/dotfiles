@@ -7,6 +7,9 @@
 - link:
     ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
     ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
+    ~/.config/polybar:
+        path: dots/polybar
+        use_glob: true
 
 - create:
     - ~/code
