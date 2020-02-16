@@ -1,0 +1,11 @@
+shift + Print
+	maimpick
+
+super + Return
+	alacritty
+
+super + d
+    j4-dmenu-desktop
+
+super + {_,shift + }q
+    bspc node -{c,k}

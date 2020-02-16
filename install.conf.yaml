@@ -1,0 +1,15 @@
+- defaults:
+    link:
+        force: true
+        create: true
+- clean: ['~', '~/.config']
+
+- link:
+    ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
+    ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
+
+- create:
+    ~/code
+
+- shell:
+    [git submodule update --init --recursive, Installing submodules]
