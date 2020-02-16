@@ -9,7 +9,7 @@
     ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
 
 - create:
-    ~/code
+    - ~/code
 
 - shell:
     [git submodule update --init --recursive, Installing submodules]
