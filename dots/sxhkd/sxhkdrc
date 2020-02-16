@@ -21,3 +21,6 @@ super + shift + r
 
 alt + Escape
     pkill -USR1 -x sxhkd
+
+super + f
+    bspc node -t \~fullscreen
