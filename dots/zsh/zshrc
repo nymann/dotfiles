@@ -1,0 +1,6 @@
+export PATH=/home/knj/.local/bin:$PATH
+export TERMINAL="alacritty"
+export ZSH="/home/knj/.oh-my-zsh"
+export LANG=en_US.UTF-8
+
+xsetroot -solid "#BBD0D7"

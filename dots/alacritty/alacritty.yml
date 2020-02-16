@@ -1,0 +1,13 @@
+colors:
+    cursor:
+        text: "0xfefff2"
+        cursor: "0xf0cc09"
+    
+    selection:
+        text: "0xb5b5b5"
+        background: "0x18354f"
+
+    primary:
+        background: "0x323232"
+        foreground: "0xffffff"
+

@@ -5,6 +5,11 @@
 - clean: ['~', '~/.config']
 
 - link:
+    ~/.zshrc: dots/zsh/zshrc
+    ~/.oh-my-zsh:
+        path: dots/oh-my-zsh
+        use_glob: true
+    ~/.config/alacritty/alacritty.yml: dots/alacritty/alacritty.yml
     ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
     ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
     ~/.config/polybar:
