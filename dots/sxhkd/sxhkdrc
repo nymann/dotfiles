@@ -10,5 +10,14 @@ super + d
 super + {_,shift + }q
     bspc node -{c,k}
 
-super + {_,shift + }{1,9,0}
-    bspc {desktop -f,node -d} '^{1-9,10}' --follow
+super + {_,shift + }{0-9}
+    bspc {desktop -f,node -d} {0-9}
+
+super + w
+    bspc monitor -f next
+
+super + shift + r
+    . ~/.config/bspwm/bspwmrc
+
+alt + Escape
+    pkill -USR1 -x sxhkd

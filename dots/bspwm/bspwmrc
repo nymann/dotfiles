@@ -2,9 +2,10 @@
 
 sxhkd &
 
-autorandr --change &
+#autorandr --change &
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor HDMI-3 -d 6 7 8 9 0 
+bspc monitor DP-2 -d 1 2 3 4 5 
 
 bspc config border_width         2
 bspc config window_gap          12
@@ -19,3 +20,4 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 
+bash ~/.config/polybar/launch.sh
