@@ -15,6 +15,9 @@
     ~/.config/polybar:
         path: dots/polybar
         use_glob: true
+    ~/.config/systemd:
+        path: dots/systemd
+        use_glob: true
 
 - create:
     - ~/code

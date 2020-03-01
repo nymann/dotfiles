@@ -14,6 +14,22 @@ if [ -f "$PATH_AC/online" ]; then
     ac=$(cat "$PATH_AC/online")
 fi
 
+if [ -f "$PATH_BATTERY_0/charge_now" ]; then
+    battery_level_0=$(cat "$PATH_BATTERY_0/charge_now")
+fi
+
+if [ -f "$PATH_BATTERY_0/charge_full" ]; then
+    battery_max_0=$(cat "$PATH_BATTERY_0/charge_full")
+fi
+
+if [ -f "$PATH_BATTERY_1/charge_now" ]; then
+    battery_level_1=$(cat "$PATH_BATTERY_1/charge_now")
+fi
+
+if [ -f "$PATH_BATTERY_1/charge_full" ]; then
+    battery_max_1=$(cat "$PATH_BATTERY_1/charge_full")
+fi
+
 if [ -f "$PATH_BATTERY_0/energy_now" ]; then
     battery_level_0=$(cat "$PATH_BATTERY_0/energy_now")
 fi
@@ -29,7 +45,6 @@ fi
 if [ -f "$PATH_BATTERY_1/energy_full" ]; then
     battery_max_1=$(cat "$PATH_BATTERY_1/energy_full")
 fi
-
 battery_level=$(("$battery_level_0 + $battery_level_1"))
 battery_max=$(("$battery_max_0 + $battery_max_1"))
 

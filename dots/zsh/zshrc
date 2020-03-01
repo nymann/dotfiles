@@ -83,13 +83,15 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
+export _JAVA_AWT_WM_NONREPARTENTING=1
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
+
+. /usr/lib/siemens-proxy/siemens-proxy.sh && proxy_update
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -102,3 +104,4 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
