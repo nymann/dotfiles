@@ -24,3 +24,12 @@ alt + Escape
 
 super + f
     bspc node -t \~fullscreen
+
+XF86AudioRaiseVolume
+    pactl -- set-sink-volume 0 +10%
+
+XF86AudioLowerVolume
+    pactl -- set-sink-volume 0 -10%
+
+XF86AudioMute
+    pactl list sinks | grep -q Mute:.no && pactl set-sink-mute 0 1 || pactl set-sink-mute 0 0

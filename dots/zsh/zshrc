@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/knj/.oh-my-zsh"
@@ -77,6 +77,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+export EDITOR=vim
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -104,4 +106,3 @@ export _JAVA_AWT_WM_NONREPARTENTING=1
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
