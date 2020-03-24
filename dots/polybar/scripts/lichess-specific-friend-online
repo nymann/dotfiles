@@ -2,6 +2,11 @@
 raw="$(curl -fGsk "https://lichess.org/api/user/$1")"
 
 online="$(echo $raw | jq '.online?')"
+if [ -z "$online" ]
+then
+    echo ""
+    exit
+fi
 if [ "$online" = false ]
 then
     echo "%{F#666666}%{F-}"

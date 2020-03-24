@@ -1,7 +1,8 @@
 #! /bin/sh
 
 sxhkd &
-
+wmname LG3D
+xsetroot -solid black
 #autorandr --change &
 bspc config border_width         2
 bspc config window_gap		0

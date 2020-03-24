@@ -18,6 +18,12 @@
     ~/.config/systemd:
         path: dots/systemd
         use_glob: true
+    ~/.config/qutebrowser:
+        path: dots/qutebrowser
+        use_glob: true
+    ~/.local/bin:
+        path: dots/scripts
+        use_glob: true
 
 - create:
     - ~/code
