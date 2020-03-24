@@ -8,7 +8,7 @@ export ZSH="/home/knj/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="random"
+ZSH_THEME="juanghurtado"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -42,10 +42,10 @@ ZSH_THEME="random"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -58,7 +58,7 @@ ZSH_THEME="random"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy.mm.dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -93,8 +93,9 @@ export _JAVA_AWT_WM_NONREPARTENTING=1
 #   export EDITOR='mvim'
 # fi
 
-. /usr/lib/siemens-proxy/siemens-proxy.sh && proxy_update
-
+if [ "$HOST" = "*siemens*" ] ; then
+    . /usr/lib/siemens-proxy/siemens-proxy.sh && proxy_update
+fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 

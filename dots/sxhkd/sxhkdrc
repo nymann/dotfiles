@@ -1,8 +1,8 @@
-shift + Print
-	maimpick
+shift + super + s
+    screenshot-util
 
 super + Return
-	alacritty
+    alacritty
 
 super + d
     j4-dmenu-desktop
@@ -33,3 +33,7 @@ XF86AudioLowerVolume
 
 XF86AudioMute
     pactl list sinks | grep -q Mute:.no && pactl set-sink-mute 0 1 || pactl set-sink-mute 0 0
+
+
+super + t
+    bspc node -t floating

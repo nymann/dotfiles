@@ -1,6 +1,12 @@
 #!/bin/sh
 raw="$(curl -fGsk "https://lichess.org/api/user/$1")"
 
+if [ "$raw" = "" ] 
+then
+    echo ""
+    exit
+fi
+
 online="$(echo $raw | jq '.online?')"
 if [ "$online" = false ]
 then
