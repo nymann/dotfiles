@@ -93,9 +93,6 @@ export _JAVA_AWT_WM_NONREPARTENTING=1
 #   export EDITOR='mvim'
 # fi
 
-if [ "$HOST" = "*siemens*" ] ; then
-    . /usr/lib/siemens-proxy/siemens-proxy.sh && proxy_update
-fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
