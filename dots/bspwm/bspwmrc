@@ -1,5 +1,5 @@
 #! /bin/sh
-
+pkill -9 shxkd
 sxhkd &
 wmname LG3D
 xsetroot -solid black
