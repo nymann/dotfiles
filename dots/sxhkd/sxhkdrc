@@ -45,3 +45,6 @@ ctrl + shift + Left
 
 ctrl + shift + x
     betterlockscreen -l dim
+
+ctrl + shift + p
+    pavucontrol
