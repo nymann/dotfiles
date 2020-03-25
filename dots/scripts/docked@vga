@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 
-bspc monitor LVDS-1 -d 1 2 3 4 5 
-bspc monitor VGA-1 -d 0 9 8 7 6
+MONITOR_1=$(bspc query -M | sed '1q;d')
+MONITOR_2=$(bspc query -M | sed '2q;d')
+bspc monitor "$MONITOR_1" -d 1 2 3 4 5
+bspc monitor "$MONITOR_2" -d 0 9 8 7 6
