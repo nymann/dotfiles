@@ -6,9 +6,12 @@ download_file()
 { 
     curl -s "https://corona-stats.online/$1" > $HOME/.cache/corona_$1
 }
+
+STORED_TIME="$(stat -c %y ~/.cache/corona_denmark | xargs -0 date +"%Y-%m-%d %H" -d)"
 if [ ! -f $HOME/.cache/corona_$1 ] ; then
     download_file $1
-elif [ "$(stat -c %y $HOME/.cache/corona_$1 | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] ; then 
+elif [ "$(stat -c %y $HOME/.cache/corona_$1 |
+        xargs -0 date +"%Y-%m-%d %H" -d)" != "$(date '+%Y-%m-%d %H')" ] ; then 
     download_file $1
 fi
 
