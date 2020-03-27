@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Original author: William Chanrico
+# Modified by: github.com/nymann
+
+if [[ -z $2 ]]; then
+	output_filename="kek"
+else
+	output_filename="$2"
+fi
+
+if [ -e "$output_filename.mp4" ]; then
+	read -p "Overwrite $(tput bold)$output_filename.mp4$(tput sgr0)? [y/N] " input
+
+	[[ ! $input =~ [yY] ]] && exit;
+fi
+
+counter=0
+
+ffmpeg -y -hide_banner -loglevel info -i $1 -c copy -bsf:a aac_adtstoasc "$output_filename.mp4" 2>&1 \
+	| while read -r OUTPUT || [ -n "$OUTPUT" ]; do
+
+	if [ $counter = 4 ]; then
+		while [[ $counter -gt 0 ]]; do
+			tput cuu1;
+			tput el;
+			let counter=counter-1;
+		done
+	fi
+
+	echo "${OUTPUT:0:$(tput cols)}"
+	let counter=counter+1
+done
