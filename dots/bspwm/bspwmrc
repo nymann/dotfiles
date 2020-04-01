@@ -3,6 +3,7 @@ pkill -9 shxkd
 sxhkd &
 wmname LG3D
 xsetroot -solid black
+setxkbmap -option -variant altgr-intl && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape'
 #autorandr --change &
 bspc config border_width         2
 bspc config window_gap		0

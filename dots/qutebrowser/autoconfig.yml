@@ -7,4 +7,4 @@
 config_version: 2
 settings:
   content.notifications:
-    https://www.youtube.com: false
+    https://www.reddit.com: false

@@ -42,14 +42,13 @@ WARNING: The login details are viewable as plaintext in qutebrowser's debug log
 
 import argparse
 import enum
-import fnmatch
 import functools
+import json
 import os
-import re
 import shlex
 import subprocess
 import sys
-import json
+
 import tldextract
 
 argument_parser = argparse.ArgumentParser(
@@ -178,17 +177,13 @@ def main(arguments):
         return ExitCodes.FAILURE
 
     extract_result = tldextract.extract(arguments.url)
-
     # Try to find candidates using targets in the following order: fully-qualified domain name (includes subdomains),
     # the registered domain name and finally: the IPv4 address if that's what
     # the URL represents
     candidates = []
     for target in filter(None, [
-                extract_result.fqdn,
-                extract_result.registered_domain,
-                extract_result.subdomain + extract_result.domain,
-                extract_result.domain,
-                extract_result.ipv4]):
+        extract_result.fqdn,
+        extract_result.ipv4]):
         target_candidates = json.loads(
             pass_(
                 target,
@@ -199,7 +194,7 @@ def main(arguments):
         if not target_candidates:
             continue
 
-        candidates = candidates + target_candidates
+        candidates.extend(target_candidates)
         if not arguments.merge_candidates:
             break
     else:
@@ -211,7 +206,7 @@ def main(arguments):
     if len(candidates) == 1:
         selection = candidates.pop()
     else:
-        choices = ['{:s} | {:s}'.format(c['name'], c['login']['username']) for c in candidates]
+        choices = [f"{c['name']} | {c['login']['username']}" for c in candidates]
         choice = dmenu(choices, arguments.dmenu_invocation, arguments.io_encoding)
         choice_tokens = choice.split('|')
         choice_name = choice_tokens[0].strip()
@@ -227,7 +222,6 @@ def main(arguments):
 
     username = selection['login']['username']
     password = selection['login']['password']
-
     if arguments.username_only:
         fake_key_raw(username)
     elif arguments.password_only:

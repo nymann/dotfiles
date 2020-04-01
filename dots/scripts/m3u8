@@ -4,7 +4,7 @@
 # Modified by: github.com/nymann
 
 if [[ -z $2 ]]; then
-	output_filename="kek"
+	output_filename="$HOME/videos/kek"
 else
 	output_filename="$2"
 fi
