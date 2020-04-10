@@ -13,6 +13,7 @@
     ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
     ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
     ~/.config/mpd/mpd.conf: dots/mpd/mpd.conf
+    ~/.xinitrc: dots/.xinitrc
     ~/.config/polybar:
         path: dots/polybar
         use_glob: true
