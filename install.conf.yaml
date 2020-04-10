@@ -12,7 +12,6 @@
     ~/.config/alacritty/alacritty.yml: dots/alacritty/alacritty.yml
     ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
     ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
-    ~/.config/mail/mailicons: dots/mail/mailicons
     ~/.config/polybar:
         path: dots/polybar
         use_glob: true
