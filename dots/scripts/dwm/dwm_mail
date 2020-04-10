@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-mkdir -p $HOME/.cache/dwmbar/
-
-while :; do
-    $HOME/.local/bin/unread_mail > $HOME/.cache/dwmbar/top_0002_mail
-    sleep 10;
-done
