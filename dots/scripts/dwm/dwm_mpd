@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+mkdir -p $HOME/.cache/dwmbar/
+
+while :; do
+    STATUS=$($HOME/.local/bin/mpd_status)
+    PROGRESS=$($HOME/.local/bin/mpd_progress)
+    echo "$STATUS $PROGRESS" > $HOME/.cache/dwmbar/bot_0001_mpd
+    sleep 1;
+done

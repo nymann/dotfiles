@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+RES=""
+while read LINE; do
+    ACC=$(echo $LINE | sed 's/=/ /' | awk '{print $1}')
+    ICO=$(echo $LINE | sed 's/=/ /' | awk '{print $2}')
+    CNT=$(du -a --exclude="All\ Mail*" ~/.local/share/mail/$ACC/*/new 2>/dev/null | grep -v "\/new$" | sed -n '$=' | tr -d '\n' | sed 's/^$/0/')
+    if [ -z "$CNT" ]; then
+        RES="$RES $ICO 0"
+    else
+        RES="$RES $ICO $CNT"
+    fi
+done < ~/.config/mailicons
+echo $RES | cut -c 1-

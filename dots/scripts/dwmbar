@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+$HOME/.local/bin/refdwmbar
+
+mkdir -p $HOME/.cache/dwmbar/
+
+while :; do
+    xsetroot -name "$(cat $HOME/.cache/dwmbar/top_* | tr '\n' ' ');$(cat $HOME/.cache/dwmbar/bot_* | tr '\n' ' ')"
+    sleep 1s
+done

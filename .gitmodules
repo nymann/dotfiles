@@ -7,3 +7,11 @@
 	path = dots/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh
 	ignore = dirty
+
+[submodule "dwm"]
+    path = dots/dwm
+    url = https://github.com/nymann/dwm
+    ignore = dirty
+[submodule "dots/dwm"]
+	path = dots/dwm
+	url = https://github.com/nymann/dwm

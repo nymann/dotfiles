@@ -102,3 +102,5 @@ export _JAVA_AWT_WM_NONREPARTENTING=1
 # For a full list of active aliases, run `alias`.
 alias sus="systemctl --user status"
 alias v="nvim"
+alias nymann="cd ~/code/github/nymann"
+alias ydl="youtube-dl -o \"%(title)s.%(ext)s\" --write-description --write-info-json"
