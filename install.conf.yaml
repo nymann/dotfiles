@@ -12,6 +12,7 @@
     ~/.config/alacritty/alacritty.yml: dots/alacritty/alacritty.yml
     ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
     ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
+    ~/.config/mpd/mpd.conf: dots/mpd/mpd.conf
     ~/.config/polybar:
         path: dots/polybar
         use_glob: true
