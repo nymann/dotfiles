@@ -14,4 +14,4 @@
     ignore = dirty
 [submodule "dots/dwm"]
 	path = dots/dwm
-	url = https://github.com/nymann/dwm
+	url = git@github.com:nymann/dwm
