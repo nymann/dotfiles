@@ -3,6 +3,5 @@ compton &
 setxkbmap -option -variant altgr-intl && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape'
 dwmbar &
 wmname LG3D &
-mpc clear ; mpc ls | mpc add
+autorandr --change &
 exec dwm
-#exec bspwm

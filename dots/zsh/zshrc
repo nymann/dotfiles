@@ -103,4 +103,10 @@ export _JAVA_AWT_WM_NONREPARTENTING=1
 alias sus="systemctl --user status"
 alias v="nvim"
 alias nymann="cd ~/code/github/nymann"
+alias creditoro="cd ~/code/github/creditoro"
+alias github="cd ~/code/github"
 alias ydl="youtube-dl -o \"%(title)s.%(ext)s\" --write-description --write-info-json"
+alias pykpi="cd ~/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykpi/"
+alias sdn="sudo shutdown now"
+alias todo="calcurse -Q --filter-type todo --filter-uncompleted"
+
