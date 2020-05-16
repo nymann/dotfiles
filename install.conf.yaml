@@ -10,6 +10,9 @@
         path: dots/oh-my-zsh
         use_glob: true
     ~/.config/alacritty/alacritty.yml: dots/alacritty/alacritty.yml
+    ~/.config/nvim:
+        path: dots/nvim
+        use_glob: true
     ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
     ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
     ~/.config/mpd/mpd.conf: dots/mpd/mpd.conf
