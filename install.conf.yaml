@@ -30,10 +30,7 @@
         path: dots/scripts
         use_glob: true
         recursive: true
-    ~/code/github/nymann/dwm:
-        path: dots/dwm
-        use_glob: true
-
+    ~/.config/fontconfig/fonts.conf: dots/fontconfig/fonts.conf
 - create:
     - ~/code
 
