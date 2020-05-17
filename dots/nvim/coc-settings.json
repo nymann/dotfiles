@@ -1,117 +1,18 @@
 {
-    "suggest.noselect": false,
-    "coc.preferences.formatOnSaveFiletypes": [
-        "javascript",
-        "typescript",
-        "typescriptreact",
-        "json",
-        "javascriptreact",
-        "typescript.tsx",
-        "graphql",
-        "dart"
-    ],
-    "prettier.printWidth": 80,
-    "prettier.tabWidth": 4,
-    "prettier.singleQuote": false,
-    "prettier.trailingComma": "es5",
-    "prettier.bracketSpacing": true,
-    "prettier.semi": true,
-    "prettier.useTabs": false,
-    "prettier.arrowParens": "always",
-    "flutter.lsp.initialization.closingLabels": true,
-    "latex.lint.onSave": true,
-    "latex.build.onSave": true,
-    "latex.forwardSearch.executable": "zathura",
-    "languageserver": {
-        "bash": {
-          "command": "bash-language-server",
-          "args": ["start"],
-          "filetypes": ["sh"],
-          "ignoredRootPaths": ["~"]
-        },
-        "digestif": {
-          "command": "digestif",
-          "filetypes": ["tex", "plaintex", "context"]
-        },
-"golang": {
-      "command": "go-langserver",
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "gocodeCompletionEnabled": true,
-        "diagnosticsEnabled": true,
-        "lintTool": "golint"
-      }
+  "suggest.noselect": false,
+  "coc.preferences.formatOnSaveFiletypes": ["json"],
+  "python.jediEnabled": false,
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
     },
-        "lua": {
-          "command": "lua-lsp",
-          "filetypes": ["lua"]
-        },
-        "python": {
-            "command": "python",
-            "args": [
-              "-mpyls",
-              "-vv",
-              "--log-file",
-              "/tmp/lsp_python.log"
-            ],
-            "trace.server": "verbose",
-            "filetypes": [
-              "python"
-            ],
-            "settings": {
-              "pyls": {
-                "enable": true,
-                "trace": {
-                  "server": "verbose"
-                },
-                "commandPath": "",
-                "configurationSources": [
-                  "pycodestyle"
-                ],
-                "plugins": {
-                  "jedi_completion": {
-                    "enabled": true
-                  },
-                  "jedi_hover": {
-                    "enabled": true
-                  },
-                  "jedi_references": {
-                    "enabled": true
-                  },
-                  "jedi_signature_help": {
-                    "enabled": true
-                  },
-                  "jedi_symbols": {
-                    "enabled": true,
-                    "all_scopes": true
-                  },
-                  "mccabe": {
-                    "enabled": true,
-                    "threshold": 15
-                  },
-                  "preload": {
-                    "enabled": true
-                  },
-                  "pycodestyle": {
-                    "enabled": true
-                  },
-                  "pydocstyle": {
-                    "enabled": false,
-                    "match": "(?!test_).*\\.py",
-                    "matchDir": "[^\\.].*"
-                  },
-                  "pyflakes": {
-                    "enabled": true
-                  },
-                  "rope_completion": {
-                    "enabled": true
-                  },
-                  "yapf": {
-                    "enabled": true
-                  }
-                }
-              }
-            }
-          }
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
     }
+  }
 }

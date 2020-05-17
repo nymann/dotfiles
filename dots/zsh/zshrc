@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.gem/ruby/2.7.0/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/knj/.oh-my-zsh"
@@ -109,4 +109,4 @@ alias ydl="youtube-dl -o \"%(title)s.%(ext)s\" --write-description --write-info-
 alias pykpi="cd ~/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykpi/"
 alias sdn="sudo shutdown now"
 alias todo="calcurse -Q --filter-type todo --filter-uncompleted"
-
+alias dotfiles="cd ~/code/github/nymann/dotfiles/"

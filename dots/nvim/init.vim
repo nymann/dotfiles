@@ -6,23 +6,26 @@ call plug#begin()
     Plug 'ryanoasis/vim-devicons'
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'prettier/vim-prettier', { 'do': 'npm install' }
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'vim-syntastic/syntastic'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+    Plug 'SirVer/ultisnips'
+    Plug 'nymann/vim-snippets'
 
-    " Language syntax
-    Plug 'cakebaker/scss-syntax.vim'
-    Plug 'glench/vim-jinja2-syntax'
-    Plug 'evanleck/vim-svelte'
-    Plug 'mboughaba/i3config.vim'
-    Plug 'HerringtonDarkholme/yats.vim'
-    Plug 'mattn/emmet-vim'
-    Plug 'pangloss/vim-javascript'
-    Plug 'dart-lang/dart-vim-plugin'
-    Plug 'digitaltoad/vim-pug'
-    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+    " Folding
+    Plug 'tmhedberg/SimpylFold'
+
+    " PYTHON (https://www.vimfromscratch.com/articles/vim-for-python/)
+    " Syntax highlighter
+    Plug 'numirias/semshi'
+    " Indentation
+    Plug 'Vimjas/vim-python-pep8-indent'
+    " Linting & Fixing
+    Plug 'dense-analysis/ale'
+
+    " Tag bar
+    Plug 'liuchengxu/vista.vim'
 
     " Appearance
     Plug 'junegunn/goyo.vim'
@@ -31,15 +34,17 @@ call plug#begin()
     Plug 'gko/vim-coloresque'
 
     " Themes
-    Plug 'morhetz/gruvbox'
-    Plug 'agude/vim-eldar'
+    Plug 'joshdick/onedark.vim'
+    Plug 'junegunn/seoul256.vim'
 call plug#end()
 
 so ~/.config/nvim/includes/basic.vim
 so ~/.config/nvim/includes/wildmenu.vim
 so ~/.config/nvim/includes/backup.vim
-so ~/.config/nvim/includes/plugins.vim
 so ~/.config/nvim/includes/map.vim
 so ~/.config/nvim/includes/filetypes.vim
+so ~/.config/nvim/includes/plugins.vim
 so ~/.config/nvim/includes/events.vim
+so ~/.config/nvim/includes/python.vim
 so ~/.config/nvim/includes/syntax/pgn.vim
+so ~/.config/nvim/includes/syntax/vcard.vim

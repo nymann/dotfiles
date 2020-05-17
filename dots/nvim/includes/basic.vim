@@ -30,11 +30,14 @@ set cmdheight=1
 set hidden
 set shortmess+=c
 set conceallevel=3
-set background=dark
 set termguicolors
 
-colorscheme gruvbox
-"colorscheme eldar
+" Colorschemes
+" seoul256 (dark):
+" Range: 233 (darkest) ~ 239 (lightest)
+" Default: 237
+let g:seoul256_background = 235
+colo seoul256
 
 if exists('+clipboard')
   set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
