@@ -110,12 +110,5 @@ alias pykpi="cd ~/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykpi/"
 alias sdn="sudo shutdown now"
 alias todo="calcurse -Q --filter-type todo --filter-uncompleted"
 alias dotfiles="cd ~/code/github/nymann/dotfiles/"
-alias sudo="sudo "
-# preserve nvim configuration
-sudo() {
-    if [[ $1 == "v"]] || [[ $1 == "nvim"]]; then
-        command sudo -E nvim "${@:2}"
-    else
-        command sudo "$@"
-    fi
-}
+alias sv="sudo -E nvim"
+
