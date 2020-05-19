@@ -80,7 +80,6 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
 export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME=~/.config
-export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
