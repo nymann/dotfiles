@@ -3,7 +3,8 @@ Description=Update calcurse caldav every 5 minutes.
 
 [Timer]
 OnUnitActiveSec=5min
-Persistent=true
+OnBootSec=2m
+ersistent=true
 
 [Install]
 WantedBy=timers.target

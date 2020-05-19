@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.gem/ruby/2.7.0/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/knj/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -77,8 +77,10 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR=vim
+export EDITOR=nvim
+export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME=~/.config
+export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -111,4 +113,7 @@ alias sdn="sudo shutdown now"
 alias todo="calcurse -Q --filter-type todo --filter-uncompleted"
 alias dotfiles="cd ~/code/github/nymann/dotfiles/"
 alias sv="sudo -E nvim"
-
+alias sysu="systemctl --user"
+alias unlock="pass mutt-wizard-siemens"
+alias scd2ldap="ldapsearch -x -H ldap://scd2ldap.siemens.net:389"
+alias stp="~/code/mo-gitlab.siemens.dk/student-talent-pool/"

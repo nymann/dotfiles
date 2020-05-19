@@ -13,8 +13,9 @@ call plug#begin()
     Plug 'SirVer/ultisnips'
     Plug 'nymann/vim-snippets'
 
-    " Folding
-    Plug 'tmhedberg/SimpylFold'
+    " MARKDOWN (https://jdhao.github.io/2019/01/15/markdown_edit_preview_nvim/)
+    " Previewing
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 
     " PYTHON (https://www.vimfromscratch.com/articles/vim-for-python/)
     " Syntax highlighter

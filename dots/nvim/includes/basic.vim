@@ -42,4 +42,4 @@ if exists('+clipboard')
   set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
 endif
 
-
+set foldlevelstart=20

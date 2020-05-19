@@ -12,6 +12,13 @@
     path = dots/dwm
     url = https://github.com/nymann/dwm
     ignore = dirty
-[submodule "dots/dwm"]
-	path = dots/dwm
-	url = git@github.com:nymann/dwm
+
+[submodule "leaderF"]
+    path = dots/nvim/plugged/LeaderF
+    url = https://github.com/Yggdroot/LeaderF
+    ignore = dirty
+
+[submodule "markdown-preview"]
+	path = dots/nvim/plugged/markdown-preview.nvim
+	url = https://github.com/iamcco/markdown-preview.nvim
+	ignore = dirty

@@ -48,5 +48,4 @@ noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 " FZF (Ctrl-P)
 nnoremap <silent> <C-p> :Leaderf file --popup<CR>
 
-" Folding
-nnoremap <space> za
+map gf :e <cfile><CR>
