@@ -24,7 +24,7 @@ map <leader>l <C-w>l
 
 " File system navigation
 nmap <C-b> :NERDTreeToggle<CR>
-map <leader>ev :e ~/.config/nvim/includes<CR>
+map <leader>ev :e ~/.config/nvim/init.vim<CR>
 
 " Search
 map <leader><leader> :noh<CR>
