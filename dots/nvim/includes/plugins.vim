@@ -1,4 +1,4 @@
-so ~/.config/nvim/includes/plugins/ale.vim
+"so ~/.config/nvim/includes/plugins/ale.vim
 so ~/.config/nvim/includes/plugins/ultisnips.vim
 so ~/.config/nvim/includes/plugins/airline.vim
 so ~/.config/nvim/includes/plugins/coc.vim

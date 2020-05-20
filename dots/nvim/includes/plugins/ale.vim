@@ -9,7 +9,7 @@ let g:ale_fixers = {
 
 nmap <F10> :ALEFix<CR>
 let g:ale_fix_on_save = 1
-
+let g:ale_python_auto_pipenv = 1
 function! LinterStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
 

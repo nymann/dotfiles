@@ -23,7 +23,7 @@ call plug#begin()
     " Indentation
     Plug 'Vimjas/vim-python-pep8-indent'
     " Linting & Fixing
-    Plug 'dense-analysis/ale'
+    "Plug 'dense-analysis/ale'
 
     " Tag bar
     Plug 'liuchengxu/vista.vim'

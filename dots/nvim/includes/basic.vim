@@ -4,8 +4,9 @@ set shell=zsh
 set encoding=UTF-8
 set number
 set cursorline
-set wrap
 set tabstop=4
+set wrap
+set relativenumber
 set shiftwidth=4
 set expandtab
 set autoindent
