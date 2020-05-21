@@ -9,7 +9,8 @@ call plug#begin()
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'vim-syntastic/syntastic'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'SirVer/ultisnips'
     Plug 'nymann/vim-snippets'
 
@@ -24,6 +25,7 @@ call plug#begin()
     Plug 'Vimjas/vim-python-pep8-indent'
     " Linting & Fixing
     "Plug 'dense-analysis/ale'
+    Plug 'heavenshell/vim-pydocstring'
 
     " Tag bar
     Plug 'liuchengxu/vista.vim'

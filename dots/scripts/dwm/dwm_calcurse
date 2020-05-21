@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+mkdir -p $HOME/.cache/dwmbar/
+
+while :; do
+    OUT="$($HOME/.local/bin/nextapt)"
+    echo $OUT > $HOME/.cache/dwmbar/top_0005_calcurse
+    sleep 10;
+done

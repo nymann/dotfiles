@@ -6,7 +6,10 @@
 
 - link:
     ~/.zshrc: dots/zsh/zshrc
-    ~/.oh-my-zsh:
+    ~/.config/zsh/custom: 
+        path: dots/zsh/custom
+        use_glob: true
+    ~/.config/zsh/oh-my-zsh:
         path: dots/oh-my-zsh
         use_glob: true
     ~/.config/alacritty/alacritty.yml: dots/alacritty/alacritty.yml

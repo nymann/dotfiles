@@ -10,5 +10,5 @@ while read LINE; do
     else
         RES="$RES $ICO $CNT"
     fi
-done < ~/.config/mail/mailicons
+done < ~/.config/mailicons
 echo $RES | cut -c 1-

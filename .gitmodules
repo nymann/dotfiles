@@ -13,9 +13,13 @@
     url = https://github.com/nymann/dwm
     ignore = dirty
 
-[submodule "leaderF"]
-    path = dots/nvim/plugged/LeaderF
-    url = https://github.com/Yggdroot/LeaderF
+[submodule "fzf"]
+    path = dots/nvim/plugged/fzf
+    url = https://github.com/junegunn/fzf
+
+[submodule "fzf.vim"]
+    path = dots/nvim/plugged/fzf.vim
+    url = https://github.com/junegunn/fzf.vim
 
 [submodule "markdown-preview"]
 	path = dots/nvim/plugged/markdown-preview.nvim
@@ -105,4 +109,8 @@
 [submodule "vista.vim"]
     path = dots/nvim/plugged/vista.vim
     url = https://github.com/liuchengxu/vista.vim
+
+[submodule "vim-pydocstring"]
+    path = dots/nvim/plugged/vim-pydocstring
+    url = https://github.com/heavenshell/vim-pydocstring
 

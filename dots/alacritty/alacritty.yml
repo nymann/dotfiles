@@ -1,15 +1,50 @@
-colors:
-    cursor:
-        text: "0xfefff2"
-        cursor: "0xf0cc09"
-    
-    selection:
-        text: "0xb5b5b5"
-        background: "0x18354f"
+schemes:
+    siemens: &dark
+        primary:
+           background: "#323232"
+           foreground: "#ffffff"
+        cursor:
+            text: "#fefff2"
+            cursor: "#009999"
+        
+        selection:
+            text: "#b5b5b5"
+            background: "#18354f"
 
-    primary:
-        background: "0x323232"
-        foreground: "0xffffff"
+        normal:
+            black: "#323232"
+            red: "#f62447"
+            green: "#65c728"
+            yellow: "#ffc800"
+            blue: "#009eff"
+            magenta: "#D14BBC"
+            cyan: "#009999"
+            white: "#ffffff"
+
+        bright:
+            black: "#323232"
+            red: "#f62447"
+            green: "#65c728"
+            yellow: "#ffc800"
+            blue: "#009eff"
+            magenta: "#D14BBC"
+            cyan: "#009999"
+            white: "#ffffff"
+
+        dim:
+            black: "#323232"
+            red: "#f62447"
+            green: "#65c728"
+            yellow: "#ffc800"
+            blue: "#009eff"
+            magenta: "#D14BBC"
+            cyan: "#009999"
+            white: "#ffffff"
+
+       
+   
+
+colors: *dark
 
 font:
     normal:
@@ -21,3 +56,6 @@ font:
     italic:
       family: RobotoMono Nerd Font
       style: Italic
+
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }

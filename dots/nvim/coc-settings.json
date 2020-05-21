@@ -3,7 +3,7 @@
   "coc.preferences.formatOnSaveFiletypes": ["json", "python"],
   "python.jediEnabled": false,
   "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "/usr/lib/python3.8/site-packages/yapf",
+  "python.formatting.yapfPath": "/usr/bin/yapf",
   "languageserver": {
     "bash": {
       "command": "bash-language-server",

@@ -1,7 +1,6 @@
 xsetroot -solid black
 compton &
-setxkbmap -option -variant altgr-intl && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape'
+setxkbmap -option caps:esc -variant altgr-intl & 
 dwmbar &
-wmname LG3D &
 autorandr --change &
 exec dwm

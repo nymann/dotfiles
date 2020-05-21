@@ -15,6 +15,11 @@ let g:NERDTreeIndicatorMapCustom = {
 let g:NERDTreeIgnore = [
     \'.inject.summary$',
     \'.inject.dart$',
-    \'.g.dart$'
+    \'.g.dart$',
+    \'^\.egg-info$',
+    \'^.idea',
+    \'^__pycache__',
+    \'^.git',
+    \'^venv'
     \]
 let g:NERDTreeShowHidden = 1
