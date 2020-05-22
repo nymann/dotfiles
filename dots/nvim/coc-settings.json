@@ -4,6 +4,11 @@
   "python.jediEnabled": false,
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "/usr/bin/yapf",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintUseMinimalCheckers": false,
+  "python.linting.lintOnSave": true,
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_flask_sqlalchemy"],
   "languageserver": {
     "bash": {
       "command": "bash-language-server",

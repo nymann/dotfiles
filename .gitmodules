@@ -63,7 +63,7 @@
 
 [submodule "onedark.vim"]
     path = dots/nvim/plugged/onedark.vim
-    url = https://github.com/junegunn/onedark.vim
+    url = https://github.com/joshdick/onedark.vim
 
 [submodule "rainbow_parentheses.vim"]
     path = dots/nvim/plugged/rainbow_parentheses.vim

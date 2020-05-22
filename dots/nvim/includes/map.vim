@@ -45,7 +45,7 @@ map <leader>/ <plug>NERDCommenterToggle<CR>
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 "noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" FZF (Ctrl-P)
-nnoremap <silent> <C-p> :Leaderf file --popup<CR>
-
+" FZF
+nnoremap <silent> <leader>f :FZF<CR>
+nnoremap <silent> <leader>F :FZF ~<CR>
 map gf :e <cfile><CR>

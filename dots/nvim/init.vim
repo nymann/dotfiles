@@ -7,7 +7,7 @@ call plug#begin()
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
     Plug 'norcalli/nvim-colorizer.lua'
-    Plug 'vim-syntastic/syntastic'
+    "Plug 'vim-syntastic/syntastic'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
