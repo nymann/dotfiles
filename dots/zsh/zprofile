@@ -15,5 +15,5 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Program related stuff
 export LANG=en_US.UTF-8
-export ZSH="${HOME}/.oh-my-zsh"
-export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh/custom"
+export ZSH="$ZDOTDIR/oh-my-zsh"
+export ZSH_CUSTOM="$ZDOTDIR/custom"

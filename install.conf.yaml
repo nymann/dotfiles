@@ -5,8 +5,8 @@
 - clean: ['~', '~/.config']
 
 - link:
-    ~/.config/zsh/zshrc: dots/zsh/zshrc
-    ~/.zprofile: dots/zsh/zprofile
+    ~/.config/zsh/.zshrc: dots/zsh/zshrc
+    ~/.config/zsh/.zprofile: dots/zsh/zprofile
     ~/.config/zsh/custom: 
         path: dots/zsh/custom
         use_glob: true
