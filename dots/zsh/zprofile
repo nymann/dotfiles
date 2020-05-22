@@ -1,0 +1,19 @@
+# Adds ~/.local/bin and my script folder to path.
+export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH"
+
+# Set config home dir.
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Default programs:
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="firefox-developer-edition"
+export READER="zathura"
+
+# Cleanup ~/ 
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Program related stuff
+export LANG=en_US.UTF-8
+export ZSH="${HOME}/.oh-my-zsh"
+export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh/custom"
