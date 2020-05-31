@@ -1,0 +1,1 @@
+/home/knj/code/github/haorenW1025/dotfiles/nvim/lua/lsp_status.lua

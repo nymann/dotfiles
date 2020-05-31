@@ -1,5 +1,6 @@
 # Adds ~/.local/bin and my script folder to path.
 export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH"
+export NODE_PATH=~/.npm-global/lib/node_modules
 
 # Set config home dir.
 export XDG_CONFIG_HOME="$HOME/.config"

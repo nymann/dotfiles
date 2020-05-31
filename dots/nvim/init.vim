@@ -1,47 +1,63 @@
 call plug#begin()
-    " Functionality
-	Plug 'scrooloose/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'norcalli/nvim-colorizer.lua'
-    "Plug 'vim-syntastic/syntastic'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'SirVer/ultisnips'
-    Plug 'nymann/vim-snippets'
+" LSP "
+Plug 'neovim/nvim-lsp'
+Plug 'haorenW1025/completion-nvim'
+Plug 'haorenW1025/diagnostic-nvim'
+Plug 'wbthomason/lsp-status.nvim'
 
-    " MARKDOWN (https://jdhao.github.io/2019/01/15/markdown_edit_preview_nvim/)
-    " Previewing
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+" Nerd tree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdcommenter'
 
-    " PYTHON (https://www.vimfromscratch.com/articles/vim-for-python/)
-    " Syntax highlighter
-    Plug 'numirias/semshi'
-    " Indentation
-    Plug 'Vimjas/vim-python-pep8-indent'
-    " Linting & Fixing
-    "Plug 'dense-analysis/ale'
-    Plug 'heavenshell/vim-pydocstring'
+" Fuzzy finding
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-    " Tag bar
-    Plug 'liuchengxu/vista.vim'
+" Formatting
+Plug 'Chiel92/vim-autoformat'
 
-    " Appearance
-    Plug 'junegunn/goyo.vim'
-    Plug 'bling/vim-airline'
-    Plug 'kien/rainbow_parentheses.vim'
-    Plug 'gko/vim-coloresque'
+" Utility
+Plug 'Yggdroot/indentLine'
+Plug 'psliwka/vim-smoothie'
 
-    " Themes
-    Plug 'joshdick/onedark.vim'
-    Plug 'junegunn/seoul256.vim'
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'nymann/vim-snippets'
+Plug 'lervag/vimtex'
+"" MARKDOWN (https://jdhao.github.io/2019/01/15/markdown_edit_preview_nvim/)
+"" Previewing
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+
+
+"" PYTHON (https://www.vimfromscratch.com/articles/vim-for-python/)
+
+"" Syntax highlighter
+Plug 'numirias/semshi'
+
+"" Linting & Fixing
+"Plug 'dense-analysis/ale'
+Plug 'heavenshell/vim-pydocstring'
+
+"" Tag bar
+Plug 'liuchengxu/vista.vim'
+
+"" Appearance
+Plug 'junegunn/goyo.vim'
+"Plug 'bling/vim-airline'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'gko/vim-coloresque'
+
+" Themes
+Plug 'joshdick/onedark.vim'
+"Plug 'junegunn/seoul256.vim'
 call plug#end()
 
 so ~/.config/nvim/includes/basic.vim
+so ~/.config/nvim/includes/lsp.vim
 so ~/.config/nvim/includes/wildmenu.vim
 so ~/.config/nvim/includes/backup.vim
 so ~/.config/nvim/includes/map.vim
@@ -51,3 +67,5 @@ so ~/.config/nvim/includes/events.vim
 so ~/.config/nvim/includes/python.vim
 so ~/.config/nvim/includes/syntax/pgn.vim
 so ~/.config/nvim/includes/syntax/vcard.vim
+
+luafile ~/.config/nvim/init.lua

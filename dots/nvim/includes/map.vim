@@ -47,5 +47,17 @@ noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 
 " FZF
 nnoremap <silent> <leader>f :FZF<CR>
-nnoremap <silent> <leader>F :FZF ~<CR>
+nnoremap <silent> <leader>f :FZF<CR>
+
+" Go to file, if it doesn't exist, create it.
 map gf :e <cfile><CR>
+
+" Fly through buffers
+nnoremap <leader>b :buffer <C-z><S-Tab>
+nnoremap <leader>B :sbuffer <C-z><S-Tab>
+
+" Autoformatter
+noremap <F3> :Autoformat<CR>
+
+" Tag bar
+nmap <F8> :TagbarToggle<CR>
