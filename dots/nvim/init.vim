@@ -27,7 +27,7 @@ Plug 'psliwka/vim-smoothie'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'nymann/vim-snippets'
-Plug 'lervag/vimtex'
+
 "" MARKDOWN (https://jdhao.github.io/2019/01/15/markdown_edit_preview_nvim/)
 "" Previewing
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
@@ -55,6 +55,7 @@ Plug 'gko/vim-coloresque'
 Plug 'joshdick/onedark.vim'
 "Plug 'junegunn/seoul256.vim'
 call plug#end()
+luafile ~/.config/nvim/lua/lsp.lua
 
 so ~/.config/nvim/includes/basic.vim
 so ~/.config/nvim/includes/lsp.vim
@@ -68,4 +69,3 @@ so ~/.config/nvim/includes/python.vim
 so ~/.config/nvim/includes/syntax/pgn.vim
 so ~/.config/nvim/includes/syntax/vcard.vim
 
-luafile ~/.config/nvim/init.lua

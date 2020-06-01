@@ -1,1 +1,0 @@
-/home/knj/code/github/haorenW1025/dotfiles/nvim/lua/on_attach.lua
