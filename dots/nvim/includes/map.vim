@@ -60,7 +60,7 @@ nnoremap <leader>B :sbuffer <C-z><S-Tab>
 noremap <F3> :Autoformat<CR>
 
 " Tag bar
-nmap <F8> :TagbarToggle<CR>
+nmap <F8> :Vista<CR>
 
 " Diagnostics maps
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>

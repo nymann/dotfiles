@@ -25,14 +25,6 @@
     path = dots/nvim/plugged/markdown-preview.nvim
     url = https://github.com/iamcco/markdown-preview.nvim
 
-[submodule "ale"]
-    path = dots/nvim/plugged/ale
-    url = https://github.com/dense-analysis/ale
-
-[submodule "coc.nvim"]
-    path = dots/nvim/plugged/coc.nvim
-    url = https://github.com/neoclide/coc.nvim
-
 [submodule "goyou.nvim"]
     path = dots/nvim/plugged/goyo.vim
     url = https://github.com/junegunn/goyo.vim
@@ -125,3 +117,41 @@
 [submodule "vim-gitbranch"]
     path = dots/nvim/plugged/vim-gitbranch
     url = https://github.com/itchyny/vim-gitbranch
+
+[submodule "completion-nvim"]
+    path = dots/nvim/plugged/completion-nvim
+    url = https://github.com/haorenW1025/completion-nvim
+
+[submodule "diagnostic-nvim"]
+    path = dots/nvim/plugged/diagnostic-nvim
+    url = https://github.com/haroenW1025/diagnostic-nvim
+
+[submodule "indentLine"]
+    path = dots/nvim/plugged/indentLine
+    url = https://github.com/Yggdroot/indentLine
+
+[submodule "lsp-status.nvim"]
+    path = dots/nvim/plugged/lsp-status.nvim
+    url = https://github.com/wbthomason/lsp-status.nvim
+
+[submodule "nvim-lsp"]
+    path = dots/nvim/plugged/nvim-lsp
+    url = https://github.com/neovim/nvim-lsp
+
+[submodule "vim-autoformat"]
+    path = dots/nvim/plugged/vim-autoformat
+    url = https://github.com/Chiel92/vim-autoformat
+
+[submodule "vim-rhubarb"]
+    path = dots/nvim/plugged/vim-rhubarb
+    url = https://github.com/tpope/vim-rhubarb
+
+[submodule "vim-signify"]
+    path = dots/nvim/plugged/vim-signify
+    url = https://github.com/mhinz/vim-signify
+
+[submodule "vim-smoothie"]
+    path = dots/nvim/plugged/vim-smoothie
+    url = https://github.com/psliwka/vim-smoothie
+
+
