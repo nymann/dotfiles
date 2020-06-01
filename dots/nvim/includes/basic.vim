@@ -1,5 +1,6 @@
 set nocompatible
 syntax on
+set updatetime=100
 set shell=zsh
 set encoding=UTF-8
 set number
@@ -41,7 +42,7 @@ set termguicolors
 colo onedark
 
 if exists('+clipboard')
-  set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
+    set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
 endif
 
 set foldlevelstart=20

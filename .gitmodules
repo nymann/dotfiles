@@ -1,12 +1,12 @@
 [submodule "dotbot"]
-	path = dotbot
-	url = https://github.com/anishathalye/dotbot
-	ignore = dirty
+    path = dotbot
+    url = https://github.com/anishathalye/dotbot
+    ignore = dirty
 
 [submodule "oh-my-zsh"]
-	path = dots/oh-my-zsh
-	url = https://github.com/ohmyzsh/ohmyzsh
-	ignore = dirty
+    path = dots/oh-my-zsh
+    url = https://github.com/ohmyzsh/ohmyzsh
+    ignore = dirty
 
 [submodule "dwm"]
     path = dots/dwm
@@ -22,8 +22,8 @@
     url = https://github.com/junegunn/fzf.vim
 
 [submodule "markdown-preview"]
-	path = dots/nvim/plugged/markdown-preview.nvim
-	url = https://github.com/iamcco/markdown-preview.nvim
+    path = dots/nvim/plugged/markdown-preview.nvim
+    url = https://github.com/iamcco/markdown-preview.nvim
 
 [submodule "ale"]
     path = dots/nvim/plugged/ale
@@ -114,3 +114,6 @@
     path = dots/nvim/plugged/vim-pydocstring
     url = https://github.com/heavenshell/vim-pydocstring
 
+[submodule "vim-fugitive"]
+    path = dots/nvim/plugged/vim-fugitive
+    url = https://github.com/tpope/vim-fugitive

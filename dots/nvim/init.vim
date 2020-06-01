@@ -13,6 +13,13 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 
+" Git
+Plug 'itchyny/vim-gitbranch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'mhinz/vim-signify'
+
+
 " Fuzzy finding
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -61,6 +68,7 @@ so ~/.config/nvim/includes/basic.vim
 so ~/.config/nvim/includes/lsp.vim
 so ~/.config/nvim/includes/wildmenu.vim
 so ~/.config/nvim/includes/backup.vim
+so ~/.config/nvim/includes/statusline.vim
 so ~/.config/nvim/includes/map.vim
 so ~/.config/nvim/includes/filetypes.vim
 so ~/.config/nvim/includes/plugins.vim
