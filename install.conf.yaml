@@ -7,36 +7,36 @@
 - link:
     ~/.config/zsh/.zshrc: dots/zsh/zshrc
     ~/.config/zsh/.zprofile: dots/zsh/zprofile
-    ~/.config/zsh/custom: 
+    ~/.config/zsh/custom:
         path: dots/zsh/custom
         use_glob: true
-    ~/.config/zsh/oh-my-zsh:
-        path: dots/oh-my-zsh
-        use_glob: true
-    ~/.config/alacritty/alacritty.yml: dots/alacritty/alacritty.yml
-    ~/.config/nvim:
-        path: dots/nvim
-        use_glob: true
-    ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
-    ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
-    ~/.config/mpd/mpd.conf: dots/mpd/mpd.conf
-    ~/.xinitrc: dots/.xinitrc
-    ~/.config/polybar:
-        path: dots/polybar
-        use_glob: true
-    ~/.config/systemd:
-        path: dots/systemd
-        use_glob: true
-    ~/.config/qutebrowser:
-        path: dots/qutebrowser
-        use_glob: true
-    ~/.local/bin:
-        path: dots/scripts
-        use_glob: true
-        recursive: true
-    ~/.config/fontconfig/fonts.conf: dots/fontconfig/fonts.conf
+        ~/.config/zsh/oh-my-zsh:
+            path: dots/oh-my-zsh
+            use_glob: true
+            ~/.config/alacritty/alacritty.yml: dots/alacritty/alacritty.yml
+            ~/.config/nvim:
+                path: dots/nvim
+                use_glob: true
+                ~/.config/bspwm/bspwmrc: dots/bspwm/bspwmrc
+                ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
+                ~/.config/mpd/mpd.conf: dots/mpd/mpd.conf
+                ~/.xinitrc: dots/.xinitrc
+                ~/.config/polybar:
+                    path: dots/polybar
+                    use_glob: true
+                    ~/.config/systemd:
+                        path: dots/systemd
+                        use_glob: true
+                        ~/.config/qutebrowser:
+                            path: dots/qutebrowser
+                            use_glob: true
+                            ~/.local/bin/scripts:
+                                path: dots/scripts
+                                use_glob: true
+                                recursive: true
+                                ~/.config/fontconfig/fonts.conf: dots/fontconfig/fonts.conf
 - create:
     - ~/code
 
-- shell:
-    [git submodule update --init --recursive, Installing submodules]
+    - shell:
+        [git submodule update --init --recursive, Installing submodules]

@@ -117,3 +117,11 @@
 [submodule "vim-fugitive"]
     path = dots/nvim/plugged/vim-fugitive
     url = https://github.com/tpope/vim-fugitive
+
+[submodule "nord-vim"]
+    path = dots/nvim/plugged/nord-vim
+    url = https://github.com/arcticicestudio/nord-vim
+
+[submodule "vim-gitbranch"]
+    path = dots/nvim/plugged/vim-gitbranch
+    url = https://github.com/itchyny/vim-gitbranch

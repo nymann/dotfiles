@@ -1,0 +1,14 @@
+[Unit]
+Description=Nodelock
+
+[Service]
+ExecStart=/usr/bin/nodelock
+Environment="NODE_PATH=/home/knj/.npm-global/lib/node_modules"
+Environment="SERIAL=30355834354F4847"
+Environment="ON_LOCK="/usr/bin/xlock""
+Environment="ON_UNLOCK="/usr/bin/xunlock""
+Environment="MODULE="/usr/lib/pkcs11/onepin-opensc-pkcs11.so""
+
+[Install]
+WantedBy=default.target
+

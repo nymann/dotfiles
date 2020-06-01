@@ -60,7 +60,9 @@ Plug 'gko/vim-coloresque'
 
 " Themes
 Plug 'joshdick/onedark.vim'
-"Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'arcticicestudio/nord-vim'
+
 call plug#end()
 luafile ~/.config/nvim/lua/lsp.lua
 

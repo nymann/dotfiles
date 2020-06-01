@@ -34,12 +34,7 @@ set conceallevel=3
 set termguicolors
 
 " Colorschemes
-" seoul256 (dark):
-" Range: 233 (darkest) ~ 239 (lightest)
-" Default: 237
-" let g:seoul256_background = 235
-" colo seoul256
-colo onedark
+colo nord
 
 if exists('+clipboard')
     set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
