@@ -9,3 +9,8 @@ nvim_lsp.pyls_ms.setup({
     on_attach = lsp_status.on_attach,
     capabilities = lsp_status.capabilities
 })
+
+nvim_lsp.dockerls.setup({
+    on_attach = lsp_status.on_attach,
+    capabilities = lsp_status.capabilities
+})

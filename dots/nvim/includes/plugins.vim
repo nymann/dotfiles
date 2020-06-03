@@ -1,6 +1,5 @@
 so ~/.config/nvim/includes/plugins/vim-pydocstring.vim
 so ~/.config/nvim/includes/plugins/ultisnips.vim
-so ~/.config/nvim/includes/plugins/airline.vim
 so ~/.config/nvim/includes/plugins/nerdtree.vim
 so ~/.config/nvim/includes/plugins/rainbow.vim
 so ~/.config/nvim/includes/plugins/devicons.vim

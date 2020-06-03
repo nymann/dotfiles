@@ -30,6 +30,7 @@ Plug 'Chiel92/vim-autoformat'
 " Utility
 Plug 'Yggdroot/indentLine'
 Plug 'psliwka/vim-smoothie'
+Plug 'junegunn/vim-easy-align'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -56,7 +57,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'junegunn/goyo.vim'
 "Plug 'bling/vim-airline'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'gko/vim-coloresque'
+Plug 'chrisbra/Colorizer'
 
 " Themes
 Plug 'joshdick/onedark.vim'
@@ -65,7 +66,6 @@ Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 luafile ~/.config/nvim/lua/lsp.lua
-
 so ~/.config/nvim/includes/basic.vim
 so ~/.config/nvim/includes/lsp.vim
 so ~/.config/nvim/includes/wildmenu.vim

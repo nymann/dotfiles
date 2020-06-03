@@ -132,7 +132,7 @@ function! statusline#coc() abort
     endif
 
     let l:base_status = trim(join(l:coc_msgs, ' ') . ' ' . get(g:, 'coc_status', ''))
-    let l:status = ' 🇻' . (l:only_hint ? '' : ' ')
+    let l:status = ' ' . (l:only_hint ? '' : ' ')
     let l:current_function = get(b:, 'coc_current_function', '')
     if l:current_function !=# ''
         let l:status = l:status . '(' . l:current_function . ') '

@@ -4,28 +4,28 @@ set laststatus=2
 function! UpdateColors(mode) abort
     " Normal mode
     if a:mode ==# 'n'
-        hi StatuslineAccent guibg=#d75f5f gui=bold guifg=#e9e9e9
+        hi StatuslineAccent guibg=#009999 gui=bold guifg=#F0F0F0
         " Insert mode
     elseif a:mode ==# 'i'
-        hi StatuslineAccent guifg=#e9e9e9 gui=bold guibg=#dab997
+        hi StatuslineAccent guifg=#F0F0F0 gui=bold guibg=#dab997
         " Replace mode
     elseif a:mode ==# 'R'
-        hi StatuslineAccent guifg=#e9e9e9 gui=bold guibg=#afaf00
+        hi StatuslineAccent guifg=#F0F0F0 gui=bold guibg=#FFC800
         " Command mode
     elseif a:mode ==# 'c'
-        hi StatuslineAccent guifg=#e9e9e9 gui=bold guibg=#83adad
+        hi StatuslineAccent guifg=#F0F0F0 gui=bold guibg=#83adad
         " Terminal mode
     elseif a:mode ==# 't'
-        hi StatuslineAccent guifg=#e9e9e9 gui=bold guibg=#6f6f6f
+        hi StatuslineAccent guifg=#F0F0F0 gui=bold guibg=#6f6f6f
         " Visual mode
     else
-        hi StatuslineAccent guifg=#e9e9e9 gui=bold guibg=#f485dd
+        hi StatuslineAccent guifg=#F0F0F0 gui=bold guibg=#f485dd
     endif
 
     if &modified
-        hi StatuslineFilename guifg=#d75f5f gui=bold guibg=#3a3a3a
+        hi StatuslineFilename guifg=#F62447 gui=bold guibg=#323232
     else
-        hi StatuslineFilename guifg=#e9e9e9 gui=bold guibg=#3a3a3a
+        hi StatuslineFilename guifg=#F0F0F0 gui=bold guibg=#323232
     endif
     " Return empty string so as not to display anything in the statusline
     return ''
@@ -33,10 +33,10 @@ endfunction
 
 function! SetModifiedSymbol(modified) abort
     if a:modified == 1
-        hi StatuslineModified guibg=#3a3a3a gui=bold guifg=#d75f5f
+        hi StatuslineModified guibg=#323232 gui=bold guifg=#F62447
         return '  ●'
     else
-        hi StatuslineModified guibg=#3a3a3a gui=bold guifg=#afaf00
+        hi StatuslineModified guibg=#323232 gui=bold guifg=#FFC800
         return ''
     endif
 endfunction
@@ -73,26 +73,26 @@ set statusline+=%{statusline#have_lsp()?'':'\ '}%(%#StatuslineLint#%{statusline#
 " Setup the colors
 function! s:setup_colors() abort
     " hi StatusLine          guifg=#d485ad     guibg=NONE     gui=NONE
-    " hi StatusLineNC        guifg=#d75f5f     guibg=NONE     gui=bold
+    " hi StatusLineNC        guifg=#F62447     guibg=NONE     gui=bold
 
-    hi StatuslineSeparator guifg=#3a3a3a gui=none guibg=none
+    hi StatuslineSeparator guifg=#323232 gui=none guibg=none
 
-    hi StatuslineFiletype guifg=#d9d9d9 gui=none guibg=#3a3a3a
+    hi StatuslineFiletype guifg=#d9d9d9 gui=none guibg=#323232
 
-    hi StatuslinePercentage guibg=#3a3a3a gui=none guifg=#dab997
+    hi StatuslinePercentage guibg=#323232 gui=none guifg=#dab997
 
-    hi StatuslineNormal guibg=#3a3a3a gui=none guifg=#e9e9e9
-    hi StatuslineVC guibg=#3a3a3a gui=none guifg=#a9a9a9
+    hi StatuslineNormal guibg=#009999 gui=none guifg=#F0F0F0
+    hi StatuslineVC guibg=#323232 gui=none guifg=#a9a9a9
 
-    hi StatuslineLintWarn guibg=#3a3a3a gui=none guifg=#ffcf00
-    hi StatuslineLintChecking guibg=#3a3a3a gui=none guifg=#458588
-    hi StatuslineLintError guibg=#3a3a3a gui=none guifg=#d75f5f
-    hi StatuslineLintOk guibg=#3a3a3a gui=none guifg=#b8bb26
-    hi StatuslineLint guibg=#e9e9e9 guifg=#3a3a3a
+    hi StatuslineLintWarn guibg=#323232 gui=none guifg=#FFC800
+    hi StatuslineLintChecking guibg=#323232 gui=none guifg=#009999
+    hi StatuslineLintError guibg=#323232 gui=none guifg=#F62447
+    hi StatuslineLintOk guibg=#323232 gui=none guifg=#65C728
+    hi StatuslineLint guibg=#F0F0F0 guifg=#323232
 
-    hi StatuslineLineCol guibg=#3a3a3a gui=none guifg=#878787
+    hi StatuslineLineCol guibg=#323232 gui=none guifg=#878787
 
-    hi StatuslineFiletype guibg=#3a3a3a gui=none guifg=#e9e9e9
+    hi StatuslineFiletype guibg=#323232 gui=none guifg=#F0F0F0
 endfunction
 
 augroup statusline_colors

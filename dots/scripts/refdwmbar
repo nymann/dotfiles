@@ -9,9 +9,9 @@ ps -ef | grep "dwm_mail" | awk '{print $2}' | xargs kill -9
 ps -ef | grep "dwm_mpd" | awk '{print $2}' | xargs kill -9
 ps -ef | grep "dwm_calcurse" | awk '{print $2}' | xargs kill -9
 
-$HOME/.local/bin/dwm/dwm_clock &
-$HOME/.local/bin/dwm/dwm_corona &
-$HOME/.local/bin/dwm/dwm_mail &
+$HOME/.local/bin/scripts/dwm/dwm_clock &
+$HOME/.local/bin/scripts/dwm/dwm_corona &
+$HOME/.local/bin/scripts/dwm/dwm_mail &
 
-$HOME/.local/bin/dwm/dwm_mpd &
-$HOME/.local/bin/dwm/dwm_calcurse &
+$HOME/.local/bin/scripts/dwm/dwm_mpd &
+$HOME/.local/bin/scripts/dwm/dwm_calcurse &

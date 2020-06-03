@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-$HOME/.local/bin/refdwmbar
+$HOME/.local/bin/scripts/refdwmbar
 
 mkdir -p $HOME/.cache/dwmbar/
 

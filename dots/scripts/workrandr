@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+# Get the connected monitor count
+available_count="$(xrandr | grep -w connected | wc -l)"
+
+if  [ "$available_count" = 1 ]; then
+    echo "No external screens connected, skipping"
+    exit 0
+fi
+
+function rand() {
+xrandr --output DP-3 --off --output DP-6.1 --auto --output DP-6.2 --auto --output DP-6.2 --right-of DP-6.1 --output DP-6.1 --primary
+}
+
+available="$(xrandr --listmonitors)"
+active="$(xrandr --listactivemonitors)"
+BANNED_MONITOR="DP-3"
+
+if [[ $active == *"$BANNED_MONITOR"* ]]; then
+    rand
+    exit 0
+fi
+
+if [[ $active == *"DP-6.1"* ]] && [[ $active == *"DP-6.2"* ]]; then
+    echo "No need for randing"
+    exit 0
+fi
+
+rand
+exit 0
