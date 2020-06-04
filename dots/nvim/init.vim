@@ -44,7 +44,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 "" PYTHON (https://www.vimfromscratch.com/articles/vim-for-python/)
 
 "" Syntax highlighter
-Plug 'numirias/semshi'
+"Plug 'numirias/semshi'
 
 "" Linting & Fixing
 "Plug 'dense-analysis/ale'

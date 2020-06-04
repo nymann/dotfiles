@@ -1,16 +1,28 @@
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
+-- lsp setup
+local lsp = require'nvim_lsp'
 
-local nvim_lsp = require('nvim_lsp')
+local on_attach = function(client)
+  require'lsp-status'.on_attach(client)
+  require'diagnostic'.on_attach()
+  require'completion'.on_attach({
+      sorter = 'alphabet',
+      matcher = {'exact', 'fuzzy'}
+    })
+end
 
-nvim_lsp.pyls_ms.setup({
-    callbacks = lsp_status.extensions.pyls_ms.setup(),
-    settings = { python = { workspaceSymbols = { enabled = true }}},
-    on_attach = lsp_status.on_attach,
-    capabilities = lsp_status.capabilities
-})
 
-nvim_lsp.dockerls.setup({
-    on_attach = lsp_status.on_attach,
-    capabilities = lsp_status.capabilities
-})
+lsp.vimls.setup{
+  on_attach = on_attach;
+}
+
+lsp.pyls.setup{
+  on_attach = on_attach;
+  settings = {
+    pyls = {
+      plugins = {
+        pycodestyle = { enabled = false; },
+      }
+    }
+  }
+}
+
