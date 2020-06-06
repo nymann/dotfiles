@@ -8,7 +8,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="firefox-developer-edition"
+export BROWSER="qutebrowser"
 export READER="zathura"
 
 # Cleanup ~/ 

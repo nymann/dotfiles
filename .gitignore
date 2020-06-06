@@ -1,8 +1,2 @@
-coverage
-coverage3
-coverage-3.8
-isort
-pylint
-pyreverse
-symilar
-epylint
+dots/nvim/plugged/
+*.pyc

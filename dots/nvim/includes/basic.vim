@@ -34,7 +34,7 @@ set conceallevel=3
 set termguicolors
 
 " Colorschemes
-colo nord
+colo onedark
 
 if exists('+clipboard')
     set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
