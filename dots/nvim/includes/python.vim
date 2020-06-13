@@ -7,9 +7,7 @@ let g:formatter_yapf_style = 'google'
 let g:formatters_python = ['yapf']
 au BufWrite *.py :Autoformat
 
-
-
-autocmd FileType python setlocal makeprg=pylint\ $HOME/.pylintrc\ --output-format=parseable 
-autocmd BufWritePost *.py silent make! <afile> | silent  redraw!
+autocmd FileType sh setlocal makeprg=shellcheck\ --format=tty 
+autocmd BufWritePost * silent make! <afile> | silent  redraw!
 autocmd QuickFixCmdPost [^l]* cwindow
 

@@ -67,5 +67,5 @@ so ~/.config/nvim/includes/python.vim
 so ~/.config/nvim/includes/syntax/pgn.vim
 so ~/.config/nvim/includes/syntax/vcard.vim
 
-so ~/.config/nvim/includes/map.vim
 so ~/.config/nvim/includes/lsp.vim
+so ~/.config/nvim/includes/map.vim
