@@ -36,14 +36,20 @@ Plug 'junegunn/fzf.vim'
 " Utility
 Plug 'psliwka/vim-smoothie'
 Plug 'junegunn/vim-easy-align'
+Plug 'unblevable/quick-scope'
+Plug 'AlphaMycelium/pathfinder.vim'
+
 " Plug 'SirVer/ultisnips'
 Plug 'chrisbra/Colorizer'
 Plug 'kien/rainbow_parentheses.vim'
 
 " Preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'heavenshell/vim-pydocstring'
 Plug 'junegunn/goyo.vim'
+
+" Debugger
+Plug 'puremourning/vimspector'
 
 " Tagbar
 Plug 'liuchengxu/vista.vim'

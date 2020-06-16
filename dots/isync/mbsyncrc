@@ -1,0 +1,51 @@
+IMAPStore personal-remote
+Host mail.nymann.dev
+Port 993
+User kristian@nymann.dev
+PassCmd "pass mutt-wizard-personal"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore personal-local
+Subfolders Verbatim
+Path ~/.local/share/mail/personal/
+Inbox ~/.local/share/mail/personal/INBOX
+Flatten .
+
+Channel personal
+Expunge Both
+Master :personal-remote:
+Slave :personal-local:
+Patterns *
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+IMAPStore siemens-remote
+Host siemens.dev
+Port 1143
+Timeout 2000
+User kristianjakobsen@siemens.com
+PassCmd "pass siemens"
+AuthMechs LOGIN
+SSLType None
+
+MaildirStore siemens-local
+Subfolders Verbatim
+Path ~/.local/share/mail/siemens/
+Inbox ~/.local/share/mail/siemens/INBOX
+Flatten .
+
+Channel siemens
+Expunge Both
+Master :siemens-remote:
+Slave :siemens-local:
+Patterns *
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile

@@ -1,22 +1,31 @@
 # pylint: skip-file
-c_bg = "#282828"
-c_fg = "#dbdbb2"
-c_bg_hl = "#504945"
-c_fg_hl = "#fbf1c7"
-c_bg_red = "#cc241d"
-c_fg_red = "#fb4934"
-c_bg_green = "#98971a"
+c_bg = "#323232"
+c_bg_hl = "#969696"
+
+c_fg = "#D2D2D2"
+c_fg_hl = "#F0F0F0"
+
+c_bg_red = "#D0021B"
+c_fg_red = "#F62447"
+
+c_bg_green = "#5E6919"
 c_fg_green = "#b8bb26"
+
 c_bg_yellow = "#d79921"
 c_fg_yellow = "#fabd2f"
+
 c_bg_blue = "#458588"
 c_fg_blue = "#83a598"
+
 c_bg_purple = "#b16286"
 c_fg_purple = "#d3869b"
+
 c_bg_aqua = "#689d6a"
 c_fg_aqua = "#8ec07c"
+
 c_bg_orange = "#d65d03"
 c_fg_orange = "#fe8019"
+
 
 def apply(c):
     c.colors.completion.fg = c_fg
