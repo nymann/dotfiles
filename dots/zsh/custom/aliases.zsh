@@ -2,6 +2,7 @@ alias sus="systemctl --user status"
 
 alias v="nvim"
 alias nymann="cd ~/code/github.com/nymann"
+alias wert="cd ~/code/github.com/wert-dk/api"
 alias kruhlmann="cd ~/code/github.com/kruhlmann"
 alias creditoro="cd ~/code/github.com/creditoro"
 alias github="cd ~/code/github.com"

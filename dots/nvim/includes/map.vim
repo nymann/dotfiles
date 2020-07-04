@@ -36,8 +36,6 @@ nnoremap * *<C-O>
 nnoremap H ^
 nnoremap L g_
 
-nnoremap ; :
-
 " Commenting
 map <leader>/ <plug>NERDCommenterToggle<CR>
 
@@ -61,17 +59,6 @@ noremap <F3> :Autoformat<CR>
 
 " Tag bar
 nmap <F4> :Vista<CR>
-
-" Diagnostics maps
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
 " Pydocstring
 nmap <silent> <leader>d :call MakePydoc()<CR> 
