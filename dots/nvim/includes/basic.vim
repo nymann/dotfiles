@@ -1,6 +1,7 @@
 set nocompatible
 syntax on
 set updatetime=100
+set conceallevel=0
 set shell=zsh
 set encoding=UTF-8
 set number

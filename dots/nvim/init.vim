@@ -42,7 +42,7 @@ Plug 'unblevable/quick-scope'
 Plug 'AlphaMycelium/pathfinder.vim'
 
 " Plug 'SirVer/ultisnips'
-Plug 'chrisbra/Colorizer'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'kien/rainbow_parentheses.vim'
 
 " Preview
