@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+shutdown_prompt()
+{
+    read -p "Are you sure you want to shutdown? Y/n" yn
+    echo
+    case $yn in
+        [Yy]*) sudo shutdown now;;
+        [Nn]*) exit 0;;
+        *) echo "You are tired, go home. Answer yes or no."
+    esac
+}
+
+$(opensc-tool --atr &>/dev/null)
+STATUS=$?
+case $STATUS in
+    3)
+        # Card is not present.
+        sudo shutdown now
+        ;;
+    0)
+        echo "Card inserted"
+        shutdown_prompt
+        ;;
+esac

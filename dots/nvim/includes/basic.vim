@@ -41,3 +41,5 @@ if exists('+clipboard')
 endif
 
 set foldlevelstart=20
+
+au BufNewFile,BufRead /*.rasi setf css

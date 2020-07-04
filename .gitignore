@@ -1,2 +1,4 @@
 dots/nvim/plugged/
 *.pyc
+dots/scripts/get-ad-cert
+dots/scripts/get_certs

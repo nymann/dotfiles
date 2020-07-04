@@ -10,4 +10,3 @@ au BufWrite *.py :Autoformat
 autocmd FileType sh setlocal makeprg=shellcheck\ --format=tty 
 autocmd BufWritePost * silent make! <afile> | silent  redraw!
 autocmd QuickFixCmdPost [^l]* cwindow
-

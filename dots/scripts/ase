@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+"""
+
+"""
+import sys
+import swatch
+from dataclasses import dataclass
+
+
+@dataclass
+class ColorData:
+    """ColorData.
+    """
+    name: str
+    values: list
+
+    @classmethod
+    def from_dict(cls, name: str, data: dict, **_):
+        """from_dict.
+
+        Args:
+            name (str): name
+            data (dict): data
+            _:
+        """
+        return cls(name=name, values=data.get("values"))
+
+    def hex(self):
+        """hex.
+        """
+        r, g, b = self.rgb()
+        return f"#{r:02X}{g:02X}{b:02X}"
+
+    def rgb(self, modifier: int = 255) -> tuple:
+        """rgb.
+        """
+        modified_colors = [int(color * modifier) for color in self.values]
+        return tuple(modified_colors)
+
+def main(filename: str):
+    """main.
+
+    Args:
+        filename (str): filename
+    """
+    output = swatch.parse(filename=filename)
+    for val in output:
+        color_data = ColorData.from_dict(**val)
+        print(f"{color_data.name}: {color_data.hex()}")
+
+
+if __name__ == "__main__":
+    for filename in sys.argv[1:]:
+        main(filename=filename)

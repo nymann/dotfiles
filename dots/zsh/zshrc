@@ -13,5 +13,5 @@ plugins=(
     sudo
 )
 
-
+bindkey -v
 source $ZSH/oh-my-zsh.sh

@@ -26,6 +26,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'mhinz/vim-signify'
 
+Plug 'takac/vim-hardtime'
+
 " Indentation
 Plug 'Yggdroot/indentLine'
 
@@ -45,7 +47,6 @@ Plug 'kien/rainbow_parentheses.vim'
 
 " Preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-Plug 'heavenshell/vim-pydocstring'
 Plug 'junegunn/goyo.vim'
 
 " Debugger
@@ -58,6 +59,9 @@ Plug 'liuchengxu/vista.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'nymann/vim-snippets'
+Plug 'tyru/open-browser.vim'
+Plug 'aklt/plantuml-syntax'
+
 call plug#end()
 
 luafile ~/.config/nvim/lua/lsp.lua
@@ -68,10 +72,11 @@ so ~/.config/nvim/includes/backup.vim
 so ~/.config/nvim/includes/statusline.vim
 so ~/.config/nvim/includes/filetypes.vim
 so ~/.config/nvim/includes/plugins.vim
+so ~/.config/nvim/includes/userfunc.vim
 so ~/.config/nvim/includes/events.vim
 so ~/.config/nvim/includes/python.vim
 so ~/.config/nvim/includes/syntax/pgn.vim
 so ~/.config/nvim/includes/syntax/vcard.vim
 
-so ~/.config/nvim/includes/lsp.vim
 so ~/.config/nvim/includes/map.vim
+so ~/.config/nvim/includes/lsp.vim

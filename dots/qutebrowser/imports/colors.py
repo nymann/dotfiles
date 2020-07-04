@@ -1,116 +1,191 @@
-# pylint: skip-file
-c_bg = "#323232"
-c_bg_hl = "#969696"
+# -*- coding: utf-8 -*-
+"""Example Google style docstrings.
 
-c_fg = "#D2D2D2"
-c_fg_hl = "#F0F0F0"
+"""
 
-c_bg_red = "#D0021B"
-c_fg_red = "#F62447"
+base000 = "#000000"
+base200 = "#323232"
+base450 = "#595959"
+base600 = "#969696"
+base750 = "#BEBEBE"
+base800 = "#D2D2D2"
+base900 = "#F0F0F0"
+base1000 = "#FFFFFF"
+primaryDarker = "#354C80"
+primaryDark = "#005CBF"
+primary = "#006FE6"
+primaryLight = "#009EFF"
+primaryLighter = "#7FB7F2"
+primaryLightest = "#CCE2FA"
+infoDark = "#235461"
+info = "#006FE6"
+infoLight = "#BBD0D7"
+infoLighter = "#D1E8F0"
+warningDark = "#665E48"
+warning = "#FFC800"
+warningLight = "#E6DBB7"
+warningLighter = "#FFEDB5"
+errorDark = "#811211"
+error = "#F62447"
+errorLight = "#D6B4B4"
+errorLighter = "#FCD3D2"
+successDark = "#5E6919"
+success = "#65C728"
+successLight = "#C8D1BA"
+successLighter = "#E6EED1"
+firefly = "#1E2832"
+aquaHaze = "#DCE1E6"
+stoneDark = "#3C464B"
+stoneLight = "#879BAA"
+stoneLight35 = "#BECDD7"
+sandDark = "#73645A"
+sandLight = "#AAAA96"
+sandLight35 = "#D7D7CD"
+snow = "#FFFFFF"
+accentTealDark = "#00646E"
+accentTealLight = "#41AAAA"
+accentBlueDark = "#005F87"
+accentBlueLight = "#50BED7"
+accentYellowDark = "#EB780A"
+accentYellowLight = "#FFB900"
+accentRedDark = "#641946"
+accentRedLight = "#AF235F"
+accentGreenDark = "#647D2D"
+accentGreenLight = "#AAB414"
 
-c_bg_green = "#5E6919"
-c_fg_green = "#b8bb26"
-
-c_bg_yellow = "#d79921"
-c_fg_yellow = "#fabd2f"
-
-c_bg_blue = "#458588"
-c_fg_blue = "#83a598"
-
-c_bg_purple = "#b16286"
-c_fg_purple = "#d3869b"
-
-c_bg_aqua = "#689d6a"
-c_fg_aqua = "#8ec07c"
-
-c_bg_orange = "#d65d03"
-c_fg_orange = "#fe8019"
+bg = snow
+fg = base200
 
 
 def apply(c):
-    c.colors.completion.fg = c_fg
-    c.colors.completion.category.bg = c_bg_orange
-    c.colors.completion.category.fg = c_fg
-    c.colors.completion.category.border.bottom = c_bg_orange
-    c.colors.completion.category.border.top = c_bg_orange
-    c.colors.completion.even.bg = c_bg
-    c.colors.completion.odd.bg = c_bg_hl
-    c.colors.completion.item.selected.bg = c_bg_green
-    c.colors.completion.item.selected.fg = c_fg
-    c.colors.completion.item.selected.border.bottom = c_bg_green
-    c.colors.completion.item.selected.border.top = c_bg_green
-    c.colors.completion.item.selected.match.fg = c_fg_red
-    c.colors.completion.scrollbar.bg = c_bg
-    c.colors.completion.scrollbar.fg = c_fg
+    """apply.
 
-    c.colors.contextmenu.menu.bg = c_bg
-    c.colors.contextmenu.menu.fg = c_fg
-    c.colors.contextmenu.selected.bg = c_bg_hl
-    c.colors.contextmenu.selected.fg = c_fg_hl
-
-    c.colors.downloads.bar.bg = c_bg
-    c.colors.downloads.error.bg = c_bg
-    c.colors.downloads.error.fg = c_fg_red
-    c.colors.downloads.start.bg = c_bg
-    c.colors.downloads.start.fg = c_fg_blue
-    c.colors.downloads.stop.bg = c_bg
-    c.colors.downloads.stop.fg = c_fg_yellow
-
-    c.colors.hints.bg = c_bg
-    c.colors.hints.fg = c_fg
-    c.colors.hints.match.fg = c_bg
-
-    c.colors.messages.error.bg = c_bg
-    c.colors.messages.error.fg = c_fg_red
-    c.colors.messages.error.border = c_fg_red
-    c.colors.messages.info.bg = c_bg
-    c.colors.messages.info.fg = c_fg_blue
-    c.colors.messages.info.border = c_fg_blue
-    c.colors.messages.warning.bg = c_bg
-    c.colors.messages.warning.fg = c_fg_yellow
-    c.colors.messages.warning.border = c_fg_yellow
-
-    c.colors.prompts.bg = c_bg
-    c.colors.prompts.border = c_bg_hl
-    c.colors.prompts.fg = c_fg
-    c.colors.prompts.selected.bg = c_bg_hl
-
-    c.colors.statusbar.caret.bg = c_bg_purple
-    c.colors.statusbar.caret.fg = c_fg_purple
-    c.colors.statusbar.caret.selection.bg = c_bg_purple
-    c.colors.statusbar.caret.selection.fg = c_fg
-    c.colors.statusbar.command.bg = c_bg
-    c.colors.statusbar.command.fg = c_fg_blue
-    c.colors.statusbar.command.private.bg = c_bg
-    c.colors.statusbar.command.private.fg = c_bg_blue
-    c.colors.statusbar.insert.bg = c_bg
-    c.colors.statusbar.insert.fg = c_fg_aqua
-    c.colors.statusbar.url.error.fg = c_fg_red
-    c.colors.statusbar.url.fg = c_fg
-    c.colors.statusbar.url.hover.fg = c_fg_blue
-    c.colors.statusbar.url.success.http.fg = c_fg_yellow
-    c.colors.statusbar.url.success.https.fg = c_fg_aqua
-    c.colors.statusbar.url.warn.fg = c_fg_yellow
-
-    c.colors.tabs.bar.bg = c_bg
-    c.colors.tabs.even.bg = c_bg
-    c.colors.tabs.even.fg = c_fg
-    c.colors.tabs.indicator.error = c_bg_red
-    c.colors.tabs.indicator.start = c_bg_blue
-    c.colors.tabs.indicator.stop = c_bg_aqua
-    c.colors.tabs.odd.bg = c_bg_hl
-    c.colors.tabs.odd.fg = c_fg_hl
-    c.colors.tabs.pinned.even.bg = c_bg_yellow
-    c.colors.tabs.pinned.even.fg = c_fg
-    c.colors.tabs.pinned.odd.bg = c_bg_yellow
-    c.colors.tabs.pinned.odd.fg = c_fg
-    c.colors.tabs.pinned.selected.even.bg = c_bg_orange
-    c.colors.tabs.pinned.selected.even.fg = c_fg
-    c.colors.tabs.pinned.selected.odd.bg = c_bg_orange
-    c.colors.tabs.pinned.selected.odd.fg = c_fg
-    c.colors.tabs.selected.even.bg = c_bg_orange
-    c.colors.tabs.selected.even.fg = c_fg
-    c.colors.tabs.selected.odd.bg = c_bg_orange
-    c.colors.tabs.selected.odd.fg = c_fg
+    Args:
+        c:
+    """
+    _tabs(c.colors.tabs)
+    _completion(c.colors.completion)
+    _prompts(c.colors.prompts)
+    _messages(c.colors.messages)
+    _downloads(c.colors.downloads)
+    _statusbar(c.colors.statusbar)
+    _contextmenu(c.colors.contextmenu)
+    _hints(c.colors.hints)
 
     c.colors.webpage.prefers_color_scheme_dark = True
+
+
+def _prompts(prompts):
+
+    prompts.bg = bg
+    prompts.border = warning
+    prompts.fg = fg
+    prompts.selected.bg = bg
+
+
+def _messages(messages):
+
+    messages.error.bg = bg
+    messages.error.border = warning
+    messages.error.fg = fg
+    messages.info.bg = bg
+    messages.info.border = warning
+    messages.info.fg = fg
+    messages.warning.bg = bg
+    messages.warning.border = warning
+    messages.warning.fg = fg
+
+
+def _downloads(downloads):
+
+    downloads.bar.bg = bg
+    downloads.error.bg = bg
+    downloads.error.fg = fg
+    downloads.start.bg = bg
+    downloads.start.fg = fg
+    downloads.stop.bg = bg
+    downloads.stop.fg = fg
+
+
+def _hints(hints):
+
+    hints.bg = bg
+    hints.fg = fg
+    hints.match.fg = fg
+
+
+def _completion(completion):
+
+    completion.category.bg = bg
+    completion.category.border.bottom = warning
+    completion.category.border.top = warning
+    completion.category.fg = fg
+    completion.even.bg = bg
+    completion.fg = fg
+    completion.item.selected.bg = bg
+    completion.item.selected.border.bottom = warning
+    completion.item.selected.border.top = warning
+    completion.item.selected.fg = fg
+    completion.item.selected.match.fg = fg
+    completion.odd.bg = bg
+    completion.scrollbar.bg = bg
+    completion.scrollbar.fg = fg
+
+
+def _tabs(tabs):
+
+    tabs.bar.bg = bg
+
+    tabs.even.bg = bg
+    tabs.even.fg = fg
+
+    tabs.indicator.error = error
+    tabs.indicator.start = warning
+    tabs.indicator.stop = warning
+
+    tabs.odd.bg = bg
+    tabs.odd.fg = fg
+
+    tabs.pinned.even.bg = bg
+    tabs.pinned.even.fg = fg
+    tabs.pinned.odd.bg = bg
+    tabs.pinned.odd.fg = fg
+    tabs.pinned.selected.even.bg = bg
+    tabs.pinned.selected.even.fg = fg
+    tabs.pinned.selected.odd.bg = bg
+    tabs.pinned.selected.odd.fg = fg
+
+    tabs.selected.even.bg = bg
+    tabs.selected.even.fg = fg
+    tabs.selected.odd.bg = bg
+    tabs.selected.odd.fg = fg
+
+
+def _contextmenu(contextmenu):
+
+    contextmenu.menu.bg = bg
+    contextmenu.menu.fg = fg
+    contextmenu.selected.bg = bg
+    contextmenu.selected.fg = fg
+
+
+def _statusbar(statusbar):
+    statusbar.caret.bg = bg
+    statusbar.caret.fg = fg
+    statusbar.caret.selection.bg = bg
+    statusbar.caret.selection.fg = fg
+
+    statusbar.command.bg = bg
+    statusbar.command.fg = fg
+    statusbar.command.private.bg = bg
+    statusbar.command.private.fg = fg
+
+    statusbar.insert.bg = bg
+    statusbar.insert.fg = fg
+
+    statusbar.url.error.fg = fg
+    statusbar.url.fg = fg
+    statusbar.url.hover.fg = fg
+    statusbar.url.success.http.fg = fg
+    statusbar.url.success.https.fg = fg
+    statusbar.url.warn.fg = fg

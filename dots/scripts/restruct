@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+mkdir src
+mv project src/$1
+
+cp ~/code/mo-gitlab.siemens.dk/devops/templates/flask/Makefile .
+cp ~/code/mo-gitlab.siemens.dk/devops/templates/flask/.gitignore .
+cp ~/code/mo-gitlab.siemens.dk/devops/templates/flask/.gitlab-ci.yml .
+cp ~/code/mo-gitlab.siemens.dk/devops/templates/flask/.env .
+cp ~/code/mo-gitlab.siemens.dk/devops/templates/flask/setup.* .
+cp -r ~/code/mo-gitlab.siemens.dk/devops/templates/flask/tests .
+url=$(git config --list | awk -F':' '/url/ {print "https://mo-gitlab.siemens.dk/"$2}')
+sed -i "s#https://mo-gitlab.siemens.dk/devOps/templates/flask#${url}#g" setup.cfg
+rm requirements.txt
+mv app.py src/
+grep -rl project . | parallel sed -i "s/project/${1}/g" {}
+grep -rl boilerplate . | parallel sed -i "s/boilerplate/${1}/g" {}
+sed -i "s/stp-sonar/mo-sonar/g" sonar-project.properties
+sed -i "s#flask_migrate#flask_migrate\n    flask_restplus\n    werkzeug==0.16.1#g" setup.cfg
