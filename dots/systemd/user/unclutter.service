@@ -8,4 +8,5 @@ ExecStart=/usr/bin/unclutter -idle 2 -jitter 3
 Restart=always
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=xsession.target
+

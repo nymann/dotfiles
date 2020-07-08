@@ -9,7 +9,8 @@ Environment="ON_LOCK="/usr/bin/xlock""
 Environment="ON_INIT="echo"
 Environment="ON_UNLOCK="/usr/bin/xunlock""
 Environment="MODULE="/usr/lib/pkcs11/onepin-opensc-pkcs11.so""
+Restart=on-failure
 
 [Install]
-WantedBy=default.target
+WantedBy=xsession.target
 

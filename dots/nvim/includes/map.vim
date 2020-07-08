@@ -60,5 +60,9 @@ noremap <F3> :Autoformat<CR>
 " Tag bar
 nmap <F4> :Vista<CR>
 
+" Vim pathfindernore
+map <leader>pe :PathfinderExplain<CR>
+
+
 " Pydocstring
 nmap <silent> <leader>d :call MakePydoc()<CR> 

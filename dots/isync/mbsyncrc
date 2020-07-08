@@ -5,7 +5,7 @@ User kristian@nymann.dev
 PassCmd "pass mutt-wizard-personal"
 AuthMechs LOGIN
 SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile ~/.cert/mail_nymann_dev.pem
 
 MaildirStore personal-local
 Subfolders Verbatim
