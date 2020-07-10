@@ -42,9 +42,48 @@ schemes:
             white: "#ffffff"
 
        
-   
+    nord: &nord
+        # Default colors
+        primary:
+            background: '#2e3440'
+            foreground: '#e5e9f0'
 
-colors: *dark
+        # Colors the cursor will use if `custom_cursor_colors` is true
+        cursor:
+            text: '#2e3440'
+            cursor: '#e5e9f0'
+
+        # Normal colors
+        normal:
+            black:   '#2e3440'
+            red:     '#88c0d0'
+            green:   '#a3be8c'
+            yellow:  '#5e81ac'
+            blue:    '#ebcb8b'
+            magenta: '#bf616a'
+            cyan:    '#d08770'
+            white:   '#e5e9f0'
+
+        # Bright colors
+        bright:
+            black:   '#4c566a'
+            red:     '#88c0d0'
+            green:   '#bf616a'
+            yellow:  '#5e81ac'
+            blue:    '#ebcb8b'
+            magenta: '#a3be8c'
+            cyan:    '#d08770'
+            white:   '#8fbcbb'
+
+        indexed_colors:
+            - { index: 16, color: '#81a1c1' }
+            - { index: 17, color: '#b48ead' }
+            - { index: 18, color: '#3b4252' }
+            - { index: 19, color: '#434c5e' }
+            - { index: 20, color: '#d8dee9' }
+            - { index: 21, color: '#eceff4' }
+
+colors: *nord
 
 font:
     normal:

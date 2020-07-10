@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 mkdir src
-mv project src/$1
+mv project "src/$1"
 
 cp ~/code/mo-gitlab.siemens.dk/devops/templates/flask/Makefile .
 cp ~/code/mo-gitlab.siemens.dk/devops/templates/flask/.gitignore .

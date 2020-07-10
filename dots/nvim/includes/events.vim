@@ -18,12 +18,3 @@ endfunction
 " Close NERDTree if it's the only buffer left
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
-" CoC prettier command on save
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" Rainbow
-au VimEnter * RainbowParenthesesActivate
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-

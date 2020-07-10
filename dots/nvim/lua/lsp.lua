@@ -53,14 +53,6 @@ local on_attach_vim = function(client, bufnr)
     end
 
     local opts = { noremap=true, silent=true }
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ld', '<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>r',  '<cmd>lua vim.lsp.buf.rename()<CR>',                 opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',          '<Cmd>lua vim.lsp.buf.hover()<CR>',                  opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD',         '<Cmd>lua vim.lsp.buf.declaration()<CR>',            opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga',         '<Cmd>lua vim.lsp.buf.code_action()<CR>',            opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd',         '<Cmd>lua vim.lsp.buf.definition()<CR>',             opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi',         '<cmd>lua vim.lsp.buf.implementation()<CR>',         opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr',         '<cmd>lua vim.lsp.buf.references()<CR>',             opts)
 
     if resolved_capabilities.document_highlight then
         vim.api.nvim_command[[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
@@ -70,44 +62,82 @@ local on_attach_vim = function(client, bufnr)
 end
 
 local servers = {
+    --{
+        --name = 'jedi_language_server'
+    --},
     {
-        name = 'pyls_ms',
+        name = 'diagnosticls',
         config = {
-            settings={
-                python = {
-                    linting = {
-                        enabled = true;
+            filetypes = {
+                'json',
+                'sh'
+            },
+            init_options = {
+                linters = {
+                    shellcheck = {
+                        command = "shellcheck",
+                        debounce = 100,
+                        args = { "--format=gcc", "--shell=sh", "-" },
+                        offsetLine = 0,
+                        offsetColumn = 0,
+                        sourceName = "shellcheck",
+                        formatLines = 1,
+                        formatPattern = {
+                            "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+                            {
+                                line = 1,
+                                column = 2,
+                                message = 4,
+                                security = 3
+                            }
+                        },
+                        securities = {
+                            refactor = "info",
+                            convention = "info",
+                            error = "error",
+                            warning = "warning",
+                            note = "info"
+                        },
                     },
-                    analysis = {
-                        disabled = {
-                            "typing-generic-arguments",
-                            "typing-typevar-arguments"
+                    pylint = {
+                        command = "pylint",
+                        args = {
+                            "--output-format=text",
+                            "--score=no",
+                            "--msg-template='{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+                            "%file"
                         },
-                        information = {},
-                        warnings = {
-                            "inherit-non-class",
-                            "no-cls-argument",
-                            "no-method-argument",
-                            "no-self-argument",
-                            "parameter-already-specified",
-                            "parameter-missing",
-                            "positional-argument-after-keyword",
-                            "positional-only-named",
-                            "return-in-init",
-                            "too-many-function-arguments",
-                            "too-many-positional-arguments-before-star",
-                            "typing-newtype-arguments",
-                            "undefined-variable",
-                            "unknown-parameter-name",
-                            "unresolved-import",
-                            "variable-not-defined-globally",
-                            "variable-not-defined-nonlocal"
+                        offsetLine = 1,
+                        offsetColumn = 1,
+                        sourceName = "pylint",
+                        formatLines = 1,
+                        formatPattern = { 
+                            "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+                            {
+                                line = 1,
+                                column = 2,
+                                message = 4,
+                                security = 3
+                            }
                         },
-                        errors = {}
+                        rootPatterns = {
+                            ".git", "setup.py"
+                        },
+                        securities = {
+                            informational = "hint",
+                            refactor = "info",
+                            convention = "info",
+                            warning = "warning",
+                            error = "error",
+                            fatal = "error"
+                        }
                     }
+                },
+                filetypes = {
+                    sh = "shellcheck"
                 }
-            };
-        }
+            }
+        } 
     },
     {
         name = 'yamlls',
@@ -120,6 +150,12 @@ local servers = {
                 ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
                 ['http://json.schemastore.org/gitlab-ci'] = '.gitlab-ci.{yml,yaml}',
                 ['https://json.schemastore.org/pre-commit-config'] = '.pre-commit-config.{yml,yaml}'
+              },
+              validate = true,
+              hover = true,
+              completion = true,
+              format = {
+                  enable = true
               }
             }
           },

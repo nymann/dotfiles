@@ -4,17 +4,17 @@
 
 download_file()
 { 
-    curl -s "https://corona-stats.online/$1" > $HOME/.cache/corona_$1
+    curl -s "https://corona-stats.online/$1" > "$HOME/.cache/corona_$1"
 }
 
-if [ ! -f $HOME/.cache/corona_$1 ] ; then
-    download_file $1
-elif [ "$(stat -c %y $HOME/.cache/corona_$1 |
+if [ ! -f "$HOME/.cache/corona_$1" ] ; then
+    download_file "$1"
+elif [ "$(stat -c %y "$HOME/.cache/corona_$1" |
         xargs -0 date +"%Y-%m-%d %H" -d)" != "$(date '+%Y-%m-%d %H')" ] ; then 
-    download_file $1
+    download_file "$1"
 fi
 
-grep -i "$1" $HOME/.cache/corona_$1 |
+grep -i "$1" "$HOME/.cache/corona_$1" |
     sed "s/\x1b\[[0-9;]*m//g ; s/\s*//g ; s/║//g ; s/│/;/g" |
     awk -F';' '{ print "  " $9 " ﮊ " $5 }'
 

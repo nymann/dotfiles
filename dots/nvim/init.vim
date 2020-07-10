@@ -9,6 +9,7 @@ Plug 'wbthomason/lsp-status.nvim'
 
 " Semshi
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " Nerdtree
 Plug 'scrooloose/nerdtree'
@@ -36,35 +37,35 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Utility
-Plug 'psliwka/vim-smoothie'
+"Plug 'psliwka/vim-smoothie'
 Plug 'junegunn/vim-easy-align'
 Plug 'unblevable/quick-scope'
-Plug 'AlphaMycelium/pathfinder.vim'
+"Plug 'AlphaMycelium/pathfinder.vim'
 
+" Snippets
 " Plug 'SirVer/ultisnips'
+" Plug 'nymann/vim-snippets'
+
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'kien/rainbow_parentheses.vim'
 
 " Preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'junegunn/goyo.vim'
 
 " Debugger
-Plug 'puremourning/vimspector'
+"Plug 'puremourning/vimspector'
 
 " Tagbar
-Plug 'liuchengxu/vista.vim'
+"Plug 'liuchengxu/vista.vim'
 
 " Themes
+Plug 'arcticicestudio/nord-vim'
 Plug 'joshdick/onedark.vim'
-Plug 'junegunn/seoul256.vim'
-Plug 'nymann/vim-snippets'
-Plug 'tyru/open-browser.vim'
-Plug 'aklt/plantuml-syntax'
 
 call plug#end()
 
 luafile ~/.config/nvim/lua/lsp.lua
+luafile ~/.config/nvim/lua/tree_sit.lua
 
 so ~/.config/nvim/includes/basic.vim
 so ~/.config/nvim/includes/wildmenu.vim

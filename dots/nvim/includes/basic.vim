@@ -35,12 +35,13 @@ set conceallevel=3
 set termguicolors
 
 " Colorschemes
-colo onedark
+colo nord
 
 if exists('+clipboard')
     set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
 endif
 
 set foldlevelstart=20
-
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 au BufNewFile,BufRead /*.rasi setf css
