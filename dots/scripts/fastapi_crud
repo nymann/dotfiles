@@ -1,0 +1,214 @@
+#!/usr/bin/bash
+
+PROJECT_NAME=${1:?"Speicify src dir fx. 'fastapi_template' if src/fastapi_template."}
+DOMAIN=${2:?"Specify domain to make fx. 'user' if you want a route called /users."}
+DOMAIN_PLURALIS=${3:?"Specify domain in pluralis fx 'users'"}
+
+cat  << EOF > "src/${PROJECT_NAME}/routers/${DOMAIN_PLURALIS}.py"
+import fastapi
+import pydantic
+from starlette import status
+
+from ${PROJECT_NAME}.core import security, service_factory
+from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_schemas
+
+router = fastapi.APIRouter()
+
+
+@router.get("/", response_model=${DOMAIN}_schemas.Paginated)
+async def get_${DOMAIN_PLURALIS}(page_size: pydantic.conint(ge=1, le=100) = 20,
+                    page: pydantic.conint(ge=1) = 1,
+                    service=fastapi.Depends(service_factory.get_${DOMAIN}_services)):
+    return await service.get_list(page=page, page_size=page_size)
+
+
+@router.post("/",
+             response_model=${DOMAIN}_schemas.DB,
+             status_code=status.HTTP_201_CREATED)
+async def add_${DOMAIN}(${DOMAIN}: ${DOMAIN}_schemas.Create,
+                   service=fastapi.Depends(service_factory.get_${DOMAIN}_services)):
+    return await service.create(${DOMAIN}=${DOMAIN})
+
+
+@router.put("/{identifier}", response_model=${DOMAIN}_schemas.DB)
+async def update_${DOMAIN}(identifier: pydantic.UUID4,
+                      ${DOMAIN}: ${DOMAIN}_schemas.Update,
+                      service=fastapi.Depends(
+                          service_factory.get_${DOMAIN}_services)):
+    ${DOMAIN} = await service.update(identifier=identifier, new_${DOMAIN}=${DOMAIN})
+    if ${DOMAIN}:
+        return ${DOMAIN}
+    raise fastapi.HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"A ${DOMAIN} with id: '{identifier} was not found.",
+    )
+
+
+@router.get("/{identifier}", response_model=${DOMAIN}_schemas.DB)
+async def get_${DOMAIN}(identifier: pydantic.UUID4,
+                   service=fastapi.Depends(service_factory.get_${DOMAIN}_services)):
+    ${DOMAIN} = await service.get_by_id(identifier=identifier)
+    if ${DOMAIN}:
+        return ${DOMAIN}
+    raise fastapi.HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"A ${DOMAIN} with id: '{identifier} was not found.",
+    )
+
+
+@router.delete("/{identifier}", response_model=${DOMAIN}_schemas.DB)
+async def delete_${DOMAIN}(identifier: pydantic.UUID4,
+                      service=fastapi.Depends(
+                          service_factory.get_${DOMAIN}_services)):
+    return await service.delete(identifier=identifier)
+EOF
+
+DIR="src/${PROJECT_NAME}/domain/${DOMAIN_PLURALIS}/"
+mkdir -p "$DIR"
+
+cat << EOF > "$DIR/${DOMAIN}_model.py"
+from ${PROJECT_NAME}.core.db import DB
+
+
+class Model(DB.Model):
+    """Model.
+    """
+
+    __tablename__ = "${DOMAIN_PLURALIS}"
+
+    identifier = DB.Column(DB.UUID(as_uuid=False),
+                           primary_key=True,
+                           server_default=DB.text("uuid_generate_v4()"))
+EOF
+
+cat << EOF > "$DIR/${DOMAIN}_queries.py"
+import datetime
+from typing import List, Tuple
+
+import pydantic
+
+from ${PROJECT_NAME}.core.db import DB
+from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_model, ${DOMAIN}_schemas
+
+CreateSchema = ${DOMAIN}_schemas.Create
+UpdateSchema = ${DOMAIN}_schemas.Update
+Model = ${DOMAIN}_model.Model
+
+
+class Queries():
+
+    async def create(self, ${DOMAIN}: CreateSchema) -> Model:
+        return await Model.create(**${DOMAIN}.__dict__)
+
+    async def get_list(self, page_size: int,
+                       page: int) -> Tuple[List[Model], int]:
+        ${DOMAIN_PLURALIS}: List[Model] = await Model.query.order_by(
+            Model.email.asc()).offset(page_size * (page - 1)
+                                     ).limit(page_size).gino.all()
+
+        count = await DB.func.count(Model.identifier).gino.scalar()
+        return ${DOMAIN_PLURALIS}, count
+
+    async def get_by_id(self, identifier: pydantic.UUID4) -> Model:
+        return await Model.get(identifier)
+
+    async def delete(self, identifier: pydantic.UUID4) -> Model:
+        ${DOMAIN} = await self.get_by_id(identifier)
+        await ${DOMAIN}.delete()
+        return ${DOMAIN}
+
+    async def update(self, old_${DOMAIN}: Model, new_${DOMAIN}: UpdateSchema) -> Model:
+        updated_${DOMAIN} = await old_${DOMAIN}.update(**new_${DOMAIN}.__dict__).apply()
+        return updated_${DOMAIN}._instance
+EOF
+
+cat << EOF > "$DIR/${DOMAIN}_schemas.py"
+from typing import List, Optional
+
+import pydantic
+
+from ${PROJECT_NAME}.domain import base_schemas
+
+
+class _Base(pydantic.BaseModel):
+    pass
+
+
+class Create(_Base):
+    pass
+
+
+class Update(_Base):
+    pass
+
+
+class DB(_Base):
+    identifier: pydantic.UUID4
+
+    class Config:
+        orm_mode = True
+
+
+class Paginated(pydantic.BaseModel):
+    results: List[DB]
+    pagination: base_schemas.Pagination
+EOF
+
+cat << EOF > "$DIR/${DOMAIN}_services.py"
+from typing import List, Optional
+
+import pydantic
+
+from ${PROJECT_NAME}.domain import base_schemas
+from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_queries, ${DOMAIN}_schemas
+
+
+class Service:
+    """Service.
+    """
+
+    def __init__(self, queries: ${DOMAIN}_queries.Queries):
+        self._queries = queries
+
+    async def create(self, ${DOMAIN}: ${DOMAIN}_schemas.Create) -> ${DOMAIN}_schemas.DB:
+        new_${DOMAIN} = await self._queries.create(${DOMAIN}=${DOMAIN})
+        return ${DOMAIN}_schemas.DB.from_orm(new_${DOMAIN})
+
+    async def get_by_id(self, identifier: pydantic.UUID4) -> ${DOMAIN}_schemas.DB:
+        ${DOMAIN} = await self._queries.get_by_id(identifier=identifier)
+        if ${DOMAIN}:
+            return ${DOMAIN}_schemas.DB.from_orm(${DOMAIN})
+        return None
+
+    async def get_list(
+            self,
+            page: pydantic.conint(ge=1),
+            page_size: pydantic.conint(ge=1, le=100),
+    ) -> ${DOMAIN}_schemas.Paginated:
+        ${DOMAIN_PLURALIS}, total = await self._queries.get_list(page=page,
+                                                    page_size=page_size)
+        more = ((total / page_size) - page) > 0
+        results = [${DOMAIN}_schemas.DB.from_orm(${DOMAIN}) for ${DOMAIN} in ${DOMAIN_PLURALIS}]
+        pagination = base_schemas.Pagination(total=total, more=more)
+        return ${DOMAIN}_schemas.Paginated(results=results, pagination=pagination)
+
+    async def update(self, identifier: pydantic.UUID4,
+                     new_${DOMAIN}: ${DOMAIN}_schemas.Update) -> ${DOMAIN}_schemas.DB:
+        old_${DOMAIN} = await self._queries.get_by_id(identifier=identifier)
+        updated_${DOMAIN} = await self._queries.update(old_${DOMAIN}=old_${DOMAIN},
+                                                  new_${DOMAIN}=new_${DOMAIN})
+        return ${DOMAIN}_schemas.DB.from_orm(updated_${DOMAIN})
+
+    async def delete(self, identifier: pydantic.UUID4) -> ${DOMAIN}_schemas.DB:
+        deleted_${DOMAIN} = await self._queries.delete(identifier=identifier)
+        return ${DOMAIN}_schemas.DB.from_orm(deleted_${DOMAIN})
+EOF
+
+
+cat << EOF >> "src/${PROJECT_NAME}/core/service_factory.py"
+from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_queries, ${DOMAIN}_services
+
+
+def get_${DOMAIN}_services() -> ${DOMAIN}_services.Service:
+    return ${DOMAIN}_services.Service(${DOMAIN}_queries.Queries())
+EOF

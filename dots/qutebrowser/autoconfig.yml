@@ -6,5 +6,5 @@
 
 config_version: 2
 settings:
-  content.media_capture:
-    https://discord.com: true
+  content.user_stylesheets:
+    global: coolsheet.css

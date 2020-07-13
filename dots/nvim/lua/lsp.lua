@@ -62,9 +62,9 @@ local on_attach_vim = function(client, bufnr)
 end
 
 local servers = {
-    --{
-        --name = 'jedi_language_server'
-    --},
+    {
+        name = 'jedi_language_server'
+    },
     {
         name = 'diagnosticls',
         config = {

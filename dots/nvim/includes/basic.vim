@@ -24,7 +24,7 @@ set incsearch
 set autoread
 set complete-=i
 set showmatch
-set colorcolumn=80,120
+set colorcolumn=80,90
 set ffs=unix,dos
 set t_Co=256
 set signcolumn=yes
@@ -35,7 +35,7 @@ set conceallevel=3
 set termguicolors
 
 " Colorschemes
-colo nord
+colo onedark
 
 if exists('+clipboard')
     set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
