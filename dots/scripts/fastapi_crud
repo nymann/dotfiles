@@ -212,3 +212,188 @@ from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_queries, ${DOMAI
 def get_${DOMAIN}_services() -> ${DOMAIN}_services.Service:
     return ${DOMAIN}_services.Service(${DOMAIN}_queries.Queries())
 EOF
+
+TEST_ROOT="tests/test_${DOMAIN_PLURALIS}"
+mkdir -p "$TEST_ROOT" 
+cat << EOF > "${TEST_ROOT}/test_basic_positive.py"
+"""Basic positive tests (happy paths).
+
+This module executes API calls with valid required parameters.
+
+Validation checks:
+    Validate status code: All requests should return 2XX HTTP status codes.
+    Validate payload: Response is a well-formed JSON object.
+    Validate state: GET requests should not change state.
+    Validate headers: Verifies if headers are the same as expected.
+"""
+
+import pydantic
+import pytest
+from requests import exceptions
+
+from tests import test_${DOMAIN_PLURALIS}, utils
+
+
+def test_validate_status_codes(client):
+
+    ${DOMAIN} = test_${DOMAIN_PLURALIS}.mock_${DOMAIN}()
+
+    # Get ${DOMAIN} list should give 200 OK
+    data, status_code = test_${DOMAIN_PLURALIS}.get_${DOMAIN}es(client=client)
+    assert status_code == 200
+
+    # For create methods we expect 201 Created
+    data, status_code = test_${DOMAIN_PLURALIS}.create_${DOMAIN}(client=client,
+                                                      ${DOMAIN}=${DOMAIN})
+    assert status_code == 201
+    identifier = data["identifier"]
+
+    # Retrieve, we expect 200 OK here.
+    data, status_code = test_${DOMAIN_PLURALIS}.get_${DOMAIN}(client=client,
+                                                   identifier=identifier)
+    assert status_code == 200
+
+    # We expect 200 OK from updates.
+    update_${DOMAIN} = ${DOMAIN}
+    update_${DOMAIN}["street_${DOMAIN}"] = "Test Testsen 100"
+    _, status_code = test_${DOMAIN_PLURALIS}.update_${DOMAIN}(client=client,
+                                                   ${DOMAIN}=data,
+                                                   identifier=identifier)
+    assert status_code == 200
+
+    # Delete, since we are returning the deleted ${DOMAIN}, a 200 OK is expected
+    # instead of 204 No Content.
+    data, status_code = test_${DOMAIN_PLURALIS}.delete_${DOMAIN}(client=client,
+                                                      identifier=identifier)
+    assert status_code == 200
+
+
+def test_validate_payload(client):
+    ${DOMAIN} = test_${DOMAIN_PLURALIS}.mock_${DOMAIN}()
+
+    # Check if the payload when creating a ${DOMAIN} matches what we thing.
+    data, _ = test_${DOMAIN_PLURALIS}.create_${DOMAIN}(client=client, ${DOMAIN}=${DOMAIN})
+
+    # API should save the email as lowercase.
+    test_${DOMAIN_PLURALIS}.no_state_change(data=data, ${DOMAIN}=${DOMAIN})
+
+    # Check if the provided identifier (UUID4) is valid
+    identifier = data["identifier"]
+    try:
+        pydantic.UUID4(identifier)
+    except pydantic.ValidationError:
+        pytest.fail("Not a valid UUID4")
+
+    # Check if the state is the same.
+    data, _ = test_${DOMAIN_PLURALIS}.get_${DOMAIN}(client=client, identifier=identifier)
+    test_${DOMAIN_PLURALIS}.no_state_change(data=data,
+                                   ${DOMAIN}=${DOMAIN},
+                                   identifier=identifier)
+
+    # Delete, since we are returning the deleted ${DOMAIN}, a 200 OK is expected
+    data, status_code = test_${DOMAIN_PLURALIS}.delete_${DOMAIN}(client=client,
+                                                      identifier=identifier)
+    test_${DOMAIN_PLURALIS}.no_state_change(data=data,
+                                   ${DOMAIN}=${DOMAIN},
+                                   identifier=identifier)
+
+
+def test_validate_headers(client):
+    pass
+
+
+def test_performance_sanity(client):
+    mock_${DOMAIN} = test_${DOMAIN_PLURALIS}.mock_${DOMAIN}()
+
+    @utils.time_it
+    def create(c, u):
+        return test_${DOMAIN_PLURALIS}.create_${DOMAIN}(client=c, ${DOMAIN}=u)
+
+    ${DOMAIN}, _ = create(c=client, u=mock_${DOMAIN})
+
+    @utils.time_it
+    def get(c, identifier: pydantic.UUID4):
+        return test_${DOMAIN_PLURALIS}.get_${DOMAIN}(client=c, identifier=identifier)
+
+    get(c=client, identifier=${DOMAIN}["identifier"])
+
+    @utils.time_it
+    def delete(c, identifier: pydantic.UUID4):
+        return test_${DOMAIN_PLURALIS}.delete_${DOMAIN}(client=c, identifier=identifier)
+EOF
+
+cat << EOF > "${TEST_ROOT}/__init__.py"
+import random
+import string
+from typing import Any, Dict, Tuple
+
+import pydantic
+import pytest
+from requests import exceptions
+
+from tests import utils
+
+ROUTE = "/${DOMAIN_PLURALIS}/"
+
+
+def raise_for_status(func):
+
+    def wrapper(*args, **kwargs) -> Tuple[Dict[str, Any], int]:
+        print(f"Called wrapper with function: '{func.__name__}'.")
+        print(f"args: '{args}', kwargs '{kwargs}'.")
+        response = func(*args, **kwargs)
+        print(f"response saved, status code: {response.status_code}")
+        response.raise_for_status()
+        return response.json(), response.status_code
+
+    return wrapper
+
+
+@raise_for_status
+def create_${DOMAIN}(client, ${DOMAIN}: dict):
+    return client.post(ROUTE, json=${DOMAIN})
+
+
+@raise_for_status
+def update_${DOMAIN}(client, ${DOMAIN}: dict, identifier: pydantic.UUID4):
+    return client.put(ROUTE + identifier, json=${DOMAIN})
+
+
+@raise_for_status
+def delete_${DOMAIN}(client, identifier: pydantic.UUID4):
+    return client.delete(ROUTE + identifier)
+
+
+@raise_for_status
+def get_${DOMAIN}(client, identifier: pydantic.UUID4):
+    return client.get(ROUTE + identifier)
+
+
+@raise_for_status
+def get_${DOMAIN_PLURALIS}(client, page: int = 1, page_size: int = 50):
+    return client.get(ROUTE, params=dict(page=page, page_size=page_size))
+
+
+def mock_${DOMAIN}(street_${DOMAIN}: str = None, zip_number: int = None):
+    if street_${DOMAIN} is None:
+        street_${DOMAIN} = f"{utils.random_string(length=10)} {utils.random_string(length=8)} 101"
+
+    if zip_number is None:
+        zip_number = random.randint(1000, 10000)
+
+    return dict(street_${DOMAIN}=street_${DOMAIN}, zip_number=zip_number)
+
+
+def no_state_change(data: Dict[str, Any],
+                    ${DOMAIN}: Dict[str, Any],
+                    identifier: pydantic.UUID4 = None) -> None:
+    assert ${DOMAIN}["street_${DOMAIN}"] == data["street_${DOMAIN}"]
+    assert ${DOMAIN}["zip_number"] == data["zip_number"]
+    if identifier:
+        assert identifier == data["identifier"]
+EOF
+touch "${TEST_ROOT}/test_destructive.py"
+touch "${TEST_ROOT}/__init__.py"
+touch "${TEST_ROOT}/test_extended_positive.py"
+touch "${TEST_ROOT}/test_invalid_input_negative.py"
+touch "${TEST_ROOT}/test_valid_input_negative.py"
