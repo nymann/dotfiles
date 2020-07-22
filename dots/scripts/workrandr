@@ -9,6 +9,10 @@ case $available_count in
         MONITOR="$(xrandr | awk -e '/ connected/ { print $1 }')"
         xrandr --output "$MONITOR" --auto
         ;;
+    2)
+        xrandr \
+            --output DP-6.1 --auto \
+            --output DP-3 --right-of DP-6.1
     3)
         # 3 monitors available
         xrandr --output DP-6.1 --off

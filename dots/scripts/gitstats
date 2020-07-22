@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+git log --pretty=format:'' --numstat "$@" | awk 'NF' | awk '{insertions+=$1; deletions+=$2} END {print NR, "files changed,", insertions, "insertions(+),", deletions, "deletions(+)"}';

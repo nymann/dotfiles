@@ -27,8 +27,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'mhinz/vim-signify'
 
-Plug 'takac/vim-hardtime'
-
 " Indentation
 Plug 'Yggdroot/indentLine'
 

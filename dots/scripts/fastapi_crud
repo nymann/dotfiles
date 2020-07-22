@@ -239,7 +239,7 @@ def test_validate_status_codes(client):
     ${DOMAIN} = test_${DOMAIN_PLURALIS}.mock_${DOMAIN}()
 
     # Get ${DOMAIN} list should give 200 OK
-    data, status_code = test_${DOMAIN_PLURALIS}.get_${DOMAIN}es(client=client)
+    data, status_code = test_${DOMAIN_PLURALIS}.get_${DOMAIN_PLURALIS}(client=client)
     assert status_code == 200
 
     # For create methods we expect 201 Created
