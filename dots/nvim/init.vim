@@ -8,7 +8,7 @@ Plug 'haorenW1025/diagnostic-nvim'
 Plug 'wbthomason/lsp-status.nvim'
 
 " Semshi
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'nvim-treesitter/nvim-treesitter'
 
 " Nerdtree
@@ -48,7 +48,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 " Preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/goyo.vim'
 
 " Debugger
 "Plug 'puremourning/vimspector'
@@ -57,7 +57,7 @@ Plug 'junegunn/goyo.vim'
 "Plug 'liuchengxu/vista.vim'
 
 " Themes
-Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
 Plug 'joshdick/onedark.vim'
 
 call plug#end()

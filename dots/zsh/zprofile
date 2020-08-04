@@ -1,5 +1,5 @@
 # Adds ~/.local/bin and my script folder to path.
-export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH:$HOME/.local/bin/siemens-scripts"
+export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH:$HOME/.local/bin/siemens-scripts:/home/knj/.gem/ruby/2.7.0/bin:$HOME/.npm-global/bin"
 export NODE_PATH=~/.npm-global/lib/node_modules
 
 # Set config home dir.

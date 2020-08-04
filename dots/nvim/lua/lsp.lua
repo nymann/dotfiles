@@ -54,136 +54,137 @@ local on_attach_vim = function(client, bufnr)
 
     local opts = { noremap=true, silent=true }
 
-    if resolved_capabilities.document_highlight then
-        vim.api.nvim_command[[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-        vim.api.nvim_command[[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
-        vim.api.nvim_command[[autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()]]
-    end
+    --if resolved_capabilities.document_highlight then
+        --vim.api.nvim_command[[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+        --vim.api.nvim_command[[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+        --vim.api.nvim_command[[autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()]]
+    --end
 end
 
 local servers = {
+    {
+        name = 'jedi_language_server'
+    },
     --{
-        --name = 'jedi_language_server'
+        --name = 'pyls_ms',
+        --config = {
+            --settings={
+                --python = {
+                    --linting = {
+                        --enabled = true;
+                    --},
+                    --analysis = {
+                        --disabled = {
+                            --"typing-generic-arguments",
+                            --"typing-typevar-arguments"
+                        --},
+                        --information = {},
+                        --warnings = {
+                            --"inherit-non-class",
+                            --"no-cls-argument",
+                            --"no-method-argument",
+                            --"no-self-argument",
+                            --"parameter-already-specified",
+                            --"parameter-missing",
+                            --"positional-argument-after-keyword",
+                            --"positional-only-named",
+                            --"return-in-init",
+                            --"too-many-function-arguments",
+                            --"too-many-positional-arguments-before-star",
+                            --"typing-newtype-arguments",
+                            --"undefined-variable",
+                            --"unknown-parameter-name",
+                            --"unresolved-import",
+                            --"variable-not-defined-globally",
+                            --"variable-not-defined-nonlocal"
+                        --},
+                        --errors = {}
+                    --}
+                --}
+            --};
+        --}
     --},
-    {
-        name = 'pyls_ms',
-        config = {
-            settings={
-                python = {
-                    linting = {
-                        enabled = true;
-                    },
-                    analysis = {
-                        disabled = {
-                            "typing-generic-arguments",
-                            "typing-typevar-arguments"
-                        },
-                        information = {},
-                        warnings = {
-                            "inherit-non-class",
-                            "no-cls-argument",
-                            "no-method-argument",
-                            "no-self-argument",
-                            "parameter-already-specified",
-                            "parameter-missing",
-                            "positional-argument-after-keyword",
-                            "positional-only-named",
-                            "return-in-init",
-                            "too-many-function-arguments",
-                            "too-many-positional-arguments-before-star",
-                            "typing-newtype-arguments",
-                            "undefined-variable",
-                            "unknown-parameter-name",
-                            "unresolved-import",
-                            "variable-not-defined-globally",
-                            "variable-not-defined-nonlocal"
-                        },
-                        errors = {}
-                    }
-                }
-            };
-        }
-    },
-    {
-        name = 'diagnosticls',
-        config = {
-            filetypes = {
-                'json',
-                'sh'
-            },
-            init_options = {
-                linters = {
-                    shellcheck = {
-                        command = "shellcheck",
-                        debounce = 100,
-                        args = { "--format=gcc", "--shell=sh", "-" },
-                        offsetLine = 0,
-                        offsetColumn = 0,
-                        sourceName = "shellcheck",
-                        formatLines = 1,
-                        formatPattern = {
-                            "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
-                            {
-                                line = 1,
-                                column = 2,
-                                message = 4,
-                                security = 3
-                            }
-                        },
-                        securities = {
-                            refactor = "info",
-                            convention = "info",
-                            error = "error",
-                            warning = "warning",
-                            note = "info"
-                        },
-                    },
-                    pylint = {
-                        command = "pylint",
-                        args = {
-                            "--output-format=text",
-                            "--score=no",
-                            "--msg-template='{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
-                            "%file"
-                        },
-                        offsetLine = 1,
-                        offsetColumn = 1,
-                        sourceName = "pylint",
-                        formatLines = 1,
-                        formatPattern = { 
-                            "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
-                            {
-                                line = 1,
-                                column = 2,
-                                message = 4,
-                                security = 3
-                            }
-                        },
-                        rootPatterns = {
-                            ".git", "setup.py"
-                        },
-                        securities = {
-                            informational = "hint",
-                            refactor = "info",
-                            convention = "info",
-                            warning = "warning",
-                            error = "error",
-                            fatal = "error"
-                        }
-                    }
-                },
-                filetypes = {
-                    sh = "shellcheck"
-                }
-            }
-        } 
-    },
+    --{
+        --name = 'diagnosticls',
+        --config = {
+            --filetypes = {
+                --'json',
+                --'sh'
+            --},
+            --init_options = {
+                --linters = {
+                    --shellcheck = {
+                        --command = "shellcheck",
+                        --debounce = 100,
+                        --args = { "--format=gcc", "--shell=sh", "-" },
+                        --offsetLine = 0,
+                        --offsetColumn = 0,
+                        --sourceName = "shellcheck",
+                        --formatLines = 1,
+                        --formatPattern = {
+                            --"^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+                            --{
+                                --line = 1,
+                                --column = 2,
+                                --message = 4,
+                                --security = 3
+                            --}
+                        --},
+                        --securities = {
+                            --refactor = "info",
+                            --convention = "info",
+                            --error = "error",
+                            --warning = "warning",
+                            --note = "info"
+                        --},
+                    --},
+                    --pylint = {
+                        --command = "pylint",
+                        --args = {
+                            --"--output-format=text",
+                            --"--score=no",
+                            --"--msg-template='{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+                            --"%file"
+                        --},
+                        --offsetLine = 1,
+                        --offsetColumn = 1,
+                        --sourceName = "pylint",
+                        --formatLines = 1,
+                        --formatPattern = { 
+                            --"^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+                            --{
+                                --line = 1,
+                                --column = 2,
+                                --message = 4,
+                                --security = 3
+                            --}
+                        --},
+                        --rootPatterns = {
+                            --".git", "setup.py"
+                        --},
+                        --securities = {
+                            --informational = "hint",
+                            --refactor = "info",
+                            --convention = "info",
+                            --warning = "warning",
+                            --error = "error",
+                            --fatal = "error"
+                        --}
+                    --}
+                --},
+                --filetypes = {
+                    --sh = "shellcheck"
+                --}
+            --}
+        --} 
+    --},
     {
         name = 'yamlls',
         config = {
           settings = {
             yaml = {
               schemas = {
+                ['https://json.schemastore.org/ansible-stable-2.9'] = '*playbook.{yml,yaml}',
                 ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
                 ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
                 ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',

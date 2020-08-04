@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+clean_pdf() {
+ pdftk $1 dump_data | \
+  sed -e 's/\(InfoValue:\)\s.*/\1\ /g' | \
+  pdftk $1 update_info - output clean-$1
+
+ exiftool -all:all= clean-$1
+ exiftool -all:all clean-$1
+ exiftool -extractEmbedded -all:all clean-$1
+ qpdf --linearize clean-$1 clean2-$1
+
+ pdftk clean2-$1 dump_data
+ exiftool clean2-$1
+ pdfinfo -meta clean2-$1
+}

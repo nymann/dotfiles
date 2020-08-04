@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+gh issue create --title "$1" --project "Roadmap" --assignee nymann --body "Implement $1 as seen on https://files.openscad.org/grammar.xhtml"

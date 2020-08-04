@@ -2,7 +2,7 @@
 Description=Nodelock
 
 [Service]
-ExecStart=/usr/bin/nodelock
+ExecStart=/usr/lib/node_modules/@kruhlmann/nodelock/nodelock
 Environment="NODE_PATH=/home/knj/.npm-global/lib/node_modules"
 Environment="SERIAL=30355834354F4847"
 Environment="ON_LOCK="/usr/bin/xlock""
