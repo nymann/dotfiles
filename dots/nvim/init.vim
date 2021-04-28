@@ -7,19 +7,11 @@ Plug 'haorenW1025/completion-nvim'
 Plug 'haorenW1025/diagnostic-nvim'
 Plug 'wbthomason/lsp-status.nvim'
 
-" Semshi
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+" Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter'
-
-" Nerdtree
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
 
 " Comments
 Plug 'scrooloose/nerdcommenter'
-Plug 'Chiel92/vim-autoformat'
 
 " Git
 Plug 'itchyny/vim-gitbranch'
@@ -35,29 +27,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Utility
-"Plug 'psliwka/vim-smoothie'
 Plug 'junegunn/vim-easy-align'
-Plug 'unblevable/quick-scope'
-"Plug 'AlphaMycelium/pathfinder.vim'
-
-" Snippets
-" Plug 'SirVer/ultisnips'
-" Plug 'nymann/vim-snippets'
-
-Plug 'norcalli/nvim-colorizer.lua'
 
 " Preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-" Plug 'junegunn/goyo.vim'
-
-" Debugger
-"Plug 'puremourning/vimspector'
-
-" Tagbar
-"Plug 'liuchengxu/vista.vim'
 
 " Themes
-" Plug 'arcticicestudio/nord-vim'
 Plug 'joshdick/onedark.vim'
 
 call plug#end()
