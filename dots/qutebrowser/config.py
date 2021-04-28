@@ -1,14 +1,21 @@
 # pylint: skip-file
-from imports import colors
-from imports import binds
+from qutebrowser.config.config import ConfigContainer
+from qutebrowser.config.configfiles import ConfigAPI
+
 from imports import aliases
-from imports import javascript
-from imports import user_agent
+from imports import binds
+from imports import colors
 from imports import content
 from imports import fonts
+from imports import javascript
 from imports import layout
 from imports import notifications
+from imports import user_agent
 
+config: ConfigAPI = config  # noqa: F821 pylint: disable=E0602,C0103
+c: ConfigContainer = c  # noqa: F821 pylint: disable=E0602,C0103files
+
+config.load_autoconfig(False)
 aliases.apply(c)
 colors.apply(c)
 javascript.apply(c)
@@ -19,11 +26,12 @@ user_agent.apply(config)
 content.apply(config, c)
 notifications.apply(config)
 
-c.auto_save.session = True
+c.auto_save.session = False
 c.confirm_quit = ["downloads"]
-c.downloads.location.directory = "~/Downloads"
+
+c.downloads.location.directory = "~/dl"
 c.downloads.location.prompt = False
-c.input.insert_mode.auto_leave = True
+c.input.insert_mode.auto_leave = False
 c.input.insert_mode.auto_load = True
 c.search.ignore_case = "smart"
 c.url.searchengines = {
@@ -38,5 +46,5 @@ c.url.searchengines = {
     "wh": "https://classic.wowhead.com/search?q={}",
     "yt": "https://youtube.com/results?search_query={}",
 }
-c.url.start_pages = "https://google.com"
-c.editor.command = ["alacritty", "--class", "floatterm", "-e", "nvim", "{}"]
+c.url.start_pages = "https://kruhlmann.dev/startpage"
+c.editor.command = ["termite", "--name", "floatterm", "-e", "nvim '{}'"]

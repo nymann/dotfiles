@@ -1,6 +1,9 @@
 # pylint: skip-file
+from qutebrowser.config.config import ConfigContainer
+from qutebrowser.config.configfiles import ConfigAPI
 
-def apply(config, c):
+
+def apply(config: ConfigAPI, c: ConfigContainer):
     config.set("content.images", True, "chrome-devtools://*")
     config.set("content.images", True, "devtools://*")
     config.set("content.javascript.enabled", True, "chrome-devtools://*")
@@ -16,4 +19,4 @@ def apply(config, c):
     c.content.pdfjs = True
     c.content.proxy = "none"
     c.content.default_encoding = "utf-8"
-    c.content.geolocation = "ask" 
+    c.content.geolocation = "ask"

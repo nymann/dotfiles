@@ -1,0 +1,30 @@
+#!/bin/sh
+
+DEFAULT_MINER_ID="312375D89306Fd3266fef63d9bA57E2f2c60Ffc7"
+MINER_ID="${1:-$DEFAULT_MINER_ID}"
+DOMAIN=ethermine.org
+CACHE_FILE="$HOME/.cache/ethermine_${MINER_ID}"
+
+download_file()
+{
+    curl -s "https://api.${DOMAIN}/miner/${MINER_ID}/dashboard" \
+        -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0' \
+        -H 'Accept: */*' \
+        -H 'Accept-Language: en-US,en;q=0.5' \
+        --compressed -H "Referer: https://www.${DOMAIN}/miners/${MINER_ID}/dashboard" \
+        -H "Origin: https://www.${DOMAIN}" \
+        -H 'Connection: keep-alive' \
+        -H 'If-None-Match: W/"53b9-9mdj1PVdda3ZltjKJ0dGQOAOHYg"' \
+        -H 'Cache-Control: max-age=0' \
+        -H 'TE: Trailers' \
+        > "${CACHE_FILE}"
+}
+
+
+if [ ! -f "${CACHE_FILE}" ] ; then
+    download_file
+elif [ $(stat -c %Y "${CACHE_FILE}") -lt $(($(date +"%s")-300)) ] ; then 
+    download_file
+fi
+UNPAID_ETH=$(cat "$CACHE_FILE" | jq '.data | .currentStatistics | .unpaid')  
+printf '0.0%d' ${UNPAID_ETH} | xargs printf "%.*f\n" 5

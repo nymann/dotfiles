@@ -1,0 +1,6 @@
+[Unit]
+Description=Corona DK to file
+
+[Service]
+Type=oneshot
+ExecStart=/home/knj/.local/bin/scripts/corona_dk_output_to_file

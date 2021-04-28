@@ -1,12 +1,13 @@
 # pylint: skip-file
+from qutebrowser.config.configfiles import ConfigAPI
 
 
-def apply(config):
+def apply(config: ConfigAPI):
     apply_default(config)
     apply_custom(config)
 
 
-def apply_default(config):
+def apply_default(config: ConfigAPI):
     config.bind("\"", "enter-mode jump_mark")
     config.bind("+", "zoom-in")
     config.bind("-", "zoom-out")
@@ -136,54 +137,40 @@ def apply_default(config):
     config.bind("sk", "set-cmd-text -s :bind")
     config.bind("sl", "set-cmd-text -s :set -t")
     config.bind("ss", "set-cmd-text -s :set")
-    config.bind(
-        "tIH", "config-cycle -p -u *://*.{url:host}/* content.images ;; reload")
+    config.bind("tIH",
+                "config-cycle -p -u *://*.{url:host}/* content.images ;; reload")
     config.bind("tIh",
                 "config-cycle -p -u *://{url:host}/* content.images ;; reload")
     config.bind("tIu", "config-cycle -p -u {url} content.images ;; reload")
-    config.bind(
-        "tPH",
-        "config-cycle -p -u *://*.{url:host}/* content.plugins ;; reload")
-    config.bind(
-        "tPh", "config-cycle -p -u *://{url:host}/* content.plugins ;; reload")
+    config.bind("tPH",
+                "config-cycle -p -u *://*.{url:host}/* content.plugins ;; reload")
+    config.bind("tPh",
+                "config-cycle -p -u *://{url:host}/* content.plugins ;; reload")
     config.bind("tPu", "config-cycle -p -u {url} content.plugins ;; reload")
-    config.bind(
-        "tSH",
-        "config-cycle -p -u *://*.{url:host}/* content.javascript.enabled ;; reload"
-    )
-    config.bind(
-        "tSh",
-        "config-cycle -p -u *://{url:host}/* content.javascript.enabled ;; reload"
-    )
-    config.bind(
-        "tSu", "config-cycle -p -u {url} content.javascript.enabled ;; reload")
+    config.bind("tSH",
+                "config-cycle -p -u *://*.{url:host}/* content.javascript.enabled ;; reload")
+    config.bind("tSh",
+                "config-cycle -p -u *://{url:host}/* content.javascript.enabled ;; reload")
+    config.bind("tSu",
+                "config-cycle -p -u {url} content.javascript.enabled ;; reload")
     config.bind("th", "back -t")
-    config.bind(
-        "tiH",
-        "config-cycle -p -t -u *://*.{url:host}/* content.images ;; reload")
-    config.bind(
-        "tih",
-        "config-cycle -p -t -u *://{url:host}/* content.images ;; reload")
+    config.bind("tiH",
+                "config-cycle -p -t -u *://*.{url:host}/* content.images ;; reload")
+    config.bind("tih",
+                "config-cycle -p -t -u *://{url:host}/* content.images ;; reload")
     config.bind("tiu", "config-cycle -p -t -u {url} content.images ;; reload")
     config.bind("tl", "forward -t")
-    config.bind(
-        "tpH",
-        "config-cycle -p -t -u *://*.{url:host}/* content.plugins ;; reload")
-    config.bind(
-        "tph",
-        "config-cycle -p -t -u *://{url:host}/* content.plugins ;; reload")
+    config.bind("tpH",
+                "config-cycle -p -t -u *://*.{url:host}/* content.plugins ;; reload")
+    config.bind("tph",
+                "config-cycle -p -t -u *://{url:host}/* content.plugins ;; reload")
     config.bind("tpu", "config-cycle -p -t -u {url} content.plugins ;; reload")
-    config.bind(
-        "tsH",
-        "config-cycle -p -t -u *://*.{url:host}/* content.javascript.enabled ;; reload"
-    )
-    config.bind(
-        "tsh",
-        "config-cycle -p -t -u *://{url:host}/* content.javascript.enabled ;; reload"
-    )
-    config.bind(
-        "tsu",
-        "config-cycle -p -t -u {url} content.javascript.enabled ;; reload")
+    config.bind("tsH",
+                "config-cycle -p -t -u *://*.{url:host}/* content.javascript.enabled ;; reload")
+    config.bind("tsh",
+                "config-cycle -p -t -u *://{url:host}/* content.javascript.enabled ;; reload")
+    config.bind("tsu",
+                "config-cycle -p -t -u {url} content.javascript.enabled ;; reload")
     config.bind("u", "undo")
     config.bind("v", "enter-mode caret")
     config.bind("wB", "set-cmd-text -s :bookmark-load -w")
@@ -259,17 +246,14 @@ def apply_default(config):
     config.bind("<Ctrl-P>", "command-history-prev", mode="command")
     config.bind("<Ctrl-Return>", "command-accept --rapid", mode="command")
     config.bind("<Ctrl-Shift-C>", "completion-item-yank --sel", mode="command")
-    config.bind("<Ctrl-Shift-Tab>",
-                "completion-item-focus prev-category",
+    config.bind("<Ctrl-Shift-Tab>", "completion-item-focus prev-category",
                 mode="command")
-    config.bind("<Ctrl-Tab>",
-                "completion-item-focus next-category",
+    config.bind("<Ctrl-Tab>", "completion-item-focus next-category",
                 mode="command")
     config.bind("<Ctrl-U>", "rl-unix-line-discard", mode="command")
     config.bind("<Ctrl-W>", "rl-unix-word-rubout", mode="command")
     config.bind("<Ctrl-Y>", "rl-yank", mode="command")
-    config.bind("<Down>",
-                "completion-item-focus --history next",
+    config.bind("<Down>", "completion-item-focus --history next",
                 mode="command")
     config.bind("<Escape>", "leave-mode", mode="command")
     config.bind("<Return>", "command-accept", mode="command")
@@ -333,7 +317,7 @@ def apply_default(config):
     config.bind("y", "prompt-accept yes", mode="yesno")
 
 
-def apply_custom(config):
+def apply_custom(config: ConfigAPI):
     config.bind("yp", "spawn mpv --force-window yes {url}")
     config.bind("yh", "hint links spawn mpv --force-window yes {hint-url}")
     config.bind(";", "set-cmd-text :")
@@ -342,6 +326,6 @@ def apply_custom(config):
     config.bind(".", "tab-next")
     config.bind(",", "tab-prev")
     config.bind("<Ctrl-Shift-p>",
-                "spawn --userscript ~/.local/bin/scripts/qute-bitwarden")
-    config.bind(" z", "spawn --userscript ~/.local/bin/scripts/qute-goyo")
+                "spawn --userscript ~/.scripts/qute-bitwarden")
+    config.bind(" z", "spawn --userscript ~/.scripts/qute-goyo")
     config.bind("e", "edit-url")

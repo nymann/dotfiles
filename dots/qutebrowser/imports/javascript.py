@@ -1,5 +1,8 @@
 # pylint: skip-file
-def apply(c):
+from qutebrowser.config.config import ConfigContainer
+
+
+def apply(c: ConfigContainer):
     c.content.javascript.alert = True
     c.content.javascript.can_access_clipboard = False
     c.content.javascript.can_open_tabs_automatically = False

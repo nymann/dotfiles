@@ -1,10 +1,12 @@
 #!/usr/bin/env sh
 
+set -e
 
 CHOICE=$(show_git_emoji_selection | rofi -i -p  "Please select an appropriate symbol for this commit message" -dmenu | grep -o '^.*:' | sed 's/://')
 PREFIX=""
+FILES_CHANGED=$(git status | tail -n +6 | sed 's/^/\#/')
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-echo $CHOICE
 case $CHOICE in
     1) PREFIX=":art:"; ;;
     2) PREFIX=":zap:"; ;;
@@ -68,20 +70,16 @@ case $CHOICE in
     60) PREFIX=":wastebasket:"; ;;
 esac
 
-echo Prefix: $PREFIX
+COMMIT_TITLE=$(echo "" | rofi -dmenu -i -p "Commit title" -lines 0  -separator-style "none")
 
-echo "Commit title"
-read -r COMMIT_TITLE
-
-echo "Commit description (optional):"
-read -r COMMIT_DESCRIPTION
-
-echo "Is this correct? (Y/n):"
-echo "git commit -m '$PREFIX $COMMIT_TITLE' -m '$COMMIT_DESCRIPTION'"
-read -r CONFIRM
-
-if [ "$CONFIRM" = "n" ] | [ "$CONFIRM" = "N" ]; then
-    exit 1
+if [ ${#COMMIT_TITLE} -gt 50 ]; then
+    printf "\e[1;33mWarning. Commit message is too long (> 50 characters)\e[0m\n\n"
 fi
 
-git commit -m "$PREFIX $COMMIT_TITLE" -m "$COMMIT_DESCRIPTION"
+cat > .git/COMMIT_EDITMSG << EOF
+$PREFIX $COMMIT_TITLE
+EOF
+
+$EDITOR .git/COMMIT_EDITMSG
+
+git commit -m "$(cat .git/COMMIT_EDITMSG)"

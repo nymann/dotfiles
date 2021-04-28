@@ -1,6 +1,12 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhistcnt =4
-let g:netrw_dirhist_4='/home/knj/code/github.com/nymann/dotfiles/dots/nvim'
-let g:netrw_dirhist_3='/home/knj/code/github/nymann/test'
-let g:netrw_dirhist_2='/home/knj/code/github/nymann/advent_of_code'
-let g:netrw_dirhist_1='/home/knj/.config/nvim'
+let g:netrw_dirhist_4='/home/knj/code/github.com/nymann/dotfiles/dots/qutebrowser'
+let g:netrw_dirhist_3='/home/knj/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykpi/common/2fa-otp/2fa-otp-frontend'
+let g:netrw_dirhist_2='/home/knj/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykpi/skpi/components/aggregated-apis/axle-counter/axle-counter-etl'
+let g:netrw_dirhist_1='/home/knj/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykpi/common/resource-monitor'
+let g:netrw_dirhist_0='/home/knj/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykpi/common/resource-monitor/src/resource_monitor/domain/monitoring_entries'
+let g:netrw_dirhist_9='/home/knj/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykpi/common/resource-monitor'
+let g:netrw_dirhist_8='/home/knj/code/github.com/nymann/mulefactory'
+let g:netrw_dirhist_7='/home/knj/code/github.com/nymann/mulefactory/src/mulefactory'
+let g:netrw_dirhist_6='/home/knj/code/github.com/nymann/mulefactory'
+let g:netrw_dirhist_5='/home/knj/code/github.com/nymann/mulefactory/make'

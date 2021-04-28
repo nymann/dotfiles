@@ -1,0 +1,9 @@
+#!/bin/sh
+DEFAULT_CURRENCY="DKK"
+CURRENCY="${2:-$DEFAULT_CURRENCY}"
+
+if [[ "$CURRENCY" == "EUR" ]]; then
+    echo "$(currency_converter $1 EUR --to DKK)"
+else
+    echo "$(currency_converter $1 DKK --to EUR)"
+fi

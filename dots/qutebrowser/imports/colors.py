@@ -1,376 +1,108 @@
-# -*- coding: utf-8 -*-
-"""Example Google style docstrings.
-
-"""
-# Solarized dark
-# base00 = "#002b36"
-# base01 = "#073642"
-# base02 = "#586e75"
-# base03 = "#657b83"
-# base04 = "#839496"
-# base05 = "#93a1a1"
-# base06 = "#eee8d5"
-# base07 = "#fdf6e3"
-# base08 = "#dc322f"
-# base09 = "#cb4b16"
-# base0A = "#b58900"
-# base0B = "#859900"
-# base0C = "#2aa198"
-# base0D = "#268bd2"
-# base0E = "#6c71c4"
-# base0F = "#d33682"
-
-# Onedark
-# base00 = "#282c34"
-# base01 = "#353b45"
-# base02 = "#3e4451"
-# base03 = "#545862"
-# base04 = "#565c64"
-# base05 = "#abb2bf"
-# base06 = "#b6bdca"
-# base07 = "#c8ccd4"
-# base08 = "#e06c75"
-# base09 = "#d19a66"
-# base0A = "#e5c07b"
-# base0B = "#98c379"
-# base0C = "#56b6c2"
-# base0D = "#61afef"
-# base0E = "#c678dd"
-# base0F = "#be5046"
-
-# Nord
-# base00 = "#2E3440"
-# base01 = "#3B4252"
-# base02 = "#434C5E"
-# base03 = "#4C566A"
-# base04 = "#D8DEE9"
-# base05 = "#E5E9F0"
-# base06 = "#ECEFF4"
-# base07 = "#8FBCBB"
-# base08 = "#BF616A"
-# base09 = "#D08770"
-# base0A = "#EBCB8B"
-# base0B = "#A3BE8C"
-# base0C = "#88C0D0"
-# base0D = "#81A1C1"
-# base0E = "#B48EAD"
-# base0F = "#5E81AC"
-
-# Onedark
-base00 = "#282c34"
-base01 = "#353b45"
-base02 = "#3e4451"
-base03 = "#545862"
-base04 = "#565c64"
-base05 = "#abb2bf"
-base06 = "#b6bdca"
-base07 = "#c8ccd4"
-base08 = "#e06c75"
-base09 = "#d19a66"
-base0A = "#e5c07b"
-base0B = "#98c379"
-base0C = "#56b6c2"
-base0D = "#61afef"
-base0E = "#c678dd"
-base0F = "#be5046"
-
-
-def apply(c):
-    """apply.
-
-    Args:
-        c:
-    """
-    _tabs(c.colors.tabs)
-    _completion(c.colors.completion)
-    _prompts(c.colors.prompts)
-    _messages(c.colors.messages)
-    _downloads(c.colors.downloads)
-    _statusbar(c.colors.statusbar)
-    _contextmenu(c.colors.contextmenu)
-    _hints(c.colors.hints)
-
-    c.colors.webpage.prefers_color_scheme_dark = True
-
-
-def _prompts(prompts):
-    # Foreground color for prompts.
-    prompts.fg = base05
-
-    # Border used around UI elements in prompts.
-    prompts.border = base00
-
-    # Background color for prompts.
-    prompts.bg = base00
-
-    # Background color for the selected item in filename prompts.
-    prompts.selected.bg = base0A
-
-
-def _messages(messages):
-
-    # Foreground color of an error message.
-    messages.error.fg = base00
-
-    # Background color of an error message.
-    messages.error.bg = base08
-
-    # Border color of an error message.
-    messages.error.border = base08
-
-    # Foreground color of a warning message.
-    messages.warning.fg = base00
-
-    # Background color of a warning message.
-    messages.warning.bg = base0E
-
-    # Border color of a warning message.
-    messages.warning.border = base0E
-
-    # Foreground color of an info message.
-    messages.info.fg = base05
-
-    # Background color of an info message.
-    messages.info.bg = base00
-
-    # Border color of an info message.
-    messages.info.border = base00
-
-
-def _downloads(downloads):
-    # Background color for the download bar.
-    downloads.bar.bg = base00
-
-    # Color gradient start for download text.
-    downloads.start.fg = base00
-
-    # Color gradient start for download backgrounds.
-    downloads.start.bg = base0D
-
-    # Color gradient end for download text.
-    downloads.stop.fg = base00
-
-    # Color gradient stop for download backgrounds.
-    downloads.stop.bg = base0C
-
-    # Foreground color for downloads with errors.
-    downloads.error.fg = base08
-
-
-def _keyhints(keyhint):
-    # Text color for the keyhint widget.
-    keyhint.fg = base05
-
-    # Highlight color for keys to complete the current keychain.
-    keyhint.suffix.fg = base05
-
-    # Background color of the keyhint widget.
-    keyhint.bg = base00
-
-
-def _hints(hints):
-
-    # Font color for hints.
-    hints.fg = base00
-
-    # Background color for hints. Note that you can use a `rgba(...)` value
-    # for transparency.
-    hints.bg = base0A
-
-    # Font color for the matched part of hints.
-    hints.match.fg = base05
-
-
-def _completion(completion):
-    completion.fg = base05
-
-    # Background color of the completion widget for odd rows.
-    completion.odd.bg = base03
-
-    # Background color of the completion widget for even rows.
-    completion.even.bg = base00
-
-    # Foreground color of completion widget category headers.
-    completion.category.fg = base0A
-
-    # Background color of the completion widget category headers.
-    completion.category.bg = base00
-
-    # Top border color of the completion widget category headers.
-    completion.category.border.top = base00
-
-    # Bottom border color of the completion widget category headers.
-    completion.category.border.bottom = base00
-
-    # Foreground color of the selected completion item.
-    completion.item.selected.fg = base01
-
-    # Background color of the selected completion item.
-    completion.item.selected.bg = base0A
-
-    # Top border color of the selected completion item.
-    completion.item.selected.border.top = base0A
-
-    # Bottom border color of the selected completion item.
-    completion.item.selected.border.bottom = base0A
-
-    # Foreground color of the matched text in the selected completion item.
-    completion.item.selected.match.fg = base08
-
-    # Foreground color of the matched text in the completion.
-    completion.match.fg = base0B
-
-    # Color of the scrollbar handle in the completion view.
-    completion.scrollbar.fg = base05
-
-    # Color of the scrollbar in the completion view.
-    completion.scrollbar.bg = base00
-
-
-def _tabs(tabs):
-    # Background color of the tab bar.
-    tabs.bar.bg = base00
-
-    # Color gradient start for the tab indicator.
-    tabs.indicator.start = base0D
-
-    # Color gradient end for the tab indicator.
-    tabs.indicator.stop = base0C
-
-    # Color for the tab indicator on errors.
-    tabs.indicator.error = base08
-
-    # Foreground color of unselected odd tabs.
-    tabs.odd.fg = base05
-
-    # Background color of unselected odd tabs.
-    tabs.odd.bg = base03
-
-    # Foreground color of unselected even tabs.
-    tabs.even.fg = base05
-
-    # Background color of unselected even tabs.
-    tabs.even.bg = base00
-
-    # Background color of pinned unselected even tabs.
-    tabs.pinned.even.bg = base0C
-
-    # Foreground color of pinned unselected even tabs.
-    tabs.pinned.even.fg = base07
-
-    # Background color of pinned unselected odd tabs.
-    tabs.pinned.odd.bg = base0B
-
-    # Foreground color of pinned unselected odd tabs.
-    tabs.pinned.odd.fg = base07
-
-    # Background color of pinned selected even tabs.
-    tabs.pinned.selected.even.bg = base05
-
-    # Foreground color of pinned selected even tabs.
-    tabs.pinned.selected.even.fg = base00
-
-    # Background color of pinned selected odd tabs.
-    tabs.pinned.selected.odd.bg = base05
-
-    # Foreground color of pinned selected odd tabs.
-    tabs.pinned.selected.odd.fg = base0E
-
-    # Foreground color of selected odd tabs.
-    tabs.selected.odd.fg = base00
-
-    # Background color of selected odd tabs.
-    tabs.selected.odd.bg = base05
-
-    # Foreground color of selected even tabs.
-    tabs.selected.even.fg = base00
-
-    # Background color of selected even tabs.
-    tabs.selected.even.bg = base05
-
-
-def _contextmenu(contextmenu):
-    # Background color of the context menu. If set to null, the Qt default is used.
-    contextmenu.menu.bg = base00
-
-    # Foreground color of the context menu. If set to null, the Qt default is used.
-    contextmenu.menu.fg = base05
-
-    # Background color of the context menu’s selected item. If set to null, the Qt default is used.
-    contextmenu.selected.bg = base0A
-
-    #Foreground color of the context menu’s selected item. If set to null, the Qt default is used.
-    contextmenu.selected.fg = base01
-
-
-def _statusbar(statusbar):
-    # Foreground color of the statusbar.
-    statusbar.normal.fg = base0B
-
-    # Background color of the statusbar.
-    statusbar.normal.bg = base00
-
-    # Foreground color of the statusbar in insert mode.
-    statusbar.insert.fg = base00
-
-    # Background color of the statusbar in insert mode.
-    statusbar.insert.bg = base0D
-
-    # Foreground color of the statusbar in passthrough mode.
-    statusbar.passthrough.fg = base00
-
-    # Background color of the statusbar in passthrough mode.
-    statusbar.passthrough.bg = base0C
-
-    # Foreground color of the statusbar in private browsing mode.
-    statusbar.private.fg = base00
-
-    # Background color of the statusbar in private browsing mode.
-    statusbar.private.bg = base03
-
-    # Foreground color of the statusbar in command mode.
-    statusbar.command.fg = base05
-
-    # Background color of the statusbar in command mode.
-    statusbar.command.bg = base00
-
-    # Foreground color of the statusbar in private browsing + command mode.
-    statusbar.command.private.fg = base05
-
-    # Background color of the statusbar in private browsing + command mode.
-    statusbar.command.private.bg = base00
-
-    # Foreground color of the statusbar in caret mode.
-    statusbar.caret.fg = base00
-
-    # Background color of the statusbar in caret mode.
-    statusbar.caret.bg = base0E
-
-    # Foreground color of the statusbar in caret mode with a selection.
-    statusbar.caret.selection.fg = base00
-
-    # Background color of the statusbar in caret mode with a selection.
-    statusbar.caret.selection.bg = base0D
-
-    # Background color of the progress bar.
-    statusbar.progress.bg = base0D
-
-    # Default foreground color of the URL in the statusbar.
-    statusbar.url.fg = base05
-
-    # Foreground color of the URL in the statusbar on error.
-    statusbar.url.error.fg = base08
-
-    # Foreground color of the URL in the statusbar for hovered links.
-    statusbar.url.hover.fg = base05
-
-    # Foreground color of the URL in the statusbar on successful load
-    # (http).
-    statusbar.url.success.http.fg = base0C
-
-    # Foreground color of the URL in the statusbar on successful load
-    # (https).
-    statusbar.url.success.https.fg = base0B
-
-    # Foreground color of the URL in the statusbar when there's a warning.
-    statusbar.url.warn.fg = base0E
+# pylint: skip-file
+from qutebrowser.config.config import ConfigContainer
+
+c_bg = "#282828"
+c_fg = "#dbdbb2"
+c_bg_hl = "#504945"
+c_fg_hl = "#fbf1c7"
+c_bg_red = "#cc241d"
+c_fg_red = "#fb4934"
+c_bg_green = "#98971a"
+c_fg_green = "#b8bb26"
+c_bg_yellow = "#d79921"
+c_fg_yellow = "#fabd2f"
+c_bg_blue = "#458588"
+c_fg_blue = "#83a598"
+c_bg_purple = "#b16286"
+c_fg_purple = "#d3869b"
+c_bg_aqua = "#689d6a"
+c_fg_aqua = "#8ec07c"
+c_bg_orange = "#d65d03"
+c_fg_orange = "#fe8019"
+
+
+def apply(c: ConfigContainer):
+    c.colors.completion.fg = c_fg
+    c.colors.completion.category.bg = c_bg_orange
+    c.colors.completion.category.fg = c_fg
+    c.colors.completion.category.border.bottom = c_bg_orange
+    c.colors.completion.category.border.top = c_bg_orange
+    c.colors.completion.even.bg = c_bg
+    c.colors.completion.odd.bg = c_bg_hl
+    c.colors.completion.item.selected.bg = c_bg_green
+    c.colors.completion.item.selected.fg = c_fg
+    c.colors.completion.item.selected.border.bottom = c_bg_green
+    c.colors.completion.item.selected.border.top = c_bg_green
+    c.colors.completion.item.selected.match.fg = c_fg_red
+    c.colors.completion.scrollbar.bg = c_bg
+    c.colors.completion.scrollbar.fg = c_fg
+
+    c.colors.contextmenu.menu.bg = c_bg
+    c.colors.contextmenu.menu.fg = c_fg
+    c.colors.contextmenu.selected.bg = c_bg_hl
+    c.colors.contextmenu.selected.fg = c_fg_hl
+
+    c.colors.downloads.bar.bg = c_bg
+    c.colors.downloads.error.bg = c_bg
+    c.colors.downloads.error.fg = c_fg_red
+    c.colors.downloads.start.bg = c_bg
+    c.colors.downloads.start.fg = c_fg_blue
+    c.colors.downloads.stop.bg = c_bg
+    c.colors.downloads.stop.fg = c_fg_yellow
+
+    c.colors.hints.bg = c_bg
+    c.colors.hints.fg = c_fg
+    c.colors.hints.match.fg = c_bg
+
+    c.colors.messages.error.bg = c_bg
+    c.colors.messages.error.fg = c_fg_red
+    c.colors.messages.error.border = c_fg_red
+    c.colors.messages.info.bg = c_bg
+    c.colors.messages.info.fg = c_fg_blue
+    c.colors.messages.info.border = c_fg_blue
+    c.colors.messages.warning.bg = c_bg
+    c.colors.messages.warning.fg = c_fg_yellow
+    c.colors.messages.warning.border = c_fg_yellow
+
+    c.colors.prompts.bg = c_bg
+    c.colors.prompts.border = c_bg_hl
+    c.colors.prompts.fg = c_fg
+    c.colors.prompts.selected.bg = c_bg_hl
+
+    c.colors.statusbar.caret.bg = c_bg_purple
+    c.colors.statusbar.caret.fg = c_fg_purple
+    c.colors.statusbar.caret.selection.bg = c_bg_purple
+    c.colors.statusbar.caret.selection.fg = c_fg
+    c.colors.statusbar.command.bg = c_bg
+    c.colors.statusbar.command.fg = c_fg_blue
+    c.colors.statusbar.command.private.bg = c_bg
+    c.colors.statusbar.command.private.fg = c_bg_blue
+    c.colors.statusbar.insert.bg = c_bg
+    c.colors.statusbar.insert.fg = c_fg_aqua
+    c.colors.statusbar.url.error.fg = c_fg_red
+    c.colors.statusbar.url.fg = c_fg
+    c.colors.statusbar.url.hover.fg = c_fg_blue
+    c.colors.statusbar.url.success.http.fg = c_fg_yellow
+    c.colors.statusbar.url.success.https.fg = c_fg_aqua
+    c.colors.statusbar.url.warn.fg = c_fg_yellow
+
+    c.colors.tabs.bar.bg = c_bg
+    c.colors.tabs.even.bg = c_bg
+    c.colors.tabs.even.fg = c_fg
+    c.colors.tabs.indicator.error = c_bg_red
+    c.colors.tabs.indicator.start = c_bg_blue
+    c.colors.tabs.indicator.stop = c_bg_aqua
+    c.colors.tabs.odd.bg = c_bg_hl
+    c.colors.tabs.odd.fg = c_fg_hl
+    c.colors.tabs.pinned.even.bg = c_bg_yellow
+    c.colors.tabs.pinned.even.fg = c_fg
+    c.colors.tabs.pinned.odd.bg = c_bg_yellow
+    c.colors.tabs.pinned.odd.fg = c_fg
+    c.colors.tabs.pinned.selected.even.bg = c_bg_orange
+    c.colors.tabs.pinned.selected.even.fg = c_fg
+    c.colors.tabs.pinned.selected.odd.bg = c_bg_orange
+    c.colors.tabs.pinned.selected.odd.fg = c_fg
+    c.colors.tabs.selected.even.bg = c_bg_orange
+    c.colors.tabs.selected.even.fg = c_fg
+    c.colors.tabs.selected.odd.bg = c_bg_orange
+    c.colors.tabs.selected.odd.fg = c_fg

@@ -1,5 +1,5 @@
 -- Setup inspired from: https://github.com/ahmedelgabri/dotfiles/blob/26f32ba6aae362a20095523b180f5f06d74f5bcb/roles/vim/files/.vim/lua/lsp.lua
-local has_lsp, nvim_lsp = pcall(require, 'nvim_lsp')
+local has_lsp, nvim_lsp = pcall(require, 'lspconfig')
 local has_completion, completion = pcall(require, 'completion')
 local has_diagnostic, diagnostic = pcall(require, 'diagnostic')
 local has_status, lsp_status = pcall(require, 'lsp_status')

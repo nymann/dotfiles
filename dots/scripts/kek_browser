@@ -1,0 +1,19 @@
+#!/bin/sh
+
+open_url() {
+    # called like this: 'open_url profile url'
+    firefox -P $1 -new-tab $2 &
+}
+
+is_work_url() {
+    # is_work_url url
+    echo $1 | grep 'siemens\|mobnet\.dk' 
+}
+
+if is_work_url $1; then
+    echo "Website is work URL"
+    open_url Work $1
+else
+    echo "Website is private URL"
+    open_url default $1
+fi

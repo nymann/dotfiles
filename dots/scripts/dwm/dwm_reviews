@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+mkdir -p $HOME/.cache/dwmbar/
+
+while :; do
+    proxychains gitlab_assigned_reviewer > $HOME/.cache/dwmbar/top_0006_gitlab_assigned_reviewer
+    sleep 60;
+done
