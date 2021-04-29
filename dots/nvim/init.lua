@@ -17,7 +17,7 @@ vim.api.nvim_exec([[
 local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use {'nvim-treesitter/nvim-treesitter'}
+  use {'nvim-treesitter/nvim-treesitter',run=':TSUpdate'}
   use 'tpope/vim-vinegar'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
@@ -458,24 +458,24 @@ vim.cmd([[
 -- Set completeopt to have a better completion experience
 vim.o.completeopt="menuone,noinsert,noselect"
 
--- require'nvim-treesitter.configs'.setup {
---   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
---   highlight = {
---     enable = true,              -- false will disable the whole extension
---   },
---   incremental_selection = {
---     enable = true,
---     keymaps = {
---       init_selection = "gnn",
---       node_incremental = "grn",
---       scope_incremental = "grc",
---       node_decremental = "grm",
---     },
---   },
---   indent = {
---     enable = true
---   }
--- }
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  }
+}
 
 -- Formatters
 -- vim.g.neoformat_enabled_python = { 'black' }
