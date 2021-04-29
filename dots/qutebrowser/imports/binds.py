@@ -320,7 +320,6 @@ def apply_default(config: ConfigAPI):
 def apply_custom(config: ConfigAPI):
     config.bind("yp", "spawn mpv --force-window yes {url}")
     config.bind("yh", "hint links spawn mpv --force-window yes {hint-url}")
-    config.bind(";", "set-cmd-text :")
     config.bind("<Ctrl-s>", "download")
     config.bind("<Ctrl-i>", "inspector")
     config.bind(".", "tab-next")
