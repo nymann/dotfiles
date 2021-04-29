@@ -8,7 +8,7 @@ def apply(config: ConfigAPI):
 
 
 def apply_default(config: ConfigAPI):
-    config.bind("\"", "enter-mode jump_mark")
+    config.bind("\"", "mode-enter jump_mark")
     config.bind("+", "zoom-in")
     config.bind("-", "zoom-out")
     config.bind(".", "repeat-command")
@@ -55,7 +55,7 @@ def apply_default(config: ConfigAPI):
     config.bind("<Ctrl-T>", "open -t")
     config.bind("<Ctrl-Tab>", "tab-focus last")
     config.bind("<Ctrl-U>", "scroll-page 0 -0.5")
-    config.bind("<Ctrl-V>", "enter-mode passthrough")
+    config.bind("<Ctrl-V>", "mode-enter passthrough")
     config.bind("<Ctrl-W>", "tab-close")
     config.bind("<Ctrl-X>", "navigate decrement")
     config.bind("<Ctrl-^>", "tab-focus last")
@@ -70,7 +70,7 @@ def apply_default(config: ConfigAPI):
     config.bind("<forward>", "forward")
     config.bind("=", "zoom")
     config.bind("?", "set-cmd-text ?")
-    config.bind("@", "run-macro")
+    config.bind("@", "macro-run")
     config.bind("B", "set-cmd-text -s :quickmark-load -t")
     config.bind("D", "tab-close -o")
     config.bind("F", "hint all tab")
@@ -94,7 +94,7 @@ def apply_default(config: ConfigAPI):
     config.bind("ZZ", "quit --save")
     config.bind("[[", "navigate prev")
     config.bind("]]", "navigate next")
-    config.bind("`", "enter-mode set_mark")
+    config.bind("`", "mode-enter set_mark")
     config.bind("ad", "download-cancel")
     config.bind("b", "set-cmd-text -s :quickmark-load")
     config.bind("cd", "download-clear")
@@ -122,7 +122,7 @@ def apply_default(config: ConfigAPI):
     config.bind("gt", "set-cmd-text -s :buffer")
     config.bind("gu", "navigate up")
     config.bind("h", "scroll left")
-    config.bind("i", "enter-mode insert")
+    config.bind("i", "mode-enter insert")
     config.bind("j", "scroll down")
     config.bind("k", "scroll up")
     config.bind("l", "scroll right")
@@ -131,7 +131,7 @@ def apply_default(config: ConfigAPI):
     config.bind("o", "set-cmd-text -s :open")
     config.bind("pP", "open -- {primary}")
     config.bind("pp", "open -- {clipboard}")
-    config.bind("q", "record-macro")
+    config.bind("q", "macro-record")
     config.bind("r", "reload")
     config.bind("sf", "save")
     config.bind("sk", "set-cmd-text -s :bind")
@@ -172,7 +172,7 @@ def apply_default(config: ConfigAPI):
     config.bind("tsu",
                 "config-cycle -p -t -u {url} content.javascript.enabled ;; reload")
     config.bind("u", "undo")
-    config.bind("v", "enter-mode caret")
+    config.bind("v", "mode-enter caret")
     config.bind("wB", "set-cmd-text -s :bookmark-load -w")
     config.bind("wO", "set-cmd-text :open -w {url:pretty}")
     config.bind("wP", "open -w -- {primary}")
@@ -202,7 +202,7 @@ def apply_default(config: ConfigAPI):
     config.bind("$", "move-to-end-of-line", mode="caret")
     config.bind("0", "move-to-start-of-line", mode="caret")
     config.bind("<Ctrl-Space>", "drop-selection", mode="caret")
-    config.bind("<Escape>", "leave-mode", mode="caret")
+    config.bind("<Escape>", "mode-enter normal", mode="caret")
     config.bind("<Return>", "yank selection", mode="caret")
     config.bind("<Space>", "toggle-selection", mode="caret")
     config.bind("G", "move-to-end-of-document", mode="caret")
@@ -214,7 +214,7 @@ def apply_default(config: ConfigAPI):
     config.bind("[", "move-to-start-of-prev-block", mode="caret")
     config.bind("]", "move-to-start-of-next-block", mode="caret")
     config.bind("b", "move-to-prev-word", mode="caret")
-    config.bind("c", "enter-mode normal", mode="caret")
+    config.bind("c", "mode-enter normal", mode="caret")
     config.bind("e", "move-to-end-of-word", mode="caret")
     config.bind("gg", "move-to-start-of-document", mode="caret")
     config.bind("h", "move-to-prev-char", mode="caret")
@@ -255,7 +255,7 @@ def apply_default(config: ConfigAPI):
     config.bind("<Ctrl-Y>", "rl-yank", mode="command")
     config.bind("<Down>", "completion-item-focus --history next",
                 mode="command")
-    config.bind("<Escape>", "leave-mode", mode="command")
+    config.bind("<Escape>", "mode-enter normal", mode="command")
     config.bind("<Return>", "command-accept", mode="command")
     config.bind("<Shift-Delete>", "completion-item-del", mode="command")
     config.bind("<Shift-Tab>", "completion-item-focus prev", mode="command")
@@ -266,16 +266,16 @@ def apply_default(config: ConfigAPI):
     config.bind("<Ctrl-B>", "hint all tab-bg", mode="hint")
     config.bind("<Ctrl-F>", "hint links", mode="hint")
     config.bind("<Ctrl-R>", "hint --rapid links tab-bg", mode="hint")
-    config.bind("<Escape>", "leave-mode", mode="hint")
+    config.bind("<Escape>", "mode-enter normal", mode="hint")
     config.bind("<Return>", "follow-hint", mode="hint")
 
     # Bindings for insert mode
     config.bind("<Ctrl-E>", "open-editor", mode="insert")
-    config.bind("<Escape>", "leave-mode", mode="insert")
+    config.bind("<Escape>", "mode-enter normal", mode="insert")
     config.bind("<Shift-Ins>", "insert-text -- {primary}", mode="insert")
 
     # Bindings for passthrough mode
-    config.bind("<Shift-Escape>", "leave-mode", mode="passthrough")
+    config.bind("<Shift-Escape>", "mode-enter normal", mode="passthrough")
 
     # Bindings for prompt mode
     config.bind("<Alt-B>", "rl-backward-word", mode="prompt")
@@ -297,19 +297,19 @@ def apply_default(config: ConfigAPI):
     config.bind("<Ctrl-X>", "prompt-open-download", mode="prompt")
     config.bind("<Ctrl-Y>", "rl-yank", mode="prompt")
     config.bind("<Down>", "prompt-item-focus next", mode="prompt")
-    config.bind("<Escape>", "leave-mode", mode="prompt")
+    config.bind("<Escape>", "mode-enter normal", mode="prompt")
     config.bind("<Return>", "prompt-accept", mode="prompt")
     config.bind("<Shift-Tab>", "prompt-item-focus prev", mode="prompt")
     config.bind("<Tab>", "prompt-item-focus next", mode="prompt")
     config.bind("<Up>", "prompt-item-focus prev", mode="prompt")
 
     # Bindings for register mode
-    config.bind("<Escape>", "leave-mode", mode="register")
+    config.bind("<Escape>", "mode-enter normal", mode="register")
 
     # Bindings for yesno mode
     config.bind("<Alt-Shift-Y>", "prompt-yank --sel", mode="yesno")
     config.bind("<Alt-Y>", "prompt-yank", mode="yesno")
-    config.bind("<Escape>", "leave-mode", mode="yesno")
+    config.bind("<Escape>", "mode-enter normal", mode="yesno")
     config.bind("<Return>", "prompt-accept", mode="yesno")
     config.bind("N", "prompt-accept --save no", mode="yesno")
     config.bind("Y", "prompt-accept --save yes", mode="yesno")
