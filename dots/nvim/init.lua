@@ -49,14 +49,14 @@ vim.o.expandtab = true
 vim.o.inccommand = "nosplit"
 
 --Set tab options for vim
-vim.o.tabstop = 8
+vim.o.tabstop = 4
 vim.o.softtabstop = 4
 
 --Set highlight on search
 vim.o.hlsearch = false
 
---Make line numbers default
-vim.wo.number = true
+--Make line numbers relative by default
+vim.wo.relativenumber = true
 
 --Do not save when switching buffers
 vim.o.hidden = true
