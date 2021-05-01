@@ -21,18 +21,18 @@ require('packer').startup(function()
   use 'tpope/vim-vinegar'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-commentary'
-  use 'tpope/vim-repeat'
+  -- use 'tpope/vim-surround'
+  -- use 'tpope/vim-commentary'
+  -- use 'tpope/vim-repeat'
   use 'justinmk/vim-dirvish'
   use 'christoomey/vim-tmux-navigator'
   use 'ludovicchabant/vim-gutentags'
   use {'nvim-telescope/telescope.nvim',
-  requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
   use 'joshdick/onedark.vim'
   use 'itchyny/lightline.vim'
-  use { 'lukas-reineke/indent-blankline.nvim', branch="lua" }
+  -- use { 'lukas-reineke/indent-blankline.nvim', branch="lua" }
   use 'hkupty/iron.nvim.git'
   use 'lewis6991/gitsigns.nvim'
   use 'neovim/nvim-lspconfig'
@@ -41,6 +41,16 @@ require('packer').startup(function()
   use 'LnL7/vim-nix'
   use 'ziglang/zig.vim'
   use 'nvim-lua/completion-nvim'
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
 end)
 
 --Expand tab to spaces
@@ -491,7 +501,7 @@ require'nvim-treesitter.configs'.setup {
     },
   },
   indent = {
-    enable = true
+    enable = false
   }
 }
 
