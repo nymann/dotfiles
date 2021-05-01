@@ -1,19 +1,19 @@
 #!/bin/sh
 
-open_url() {
-    # called like this: 'open_url profile url'
-    firefox -P $1 -new-tab $2 &
-}
+# This script functions as a browser wrapper.
+# It opens work related URLs in my work browser firefox,
+# and all other URLs in my private browser; qutebrowser.
+
+# To set this browser as default, put `export BROWSER=kek_browser`
+# in your profile.
 
 is_work_url() {
-    # is_work_url url
-    echo $1 | grep 'siemens\|mobnet\.dk' 
+    # Called like: is_work_url url
+    echo "$1" | grep 'siemens\.com|siemens\.dk|mobnet\.dk' 
 }
 
-if is_work_url $1; then
-    echo "Website is work URL"
-    open_url Work $1
+if is_work_url "$1"; then
+    firefox -new-tab "$1"
 else
-    echo "Website is private URL"
-    open_url default $1
+    qutebrowser --target tab "$1"
 fi

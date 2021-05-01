@@ -40,6 +40,7 @@ require('packer').startup(function()
   use 'tbastos/vim-lua'
   use 'LnL7/vim-nix'
   use 'ziglang/zig.vim'
+  use 'nvim-lua/completion-nvim'
 end)
 
 --Expand tab to spaces
@@ -63,6 +64,9 @@ vim.o.hidden = true
 
 --Enable mouse mode
 vim.o.mouse = "a"
+
+--Yanks go to ctrl-c '+' clipboard register
+vim.o.clipboard = "unnamedplus"
 
 --Enable break indent
 vim.o.breakindent = true
@@ -90,11 +94,21 @@ vim.g.lightline = { colorscheme = 'onedark';
 }
 
 --Fire, walk with me
-vim.cmd[[set guifont="Monaco:h18"]]
+vim.cmd[[set guifont="Monaco Nerd Font:h20"]]
 vim.g.firenvim_config = { localSettings = { ['.*'] = { takeover = 'never' } } }
 
+--completion-nvim tab as trigger
+vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
+vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt="menuone,noinsert,noselect"
+
+-- Avoid showing message extra message when using completion
+vim.o.shortmess = vim.o.shortmess .. "c"
+
 --Remap space as leader key
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
+vim.api.nvim_set_keymap('n', '<Space>', '<Nop>', { noremap = true, silent=true})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -343,9 +357,14 @@ local on_attach = function(_client, bufnr)
     vim.lsp.diagnostic.on_publish_diagnostics, {
       virtual_text = true;
       signs = true,
-      update_in_insert = true,
+      update_in_insert = false,
     }
   )
+
+  -- completion
+  local completion = require('completion')
+  completion.on_attach()
+
 
   local overridden_hover = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
   vim.lsp.handlers["textDocument/hover"] = function(...)
@@ -373,9 +392,7 @@ local on_attach = function(_client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 end
 
-local servers = {
-	'pyright'
-}
+local servers = {'pyright'}
 --local servers = {
 --  'gopls', 'clangd', 'vuels', 'hls', 'solargraph', 'rnix', 'ocamllsp',
 --  'dartls', 'tsserver', 'solargraph', 'pyright', 'als'
@@ -383,7 +400,8 @@ local servers = {
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    on_attach = on_attach,
+    -- on_attach = completion.on_attach,
+    on_attach = on_attach
 }
 end
 
@@ -461,7 +479,7 @@ vim.o.completeopt="menuone,noinsert,noselect"
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
-    enable = true,              -- false will disable the whole extension
+    enable = true, -- false will disable the whole extension
   },
   incremental_selection = {
     enable = true,
