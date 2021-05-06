@@ -27,4 +27,4 @@ elif [ $(stat -c %Y "${CACHE_FILE}") -lt $(($(date +"%s")-300)) ] ; then
     download_file
 fi
 UNPAID_ETH=$(cat "$CACHE_FILE" | jq '.data | .currentStatistics | .unpaid')  
-printf '0.0%d' ${UNPAID_ETH} | xargs printf "%.*f\n" 5
+printf '0.00%d' ${UNPAID_ETH} | xargs printf "%.*f\n" 5

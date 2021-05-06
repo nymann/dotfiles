@@ -51,17 +51,20 @@ require('packer').startup(function()
       }
     end
   }
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = 'cd app && yarn install',
+    cmd = 'MarkdownPreview',
+    ft= {'markdown'}
+  }
+  use 'junegunn/vim-easy-align'
+  use 'mhartington/formatter.nvim'
 end)
 
---Expand tab to spaces
-vim.o.expandtab = true
 
 --Incremental live completion
 vim.o.inccommand = "nosplit"
 
---Set tab options for vim
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
 
 --Set highlight on search
 vim.o.hlsearch = false
@@ -434,6 +437,14 @@ nvim_lsp.texlab.setup{
   }
 }
 
+-- java language server
+nvim_lsp.jdtls.setup {
+  cmd = {"jdtls"};
+  on_attach = on_attach;
+}
+
+
+
 local sumneko_cmd
 if vim.fn.executable("lua-language-server") == 1 then
   sumneko_cmd = {"lua-language-server"}
@@ -506,7 +517,30 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- Formatters
--- vim.g.neoformat_enabled_python = { 'black' }
+require'formatter'.setup {
+  logging = false,
+  filetype = {
+    java = {
+      -- google-java-format
+      function()
+        return {
+          exe = "java",
+          args = {"-jar", vim.fn.getenv("HOME").."/.local/share/google-java-format-1.4-all-deps.jar", "-"},
+          stdin = true
+        }
+      end
+    }
+  }
+}
+
+vim.api.nvim_exec([[
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost *.java FormatWrite
+  augroup end
+]], true)
+
+
 
 local iron = require('iron')
 
@@ -515,3 +549,10 @@ iron.core.set_config {
     python = "ipython",
   }
 }
+
+--Set tab options for vim
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.smarttab = true
+vim.o.expandtab = true --Expand tab to spaces

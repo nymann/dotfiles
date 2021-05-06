@@ -328,3 +328,6 @@ def apply_custom(config: ConfigAPI):
                 "spawn --userscript ~/.local/bin/scripts/qute-bitwarden")
     config.bind(" z", "spawn --userscript ~/.scripts/qute-goyo")
     config.bind("e", "edit-url")
+    config.bind("po", "proxy-off")
+    config.bind("pz", "proxy-zscaler-on")
+    config.bind("pt", "proxy-tor-on")
