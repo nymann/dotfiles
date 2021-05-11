@@ -58,4 +58,7 @@ require('packer').startup(function()
   use 'junegunn/vim-easy-align'
   use 'mhartington/formatter.nvim'
   use 'rafamadriz/friendly-snippets'
+  use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
+  use 'ray-x/lsp_signature.nvim'
+  use {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
 end)

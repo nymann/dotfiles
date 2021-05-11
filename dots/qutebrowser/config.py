@@ -45,6 +45,7 @@ c.url.searchengines = {
     "wiki": "https://en.wikipedia.org/?search={}",
     "wh": "https://classic.wowhead.com/search?q={}",
     "yt": "https://youtube.com/results?search_query={}",
+    "gh": "https://github.com/{}",
 }
 c.url.start_pages = "https://kruhlmann.dev/startpage"
 c.editor.command = ["alacritty", "-e", "nvim", "{}"]

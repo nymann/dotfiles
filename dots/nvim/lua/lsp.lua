@@ -1,54 +1,94 @@
--- LSP settings
--- log file location: ~/.local/share/nvim/lsp.log
--- Add nvim-lspconfig plugin
-local nvim_lsp = require('lspconfig')
+local protocol = require('vim.lsp.protocol')
+local lspconfig = require('lspconfig')
+
+--- Document highlights
+local function document_highlight()
+	vim.api.nvim_exec([[
+		hi LspReferenceRead  guibg=#121111 guifg=#FFFF00
+		hi LspReferenceText  guibg=#121111 guifg=#FFFF00
+		hi LspReferenceWrite guibg=#121111 guifg=#FFFF00
+
+		augroup lsp_document_highlight
+			autocmd!
+			autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+			autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+			autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+		augroup END
+	]], false)
+end
 
 -- vim.lsp.set_log_level("debug")
-local on_attach = function(_client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      virtual_text = true;
-      signs = true,
-      update_in_insert = false,
-    }
-  )
-  local overridden_hover = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-  vim.lsp.handlers["textDocument/hover"] = function(...)
-    local buf = overridden_hover (...)
-    vim.api.nvim_buf_set_keymap(buf, 'n', 'K', '<Cmd>wincmd p<CR>', {noremap = true, silent = true})
-  end
+local on_attach = function()
+  document_highlight()
 
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  protocol.CompletionItemKind = {
+    '';             -- Text          = 1;
+    'ƒ';             -- Method        = 2;
+    'ƒ';             -- Function      = 3;
+    '';             -- Constructor   = 4;
+    '識';            -- Field         = 5;
+    '𝑋';             -- Variable      = 6;
+    '';             -- Class         = 7;
+    '';             -- Interface     = 8;
+    '';             -- Module        = 9;
+    'Property';      -- Property      = 10;
+    'Unit';          -- Unit          = 11;
+    'Value';         -- Value         = 12;
+    '了';            -- Enum          = 13;
+    '';             -- Keyword       = 14;
+    '﬌';             -- Snippet       = 15;
+    'Color';         -- Color         = 16;
+    '';             -- File          = 17;
+    'Reference';     -- Reference     = 18;
+    '';             -- Folder        = 19;
+    '';             -- EnumMember    = 20;
+    '';             -- Constant      = 21;
+    '';             -- Struct        = 22;
+    'Event';         -- Event         = 23;
+    'Operator';      -- Operator      = 24;
+    'TypeParameter'; -- TypeParameter = 25;
+  }
+  require('lsp_signature').on_attach()
 end
+
+local capabilities = protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+ vim.lsp.diagnostic.on_publish_diagnostics, {
+   underline = false, -- Enable underline, use default values
+   virtual_text = false -- Enable virtual text only on Warning or above, override spacing to 2
+ }
+)
+vim.fn.sign_define(
+    "LspDiagnosticsSignError",
+    {texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError"}
+)
+vim.fn.sign_define(
+    "LspDiagnosticsSignWarning",
+    {texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning"}
+)
+vim.fn.sign_define(
+    "LspDiagnosticsSignHint",
+    {texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint"}
+)
+vim.fn.sign_define(
+    "LspDiagnosticsSignInformation",
+    {texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation"}
+)
 
 local servers = {'pyright'}
 
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
 }
 end
 
-nvim_lsp.texlab.setup{
-  on_attach = on_attach;
+lspconfig.texlab.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     latex = {
       rootDirectory = ".",
@@ -67,13 +107,17 @@ nvim_lsp.texlab.setup{
 }
 
 -- java language server
-nvim_lsp.jdtls.setup {
-  cmd = {"jdtls"};
-  on_attach = on_attach;
+local root_pattern = lspconfig.util.root_pattern
+lspconfig.jdtls.setup {
+  root_dir = root_pattern(".git"),
+  cmd = {"jdtls"},
+  on_attach = on_attach,
+  capabilities = capabilities
 }
 
-nvim_lsp.texlab.setup{
-  on_attach = on_attach;
+lspconfig.texlab.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     latex = {
       rootDirectory = ".",
@@ -93,29 +137,30 @@ nvim_lsp.texlab.setup{
 
 
 
-nvim_lsp.sumneko_lua.setup {
-  cmd = {"lua-language-server"};
-  autostart = false;
+lspconfig.sumneko_lua.setup {
+  cmd = {"lua-language-server"},
+  autostart = false,
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
-      Lua = {
-          runtime = {
-              -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
-              version = 'LuaJIT',
-              -- Setup your lua path
-              path = vim.split(package.path, ';'),
-          },
-          diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = {'vim'},
-          },
-          workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = {
-                  [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                  [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-              },
-          },
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = vim.split(package.path, ';'),
       },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+    },
   },
 }

@@ -59,56 +59,6 @@ vim.api.nvim_exec([[
   augroup end
 ]], false)
 
-
--- Lexplore toggle function
-ToggleNetrw = function()
-  if vim.g.NetrwIsOpen == 1 then
-    local i = vim.api.nvim_get_current_buf()
-    while i >= 1 do
-      if vim.bo.filetype == "netrw" then
-        vim.cmd([[ silent exe "bwipeout " . ]] .. i )
-      end
-      i = i - 1
-    end
-    vim.g.NetrwIsOpen = 0
-    vim.g.netrw_liststyle = 0
-    vim.g.netrw_chgwin = -1
-  else
-    vim.g.NetrwIsOpen = 1
-    vim.g.netrw_liststyle = 3
-    vim.cmd([[silent Lexplore]])
-  end
-end
-
--- Function to open preview of file under netrw
-vim.api.nvim_exec([[
-  augroup Netrw
-    autocmd!
-    autocmd filetype netrw nmap <leader>; <cr>:wincmd W<cr>
-  augroup end
-]], false)
-
-vim.api.nvim_exec([[
-  augroup BufferCD
-    autocmd!
-    autocmd BufEnter * silent! Glcd 
-  augroup end
-]], false)
-
-vim.api.nvim_exec([[
-  augroup nvim-luadev
-    autocmd!
-    function! SetLuaDevOptions()
-      nmap <buffer> <C-c><C-c> <Plug>(Luadev-RunLine)
-      vmap <buffer> <C-c><C-c> <Plug>(Luadev-Run)
-      nmap <buffer> <C-c><C-k> <Plug>(Luadev-RunWord)
-      map  <buffer> <C-x><C-p> <Plug>(Luadev-Complete)
-      set filetype=lua
-    endfunction
-    autocmd BufEnter \[nvim-lua\] call SetLuaDevOptions()
-  augroup end
-]], false)
-
 require'compe'.setup {
   enabled = true;
   debug = false;
