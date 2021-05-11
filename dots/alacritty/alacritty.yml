@@ -1,189 +1,179 @@
 schemes:
-    siemens: &dark
-        primary:
-           background: "#323232"
-           foreground: "#ffffff"
-        cursor:
-            text: "#fefff2"
-            cursor: "#009999"
-        
-        selection:
-            text: "#b5b5b5"
-            background: "#18354f"
-
-        normal:
-            black: "#323232"
-            red: "#f62447"
-            green: "#65c728"
-            yellow: "#ffc800"
-            blue: "#009eff"
-            magenta: "#D14BBC"
-            cyan: "#009999"
-            white: "#ffffff"
-
-        bright:
-            black: "#323232"
-            red: "#f62447"
-            green: "#65c728"
-            yellow: "#ffc800"
-            blue: "#009eff"
-            magenta: "#D14BBC"
-            cyan: "#009999"
-            white: "#ffffff"
-
-        dim:
-            black: "#323232"
-            red: "#f62447"
-            green: "#65c728"
-            yellow: "#ffc800"
-            blue: "#009eff"
-            magenta: "#D14BBC"
-            cyan: "#009999"
-            white: "#ffffff"
-
-    papercolorlight: &light
-      # Default colors
-      primary:
-        background: '0xeeeeee'
-        foreground: '0x878787'
-
-      cursor:
-        text: '0xeeeeee'
-        cursor: '0x878787'
-
-      # Normal colors
-      normal:
-        black:   '0xeeeeee'
-        red:     '0xaf0000'
-        green:   '0x008700'
-        yellow:  '0x5f8700'
-        blue:    '0x0087af'
-        magenta: '0x878787'
-        cyan:    '0x005f87'
-        white:   '0x444444'
-
-      # Bright colors
-      bright:
-        black:   '0xbcbcbc'
-        red:     '0xd70000'
-        green:   '0xd70087'
-        yellow:  '0x8700af'
-        blue:    '0xd75f00'
-        magenta: '0xd75f00'
-        cyan:    '0x005faf'
-        white:   '0x005f87'
-       
-    nord: &nord
-        # Default colors
-        primary:
-            background: '#2e3440'
-            foreground: '#e5e9f0'
-
-        # Colors the cursor will use if `custom_cursor_colors` is true
-        cursor:
-            text: '#2e3440'
-            cursor: '#e5e9f0'
-
-        # Normal colors
-        normal:
-            black:   '#2e3440'
-            red:     '#88c0d0'
-            green:   '#a3be8c'
-            yellow:  '#5e81ac'
-            blue:    '#ebcb8b'
-            magenta: '#bf616a'
-            cyan:    '#d08770'
-            white:   '#e5e9f0'
-
-        # Bright colors
-        bright:
-            black:   '#4c566a'
-            red:     '#88c0d0'
-            green:   '#bf616a'
-            yellow:  '#5e81ac'
-            blue:    '#ebcb8b'
-            magenta: '#a3be8c'
-            cyan:    '#d08770'
-            white:   '#8fbcbb'
-
-        indexed_colors:
-            - { index: 16, color: '#81a1c1' }
-            - { index: 17, color: '#b48ead' }
-            - { index: 18, color: '#3b4252' }
-            - { index: 19, color: '#434c5e' }
-            - { index: 20, color: '#d8dee9' }
-            - { index: 21, color: '#eceff4' }
-
-    onedark: &onedark
-      # Default colors
-      primary:
-        background: '#1e2127'
-        foreground: '#abb2bf'
-
-        # Bright and dim foreground colors
-        #
-        # The dimmed foreground color is calculated automatically if it is not present.
-        # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
-        # is `false`, the normal foreground color will be used.
-        #dim_foreground: '#9a9a9a'
-        bright_foreground: '#e6efff'
-
-      # Cursor colors
-      #
-      # Colors which should be used to draw the terminal cursor. If these are unset,
-      # the cursor color will be the inverse of the cell color.
-      #cursor:
-      #  text: '#000000'
-      #  cursor: '#ffffff'
-
-      # Normal colors
-      normal:
-        black:   '#1e2127'
-        red:     '#e06c75'
-        green:   '#98c379'
-        yellow:  '#d19a66'
-        blue:    '#61afef'
-        magenta: '#c678dd'
-        cyan:    '#56b6c2'
-        white:   '#828791'
-
-      # Bright colors
-      bright:
-        black:   '#5c6370'
-        red:     '#e06c75'
-        green:   '#98c379'
-        yellow:  '#d19a66'
-        blue:    '#61afef'
-        magenta: '#c678dd'
-        cyan:    '#56b6c2'
-        white:   '#e6efff'
-
-      # Dim colors
-      #
-      # If the dim colors are not set, they will be calculated automatically based
-      # on the `normal` colors.
-      dim:
-        black:   '#1e2127'
-        red:     '#e06c75'
-        green:   '#98c379'
-        yellow:  '#d19a66'
-        blue:    '#61afef'
-        magenta: '#c678dd'
-        cyan:    '#56b6c2'
-        white:   '#828791'
-
-colors: *onedark
-
-font:
+  siemens:
+    primary:
+      background: '#323232'
+      foreground: '#ffffff'
+    cursor:
+      text: '#fefff2'
+      cursor: '#009999'
+    selection:
+      text: '#b5b5b5'
+      background: '#18354f'
     normal:
-      family: RobotoMono Nerd Font
-      style: Regular
-    bold:
-      family: RobotoMono Nerd Font
-      style: Bold
-    italic:
-      family: RobotoMono Nerd Font
-      style: Italic
-
+      black: '#323232'
+      red: '#f62447'
+      green: '#65c728'
+      yellow: '#ffc800'
+      blue: '#009eff'
+      magenta: '#D14BBC'
+      cyan: '#009999'
+      white: '#ffffff'
+    bright:
+      black: '#323232'
+      red: '#f62447'
+      green: '#65c728'
+      yellow: '#ffc800'
+      blue: '#009eff'
+      magenta: '#D14BBC'
+      cyan: '#009999'
+      white: '#ffffff'
+    dim:
+      black: '#323232'
+      red: '#f62447'
+      green: '#65c728'
+      yellow: '#ffc800'
+      blue: '#009eff'
+      magenta: '#D14BBC'
+      cyan: '#009999'
+      white: '#ffffff'
+  papercolorlight:
+    primary:
+      background: '0xeeeeee'
+      foreground: '0x878787'
+    cursor:
+      text: '0xeeeeee'
+      cursor: '0x878787'
+    normal:
+      black: '0xeeeeee'
+      red: '0xaf0000'
+      green: '0x008700'
+      yellow: '0x5f8700'
+      blue: '0x0087af'
+      magenta: '0x878787'
+      cyan: '0x005f87'
+      white: '0x444444'
+    bright:
+      black: '0xbcbcbc'
+      red: '0xd70000'
+      green: '0xd70087'
+      yellow: '0x8700af'
+      blue: '0xd75f00'
+      magenta: '0xd75f00'
+      cyan: '0x005faf'
+      white: '0x005f87'
+  nord:
+    primary:
+      background: '#2e3440'
+      foreground: '#e5e9f0'
+    cursor:
+      text: '#2e3440'
+      cursor: '#e5e9f0'
+    normal:
+      black: '#2e3440'
+      red: '#88c0d0'
+      green: '#a3be8c'
+      yellow: '#5e81ac'
+      blue: '#ebcb8b'
+      magenta: '#bf616a'
+      cyan: '#d08770'
+      white: '#e5e9f0'
+    bright:
+      black: '#4c566a'
+      red: '#88c0d0'
+      green: '#bf616a'
+      yellow: '#5e81ac'
+      blue: '#ebcb8b'
+      magenta: '#a3be8c'
+      cyan: '#d08770'
+      white: '#8fbcbb'
+    indexed_colors:
+      - index: 16
+        color: '#81a1c1'
+      - index: 17
+        color: '#b48ead'
+      - index: 18
+        color: '#3b4252'
+      - index: 19
+        color: '#434c5e'
+      - index: 20
+        color: '#d8dee9'
+      - index: 21
+        color: '#eceff4'
+  onedark:
+    primary:
+      background: '#1e2127'
+      foreground: '#abb2bf'
+      bright_foreground: '#e6efff'
+    normal:
+      black: '#1e2127'
+      red: '#e06c75'
+      green: '#98c379'
+      yellow: '#d19a66'
+      blue: '#61afef'
+      magenta: '#c678dd'
+      cyan: '#56b6c2'
+      white: '#828791'
+    bright:
+      black: '#5c6370'
+      red: '#e06c75'
+      green: '#98c379'
+      yellow: '#d19a66'
+      blue: '#61afef'
+      magenta: '#c678dd'
+      cyan: '#56b6c2'
+      white: '#e6efff'
+    dim:
+      black: '#1e2127'
+      red: '#e06c75'
+      green: '#98c379'
+      yellow: '#d19a66'
+      blue: '#61afef'
+      magenta: '#c678dd'
+      cyan: '#56b6c2'
+      white: '#828791'
+  tokynight: &ref_0
+    # Default colors
+    primary:
+      background: '0x1a1b26'
+      foreground: '0xc0caf5'
+  
+    # Normal colors
+    normal:
+      black:   '0x15161E'
+      red:     '0xf7768e'
+      green:   '0x9ece6a'
+      yellow:  '0xe0af68'
+      blue:    '0x7aa2f7'
+      magenta: '0xbb9af7'
+      cyan:    '0x7dcfff'
+      white:   '0xa9b1d6'
+  
+    # Bright colors
+    bright:
+      black:   '0x414868'
+      red:     '0xf7768e'
+      green:   '0x9ece6a'
+      yellow:  '0xe0af68'
+      blue:    '0x7aa2f7'
+      magenta: '0xbb9af7'
+      cyan:    '0x7dcfff'
+      white:   '0xc0caf5'
+  
+    indexed_colors:
+      - { index: 16, color: '0xff9e64' }
+      - { index: 17, color: '0xdb4b4b' }
+colors: *ref_0
+font:
+  normal:
+    family: RobotoMono Nerd Font
+    style: Regular
+  bold:
+    family: RobotoMono Nerd Font
+    style: Bold
+  italic:
+    family: RobotoMono Nerd Font
+    style: Italic
 key_bindings:
-  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
+  - key: Return
+    mods: Control|Shift
+    action: SpawnNewInstance

@@ -26,3 +26,6 @@ export ZSH_CUSTOM="$ZDOTDIR/custom"
 export WINIT_X11_SCALE_FACTOR=1
 
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+# ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"

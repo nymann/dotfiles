@@ -47,4 +47,4 @@ c.url.searchengines = {
     "yt": "https://youtube.com/results?search_query={}",
 }
 c.url.start_pages = "https://kruhlmann.dev/startpage"
-c.editor.command = ["alacritty", "--title", "floatterm", "-e", "nvim '{}'"]
+c.editor.command = ["alacritty", "-e", "nvim", "{}"]

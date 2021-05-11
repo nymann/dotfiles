@@ -1,6 +1,4 @@
--- Install packer
-local execute = vim.api.nvim_command
-
+-- Install packer local execute = vim.api.nvim_command
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -21,18 +19,13 @@ require('packer').startup(function()
   use 'tpope/vim-vinegar'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
-  -- use 'tpope/vim-surround'
-  -- use 'tpope/vim-commentary'
-  -- use 'tpope/vim-repeat'
   use 'justinmk/vim-dirvish'
   use 'christoomey/vim-tmux-navigator'
   use 'ludovicchabant/vim-gutentags'
   use {'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
-  use 'joshdick/onedark.vim'
-  use 'itchyny/lightline.vim'
-  -- use { 'lukas-reineke/indent-blankline.nvim', branch="lua" }
+  use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
   use 'hkupty/iron.nvim.git'
   use 'lewis6991/gitsigns.nvim'
   use 'neovim/nvim-lspconfig'
@@ -40,15 +33,18 @@ require('packer').startup(function()
   use 'tbastos/vim-lua'
   use 'LnL7/vim-nix'
   use 'ziglang/zig.vim'
-  use 'nvim-lua/completion-nvim'
+  use { 'hrsh7th/nvim-compe', requires = {'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ'} }
+  use {
+    'folke/lsp-trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require("trouble").setup {}
+    end
+  }
   use {
     'folke/which-key.nvim',
     config = function()
-      require('which-key').setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require('which-key').setup {}
     end
   }
   use {
@@ -57,8 +53,11 @@ require('packer').startup(function()
     cmd = 'MarkdownPreview',
     ft= {'markdown'}
   }
+  use 'folke/tokyonight.nvim'
+  use 'Raimondi/delimitMate'
   use 'junegunn/vim-easy-align'
   use 'mhartington/formatter.nvim'
+  use 'rafamadriz/friendly-snippets'
 end)
 
 
@@ -96,26 +95,29 @@ vim.o.updatetime = 250
 vim.wo.signcolumn="yes"
 
 --Set colorscheme (order is important here)
-vim.o.termguicolors = true
-vim.g.onedark_terminal_italics = 2
-vim.cmd[[colorscheme onedark]]
+vim.g.tokyonight_style ="night"
+vim.cmd[[colorscheme tokyonight]]
 
 --Set statusbar
-vim.g.lightline = { colorscheme = 'onedark';
-      active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } };
-      component_function = { gitbranch = 'fugitive#head', };
+require('lualine').setup{
+  options = {
+    theme = "tokyonight"
+	}
 }
+
 
 --Fire, walk with me
 vim.cmd[[set guifont="Monaco Nerd Font:h20"]]
 vim.g.firenvim_config = { localSettings = { ['.*'] = { takeover = 'never' } } }
 
---completion-nvim tab as trigger
+-- Cycle forward and backward in completion list using tab and s-tab.
 vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
 vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
+vim.api.nvim_set_keymap("i" , "<CR>"      , "compe#confirm({ 'keys': '<Plug>delimitMateCR', 'mode': '' })" , { noremap = true , expr = true , silent = true })
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt="menuone,noinsert,noselect"
+vim.g.completion_enable_snippet = 'vim-vsnip'
 
 -- Avoid showing message extra message when using completion
 vim.o.shortmess = vim.o.shortmess .. "c"
@@ -363,6 +365,23 @@ vim.g.python_highlight_space_errors = 0
 -- log file location: ~/.local/share/nvim/lsp.log
 -- Add nvim-lspconfig plugin
 local nvim_lsp = require('lspconfig')
+
+require'compe'.setup {
+  enabled = true;
+  debug = false;
+  min_length = 1;
+  documentation = true;
+  autocomplete = true;
+  source = {
+  	buffer   = true;
+  	calc     = true;
+  	nvim_lsp = true;
+  	nvim_lua = true;
+  	path     = true;
+  	spell    = true;
+  	vsnip    = true;
+  };
+}
 -- vim.lsp.set_log_level("debug")
 local on_attach = function(_client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -373,12 +392,6 @@ local on_attach = function(_client, bufnr)
       update_in_insert = false,
     }
   )
-
-  -- completion
-  local completion = require('completion')
-  completion.on_attach()
-
-
   local overridden_hover = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
   vim.lsp.handlers["textDocument/hover"] = function(...)
     local buf = overridden_hover (...)
@@ -406,14 +419,9 @@ local on_attach = function(_client, bufnr)
 end
 
 local servers = {'pyright'}
---local servers = {
---  'gopls', 'clangd', 'vuels', 'hls', 'solargraph', 'rnix', 'ocamllsp',
---  'dartls', 'tsserver', 'solargraph', 'pyright', 'als'
---}
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    -- on_attach = completion.on_attach,
     on_attach = on_attach
 }
 end
@@ -443,18 +451,29 @@ nvim_lsp.jdtls.setup {
   on_attach = on_attach;
 }
 
+nvim_lsp.texlab.setup{
+  on_attach = on_attach;
+  settings = {
+    latex = {
+      rootDirectory = ".",
+      build = {
+        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-pvc" },
+        forwardSearchAfter = true,
+        onSave = true
+      },
+      forwardSearch = {
+        executable = "zathura",
+        args = {"--synctex-forward", "%l:1:%f", "%p"},
+        onSave = true
+      }
+    }
+  }
+}
 
 
-local sumneko_cmd
-if vim.fn.executable("lua-language-server") == 1 then
-  sumneko_cmd = {"lua-language-server"}
-else
-  local sumneko_root_path = vim.fn.getenv("HOME").."/.local/bin/sumneko_lua"
-  sumneko_cmd = {sumneko_root_path.."/bin/macOS/lua-language-server", "-E", sumneko_root_path.."/main.lua" }
-end
 
 nvim_lsp.sumneko_lua.setup {
-  cmd = sumneko_cmd;
+  cmd = {"lua-language-server"};
   autostart = false;
   on_attach = on_attach,
   settings = {
@@ -540,6 +559,28 @@ vim.api.nvim_exec([[
   augroup end
 ]], true)
 
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>LspTroubleToggle<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>LspTroubleToggle lsp_document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>LspTroubleToggle loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "gR", "<cmd>LspTrouble lsp_references<cr>",
+  {silent = true, noremap = true}
+)
+
+-- Snippet key mappings
+vim.api.nvim_set_keymap('i', '<C-l>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-l>"', {noremap = false, expr = true})
+vim.api.nvim_set_keymap('s', '<C-l>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-l>"', {noremap = false, expr = true})
 
 
 local iron = require('iron')
@@ -549,10 +590,3 @@ iron.core.set_config {
     python = "ipython",
   }
 }
-
---Set tab options for vim
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.smarttab = true
-vim.o.expandtab = true --Expand tab to spaces
