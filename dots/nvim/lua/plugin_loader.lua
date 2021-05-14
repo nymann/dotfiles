@@ -32,6 +32,7 @@ require('packer').startup(function()
   use 'bfredl/nvim-luadev'
   use 'tbastos/vim-lua'
   use 'LnL7/vim-nix'
+  use 'lervag/vimtex'
   use 'ziglang/zig.vim'
   use { 'hrsh7th/nvim-compe', requires = {'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ'} }
   use {
@@ -61,4 +62,10 @@ require('packer').startup(function()
   use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
   use 'ray-x/lsp_signature.nvim'
   use {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
+  use {
+    'lewis6991/spellsitter.nvim',
+    config = function()
+      require('spellsitter').setup()
+    end
+  }
 end)

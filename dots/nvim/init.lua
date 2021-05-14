@@ -59,6 +59,7 @@ vim.api.nvim_exec([[
   augroup end
 ]], false)
 
+
 require'compe'.setup {
   enabled = true;
   debug = false;
@@ -95,17 +96,9 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true, -- false will disable the whole extension
   },
-  incremental_selection = {
+  rainbow = {
     enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  indent = {
-    enable = false
+    extended_mode = true,
   }
 }
 
@@ -126,6 +119,19 @@ require'formatter'.setup {
   }
 }
 
+WriteServerName = function()
+  local file = assert(io.open("/tmp/current_nvim_servername", "w"))
+  local servername = vim.v.servername;
+  file:write(servername .. "\n");
+  file:close()
+end
+
+vim.api.nvim_exec([[
+  augroup vimtex_common
+    autocmd!
+    autocmd FileType tex lua WriteServerName()
+]], false)
+
 vim.api.nvim_exec([[
   augroup FormatAutogroup
     autocmd!
@@ -140,5 +146,7 @@ iron.core.set_config {
     python = "ipython",
   }
 }
+
+require('spellsitter').setup()
 
 require('binds')

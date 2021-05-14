@@ -48,7 +48,20 @@ local on_attach = function()
     'Operator';      -- Operator      = 24;
     'TypeParameter'; -- TypeParameter = 25;
   }
-  require('lsp_signature').on_attach()
+  require('lsp_signature').on_attach({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+                 -- If you want to hook lspsaga or other signature handler, pls set to false
+    doc_lines = 10, -- only show one line of comment set to 0 if you do not want API comments be shown
+
+    hint_enable = true, -- virtual hint enable
+    hint_prefix = "🐼 ",  -- Panda for parameter
+    hint_scheme = "String",
+
+    handler_opts = {
+      border = "shadow"   -- double, single, shadow, none
+    },
+    decorator = {"**", "**"}  -- or decorator = {"***", "***"}  decorator = {"**", "**"} see markdown help
+  })
 end
 
 local capabilities = protocol.make_client_capabilities()
@@ -78,6 +91,7 @@ vim.fn.sign_define(
 )
 
 local servers = {'pyright'}
+--local servers = {'jedi_language_server'}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -93,7 +107,10 @@ lspconfig.texlab.setup{
     latex = {
       rootDirectory = ".",
       build = {
-        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-pvc" },
+        --args = { "-shell-escape", "-pdf", "-pvc","-lualatex", "%f" },
+        args = { "-shell-escape", "-pdf", "-pvc","-lualatex", "-interaction=nonstopmode", "synctex=1", "%f" },
+        executable = "latexmk",
+        --outputDirectory = {"."},
         forwardSearchAfter = true,
         onSave = true
       },
@@ -114,28 +131,6 @@ lspconfig.jdtls.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
-
-lspconfig.texlab.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    latex = {
-      rootDirectory = ".",
-      build = {
-        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-pvc" },
-        forwardSearchAfter = true,
-        onSave = true
-      },
-      forwardSearch = {
-        executable = "zathura",
-        args = {"--synctex-forward", "%l:1:%f", "%p"},
-        onSave = true
-      }
-    }
-  }
-}
-
-
 
 lspconfig.sumneko_lua.setup {
   cmd = {"lua-language-server"},

@@ -37,6 +37,8 @@ cmd[[ set undofile ]]
 o.ignorecase = true
 o.smartcase = true
 
+
+
 --Decrease update time
 o.updatetime = 250
 wo.signcolumn="yes"
@@ -146,3 +148,14 @@ local bufferline = {
 }
 
 g.bufferline = bufferline
+
+
+o.swapfile = false
+o.smarttab = true
+o.expandtab = true
+o.termguicolors = true
+
+-- vimtex
+g.vimtex_view_method = 'zathura'
+g.vimtex_format_enabled = 1
+g.vimtex_compiler_latexmk = '-pdf -pvc -lualatex -shell-escape -verbose -file-line-error -synctex=1 -interaction=nonstopmode'
