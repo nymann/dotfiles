@@ -98,7 +98,6 @@ return require("packer").startup(function(use)
   }
   use {
     "lervag/vimtex",
-    ft = "tex",
     config = [[require("plugins.config.vimtex")]]
   }
 end)
