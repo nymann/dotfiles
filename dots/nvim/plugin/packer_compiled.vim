@@ -92,10 +92,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
-  ["iron.nvim.git"] = {
+  ["iron.nvim"] = {
     config = { 'require("plugins.config.iron")' },
     loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/iron.nvim.git"
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/iron.nvim"
   },
   ["lsp-trouble.nvim"] = {
     config = { 'require("plugins.config.lsptrouble")' },
@@ -126,10 +126,6 @@ _G.packer_plugins = {
     config = { 'require("plugins.config.lsp")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
-  },
-  ["nvim-luadev"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-luadev"
   },
   ["nvim-tree.lua"] = {
     config = { 'require("plugins.config.nvim_tree")' },
@@ -173,41 +169,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
   },
-  ["vim-dirvish"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-dirvish"
-  },
   ["vim-easy-align"] = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-easy-align"
   },
-  ["vim-fugitive"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-fugitive"
-  },
   ["vim-gutentags"] = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-gutentags"
-  },
-  ["vim-lua"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-lua"
-  },
-  ["vim-nix"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-nix"
-  },
-  ["vim-rhubarb"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-rhubarb"
-  },
-  ["vim-tmux-navigator"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator"
-  },
-  ["vim-vinegar"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-vinegar"
   },
   ["vim-vsnip"] = {
     loaded = true,
@@ -227,22 +195,18 @@ _G.packer_plugins = {
     config = { 'require("plugins.config.which_key")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/which-key.nvim"
-  },
-  ["zig.vim"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/zig.vim"
   }
 }
 
 time("Defining packer_plugins", false)
--- Config for: lsp-trouble.nvim
-time("Config for lsp-trouble.nvim", true)
-require("plugins.config.lsptrouble")
-time("Config for lsp-trouble.nvim", false)
--- Config for: lualine.nvim
-time("Config for lualine.nvim", true)
-require("plugins.config.lualine")
-time("Config for lualine.nvim", false)
+-- Config for: nvim-treesitter
+time("Config for nvim-treesitter", true)
+require("plugins.config.treesitter")
+time("Config for nvim-treesitter", false)
+-- Config for: iron.nvim
+time("Config for iron.nvim", true)
+require("plugins.config.iron")
+time("Config for iron.nvim", false)
 -- Config for: which-key.nvim
 time("Config for which-key.nvim", true)
 require("plugins.config.which_key")
@@ -251,38 +215,38 @@ time("Config for which-key.nvim", false)
 time("Config for gitsigns.nvim", true)
 require("plugins.config.gitsigns")
 time("Config for gitsigns.nvim", false)
--- Config for: nvim-tree.lua
-time("Config for nvim-tree.lua", true)
-require("plugins.config.nvim_tree")
-time("Config for nvim-tree.lua", false)
--- Config for: tokyonight.nvim
-time("Config for tokyonight.nvim", true)
-require("plugins.config.tokyonight")
-time("Config for tokyonight.nvim", false)
--- Config for: nvim-lspconfig
-time("Config for nvim-lspconfig", true)
-require("plugins.config.lsp")
-time("Config for nvim-lspconfig", false)
--- Config for: nvim-treesitter
-time("Config for nvim-treesitter", true)
-require("plugins.config.treesitter")
-time("Config for nvim-treesitter", false)
 -- Config for: telescope.nvim
 time("Config for telescope.nvim", true)
 require("plugins.config.telescope")
 time("Config for telescope.nvim", false)
+-- Config for: nvim-lspconfig
+time("Config for nvim-lspconfig", true)
+require("plugins.config.lsp")
+time("Config for nvim-lspconfig", false)
+-- Config for: lualine.nvim
+time("Config for lualine.nvim", true)
+require("plugins.config.lualine")
+time("Config for lualine.nvim", false)
 -- Config for: spellsitter.nvim
 time("Config for spellsitter.nvim", true)
 require("plugins.config.spellsitter")
 time("Config for spellsitter.nvim", false)
--- Config for: iron.nvim.git
-time("Config for iron.nvim.git", true)
-require("plugins.config.iron")
-time("Config for iron.nvim.git", false)
 -- Config for: nvim-compe
 time("Config for nvim-compe", true)
 require("plugins.config.compe")
 time("Config for nvim-compe", false)
+-- Config for: tokyonight.nvim
+time("Config for tokyonight.nvim", true)
+require("plugins.config.tokyonight")
+time("Config for tokyonight.nvim", false)
+-- Config for: lsp-trouble.nvim
+time("Config for lsp-trouble.nvim", true)
+require("plugins.config.lsptrouble")
+time("Config for lsp-trouble.nvim", false)
+-- Config for: nvim-tree.lua
+time("Config for nvim-tree.lua", true)
+require("plugins.config.nvim_tree")
+time("Config for nvim-tree.lua", false)
 
 -- Command lazy-loads
 time("Defining lazy-load commands", true)
@@ -293,8 +257,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time("Defining lazy-load filetype autocommands", true)
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 time("Defining lazy-load filetype autocommands", false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

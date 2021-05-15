@@ -8,20 +8,10 @@ return require("packer").startup(function(use)
     opt = true,
   }
   use {
-    "lervag/vimtex",
-    ft = "tex",
-    config = [[require("plugins.config.vimtex")]]
-  }
-  use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
     config = [[require("plugins.config.treesitter")]]
   }
-  use {"tpope/vim-vinegar"}
-  use {"tpope/vim-fugitive"}
-  use {"tpope/vim-rhubarb"}
-  use {"justinmk/vim-dirvish"}
-  use {"christoomey/vim-tmux-navigator"}
   use {"ludovicchabant/vim-gutentags"}
   use {
     "nvim-telescope/telescope.nvim",
@@ -39,7 +29,7 @@ return require("packer").startup(function(use)
     config = [[require("plugins.config.lualine")]],
   }
   use {
-    "hkupty/iron.nvim.git",
+    "hkupty/iron.nvim",
     config = [[require("plugins.config.iron")]],
   }
   use {
@@ -50,10 +40,6 @@ return require("packer").startup(function(use)
     "neovim/nvim-lspconfig",
     config = [[require("plugins.config.lsp")]],
   }
-  use {"bfredl/nvim-luadev"}
-  use {"tbastos/vim-lua"}
-  use {"LnL7/vim-nix"}
-  use {"ziglang/zig.vim"}
   use {
     "hrsh7th/nvim-compe",
     requires = {
@@ -109,5 +95,10 @@ return require("packer").startup(function(use)
   use {
     "lewis6991/spellsitter.nvim",
     config = [[require("plugins.config.spellsitter")]],
+  }
+  use {
+    "lervag/vimtex",
+    ft = "tex",
+    config = [[require("plugins.config.vimtex")]]
   }
 end)
