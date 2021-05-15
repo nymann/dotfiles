@@ -1,13 +1,72 @@
+local cmd = vim.cmd
+
+-- Toggle to disable mouse mode and indentlines for easier paste
+ToggleMouse = function()
+  if vim.o.mouse == 'a' then
+    vim.cmd[[IndentBlanklineDisable]]
+    vim.wo.signcolumn='no'
+    vim.o.mouse = 'v'
+    vim.wo.number = false
+    print("Mouse disabled")
+  else
+    vim.cmd[[IndentBlanklineEnable]]
+    vim.wo.signcolumn='yes'
+    vim.o.mouse = 'a'
+    vim.wo.number = true
+    print("Mouse enabled")
+  end
+end
+
+-- Highlight on yank
+cmd([[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]], false)
+
+FormatRange = function()
+  local start_pos = vim.api.nvim_buf_get_mark(0, '<')
+  local end_pos = vim.api.nvim_buf_get_mark(0, '>')
+  vim.lsp.buf.range_formatting({}, start_pos, end_pos)
+end
+
+cmd([[
+  command! -range FormatRange  execute 'lua FormatRange()'
+]])
+
+cmd([[
+  command! Format execute 'lua vim.lsp.buf.formatting()'
+]])
+
+WriteServerName = function()
+  local file = assert(io.open("/tmp/current_nvim_servername", "w"))
+  local servername = vim.v.servername;
+  file:write(servername .. "\n");
+  file:close()
+end
+
+cmd([[
+  augroup vimtex_common
+    autocmd!
+    autocmd FileType tex lua WriteServerName()
+]], false)
+
+cmd([[
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost *.java FormatWrite
+  augroup end
+]], true)
+
+
+
 local g = vim.g
 local api = vim.api
 local o = vim.o
 local wo = vim.wo
 local cmd = vim.cmd
 
---Remap space as leader key
-api.nvim_set_keymap('n', '<Space>', '<Nop>', { noremap = true, silent=true})
-g.mapleader = " "
-g.maplocalleader = " "
 
 --Incremental live completion
 o.inccommand = "nosplit"
@@ -43,9 +102,6 @@ o.smartcase = true
 o.updatetime = 250
 wo.signcolumn="yes"
 
---Set colorscheme (order is important here)
-g.tokyonight_style ="night"
-cmd[[colorscheme tokyonight]]
 -- Set completeopt to have a better completion experience
 o.completeopt="menuone,noinsert,noselect"
 g.completion_enable_snippet = 'vim-vsnip'
@@ -85,57 +141,8 @@ g.python_highlight_space_errors = 0
 -- vim.cmd([[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]])
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt="menuone,noinsert,noselect"
+o.completeopt="menuone,noinsert,noselect"
 
--- nvim tree
-g.nvim_tree_side = "left"
-g.nvim_tree_width = 35
-g.nvim_tree_ignore = {".git", "node_modules", ".cache", "__pycache__"}
-g.nvim_tree_auto_open = 0
-g.nvim_tree_auto_close = 0
-g.nvim_tree_quit_on_open = 0
-g.nvim_tree_follow = 1
-g.nvim_tree_indent_markers = 1
-g.nvim_tree_hide_dotfiles = 1
-g.nvim_tree_git_hl = 1
-g.nvim_tree_gitignore = 1
-g.nvim_tree_root_folder_modifier = ":~"
-g.nvim_tree_allow_resize = 1
-g.nvim_tree_lsp_diagnostics = 1
-
-g.nvim_tree_show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1
-}
-
-g.nvim_tree_icons = {
-    default = '',
-    symlink = '',
-    git  = {
-      unstaged = "",
-      staged = "✓",
-      unmerged = "",
-      renamed = "",
-      untracked = "",
-      deleted = "",
-      ignored = ""
-      },
-    folder  = {
-      default = "",
-      open = "",
-      empty = "",
-      empty_open = "",
-      symlink = "",
-      symlink_open = "",
-      },
-      lsp  = {
-        hint = "",
-        info = "",
-        warning = "",
-        error = "",
-        }
-}
 
 
 local bufferline = {
@@ -155,7 +162,3 @@ o.smarttab = true
 o.expandtab = true
 o.termguicolors = true
 
--- vimtex
-g.vimtex_view_method = 'zathura'
-g.vimtex_format_enabled = 1
-g.vimtex_compiler_latexmk = '-pdf -pvc -lualatex -shell-escape -verbose -file-line-error -synctex=1 -interaction=nonstopmode'

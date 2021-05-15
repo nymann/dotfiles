@@ -71,6 +71,10 @@ end
 time("try_loadstring definition", false)
 time("Defining packer_plugins", true)
 _G.packer_plugins = {
+  ["barbar.nvim"] = {
+    loaded = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+  },
   delimitMate = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/delimitMate"
@@ -84,21 +88,28 @@ _G.packer_plugins = {
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/friendly-snippets"
   },
   ["gitsigns.nvim"] = {
+    config = { 'require("plugins.config.gitsigns")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["iron.nvim.git"] = {
+    config = { 'require("plugins.config.iron")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/iron.nvim.git"
   },
-  ["lightline.vim"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/lightline.vim"
-  },
   ["lsp-trouble.nvim"] = {
-    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0" },
+    config = { 'require("plugins.config.lsptrouble")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/lsp-trouble.nvim"
+  },
+  ["lsp_signature.nvim"] = {
+    loaded = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim"
+  },
+  ["lualine.nvim"] = {
+    config = { 'require("plugins.config.lualine")' },
+    loaded = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
   ["markdown-preview.nvim"] = {
     commands = { "MarkdownPreview" },
@@ -107,10 +118,12 @@ _G.packer_plugins = {
     path = "/home/knj/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim"
   },
   ["nvim-compe"] = {
+    config = { 'require("plugins.config.compe")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-lspconfig"] = {
+    config = { 'require("plugins.config.lsp")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
@@ -118,7 +131,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-luadev"
   },
+  ["nvim-tree.lua"] = {
+    config = { 'require("plugins.config.nvim_tree")' },
+    loaded = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
+    config = { 'require("plugins.config.treesitter")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
   },
@@ -126,13 +145,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
-  ["onedark.vim"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/onedark.vim"
-  },
   ["packer.nvim"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/opt/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -142,9 +158,20 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  ["spellsitter.nvim"] = {
+    config = { 'require("plugins.config.spellsitter")' },
+    loaded = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/spellsitter.nvim"
+  },
   ["telescope.nvim"] = {
+    config = { 'require("plugins.config.telescope")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["tokyonight.nvim"] = {
+    config = { 'require("plugins.config.tokyonight")' },
+    loaded = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
   },
   ["vim-dirvish"] = {
     loaded = true,
@@ -190,8 +217,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
   },
+  vimtex = {
+    config = { 'require("plugins.config.vimtex")' },
+    loaded = false,
+    needs_bufread = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/opt/vimtex"
+  },
   ["which-key.nvim"] = {
-    config = { "\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0" },
+    config = { 'require("plugins.config.which_key")' },
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/which-key.nvim"
   },
@@ -202,14 +235,54 @@ _G.packer_plugins = {
 }
 
 time("Defining packer_plugins", false)
--- Config for: which-key.nvim
-time("Config for which-key.nvim", true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
-time("Config for which-key.nvim", false)
 -- Config for: lsp-trouble.nvim
 time("Config for lsp-trouble.nvim", true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "lsp-trouble.nvim")
+require("plugins.config.lsptrouble")
 time("Config for lsp-trouble.nvim", false)
+-- Config for: lualine.nvim
+time("Config for lualine.nvim", true)
+require("plugins.config.lualine")
+time("Config for lualine.nvim", false)
+-- Config for: which-key.nvim
+time("Config for which-key.nvim", true)
+require("plugins.config.which_key")
+time("Config for which-key.nvim", false)
+-- Config for: gitsigns.nvim
+time("Config for gitsigns.nvim", true)
+require("plugins.config.gitsigns")
+time("Config for gitsigns.nvim", false)
+-- Config for: nvim-tree.lua
+time("Config for nvim-tree.lua", true)
+require("plugins.config.nvim_tree")
+time("Config for nvim-tree.lua", false)
+-- Config for: tokyonight.nvim
+time("Config for tokyonight.nvim", true)
+require("plugins.config.tokyonight")
+time("Config for tokyonight.nvim", false)
+-- Config for: nvim-lspconfig
+time("Config for nvim-lspconfig", true)
+require("plugins.config.lsp")
+time("Config for nvim-lspconfig", false)
+-- Config for: nvim-treesitter
+time("Config for nvim-treesitter", true)
+require("plugins.config.treesitter")
+time("Config for nvim-treesitter", false)
+-- Config for: telescope.nvim
+time("Config for telescope.nvim", true)
+require("plugins.config.telescope")
+time("Config for telescope.nvim", false)
+-- Config for: spellsitter.nvim
+time("Config for spellsitter.nvim", true)
+require("plugins.config.spellsitter")
+time("Config for spellsitter.nvim", false)
+-- Config for: iron.nvim.git
+time("Config for iron.nvim.git", true)
+require("plugins.config.iron")
+time("Config for iron.nvim.git", false)
+-- Config for: nvim-compe
+time("Config for nvim-compe", true)
+require("plugins.config.compe")
+time("Config for nvim-compe", false)
 
 -- Command lazy-loads
 time("Defining lazy-load commands", true)
@@ -221,7 +294,13 @@ vim.cmd [[au!]]
   -- Filetype lazy-loads
 time("Defining lazy-load filetype autocommands", true)
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
 time("Defining lazy-load filetype autocommands", false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time("Sourcing ftdetect script at: /home/knj/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim", true)
+vim.cmd [[source /home/knj/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim]]
+time("Sourcing ftdetect script at: /home/knj/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim", false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
 

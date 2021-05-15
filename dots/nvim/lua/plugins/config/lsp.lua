@@ -100,28 +100,27 @@ for _, lsp in ipairs(servers) do
 }
 end
 
-lspconfig.texlab.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    latex = {
-      rootDirectory = ".",
-      build = {
-        --args = { "-shell-escape", "-pdf", "-pvc","-lualatex", "%f" },
-        args = { "-shell-escape", "-pdf", "-pvc","-lualatex", "-interaction=nonstopmode", "synctex=1", "%f" },
-        executable = "latexmk",
-        --outputDirectory = {"."},
-        forwardSearchAfter = true,
-        onSave = true
-      },
-      forwardSearch = {
-        executable = "zathura",
-        args = {"--synctex-forward", "%l:1:%f", "%p"},
-        onSave = true
-      }
-    }
-  }
-}
+--lspconfig.texlab.setup{
+--  on_attach = on_attach,
+--  capabilities = capabilities,
+--  settings = {
+--    latex = {
+--      rootDirectory = ".",
+--      build = {
+--        args = { "-shell-escape", "-pdf", "-pvc","-lualatex", "-interaction=nonstopmode", "synctex=1", "report.tex" },
+--        executable = "latexmk",
+--        --outputDirectory = {"."},
+--        forwardSearchAfter = false,
+--        onSave = true
+--      },
+--      --forwardSearch = {
+--      --  executable = "zathura",
+--      --  args = {"--synctex-forward", "%l:1:%f", "%p"},
+--      --  onSave = false
+--      --}
+--    }
+--  }
+--}
 
 -- java language server
 local root_pattern = lspconfig.util.root_pattern
@@ -158,4 +157,23 @@ lspconfig.sumneko_lua.setup {
       },
     },
   },
+}
+
+lspconfig.efm.setup {
+  cmd = {"efm-langserver"},
+  init_options = {documentFormatting = true, codeAction = false},
+  filetypes = {"python"},
+  settings = {
+    rootMarkers = {".git/"},
+    languages = {
+      python = {
+        formatCommand = "black --quiet - ",
+        formatStdin = true,
+        lintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
+        lintStdin = true,
+        lintIgnoreExitCode = true,
+        lintFormats = {"%f:%l:%c:%t:%m"}
+      }
+    }
+  }
 }
