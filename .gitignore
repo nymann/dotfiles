@@ -4,3 +4,4 @@ dots/nvim/.netrwhist
 dots/qutebrowser/autoconfig.yml
 dots/qutebrowser/quickmarks
 dots/nvim/plugin/packer_compiled.vim
+dots/qutebrowser/qsettings/QtProject.conf
