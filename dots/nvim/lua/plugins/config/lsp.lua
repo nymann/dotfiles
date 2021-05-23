@@ -162,7 +162,7 @@ lspconfig.sumneko_lua.setup {
 lspconfig.efm.setup {
   cmd = {"efm-langserver"},
   init_options = {documentFormatting = true, codeAction = false},
-  filetypes = {"python"},
+  filetypes = {"markdown"},
   settings = {
     rootMarkers = {".git/"},
     languages = {

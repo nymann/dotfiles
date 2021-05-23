@@ -1,1 +1,4 @@
-require('spellsitter').setup()
+require('spellsitter').setup {
+  hl = 'SpellBad',
+  captures = {},
+}
