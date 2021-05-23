@@ -44,3 +44,5 @@ alias skpi="/home/knj/code/mo-gitlab.siemens.dk/sw-group/banedanmark/s-bane/pykp
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias pc=".git/hooks/pre-commit"
 alias startx="ssh-agent startx"
+alias flakeit="ls src/**/*.py | entr -c flake8 src"
+alias testit="ls src/**/*.py .env setup.cfg | entr -c python setup.py test"
