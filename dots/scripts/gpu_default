@@ -4,7 +4,7 @@ sudo nvidia-smi -pm 0
 sudo nvidia-smi -i 0 -pl 230
 sudo nvidia-settings -a '[gpu:0]/GPUPowerMizerMode=0'
 sudo nvidia-settings -a '[gpu:0]/GPUFanControlState=1'
-sudo nvidia-settings -a '[fan:0]/GPUTargetFanSpeed=70'
+sudo nvidia-settings -a '[fan:0]/GPUTargetFanSpeed=60'
 sudo nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[2]=0'
 sudo nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[3]=0'
 sudo nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[4]=0'

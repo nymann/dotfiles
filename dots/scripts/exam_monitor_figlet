@@ -1,0 +1,14 @@
+#!/bin/sh
+
+display_text_and_sleep() {
+	printf "\033c"
+	figlet "$1"
+	sleep $2
+}
+while
+	display_text_and_sleep "Make exam monitor great again" 5
+	display_text_and_sleep "Requirements specification 404's" 5
+	display_text_and_sleep "Requires Java8 javafx" 5
+	display_text_and_sleep "Installed in a non-default location." 5
+do :; done
+

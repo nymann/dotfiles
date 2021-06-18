@@ -1,0 +1,8 @@
+#!/bin/sh
+
+TIMER="${1:-30}"
+((x = $TIMER * 60))
+DEFAULT_ALARM_SOUND="$HOME/.cache/alarm.opus"
+SOUND="${2:-$DEFAULT_ALARM_SOUND}"
+
+sleep $x && mpv "$SOUND"

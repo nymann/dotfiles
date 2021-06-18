@@ -1,0 +1,2 @@
+#!/bin/sh
+youtube-dl -f bestaudio/best -o - $QUTE_URL | mpv -

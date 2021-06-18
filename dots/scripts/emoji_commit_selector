@@ -4,8 +4,6 @@ set -e
 
 CHOICE=$(show_git_emoji_selection | rofi -i -p  "Please select an appropriate symbol for this commit message" -dmenu | grep -o '^.*:' | sed 's/://')
 PREFIX=""
-FILES_CHANGED=$(git status | tail -n +6 | sed 's/^/\#/')
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 case $CHOICE in
     1) PREFIX=":art:"; ;;
