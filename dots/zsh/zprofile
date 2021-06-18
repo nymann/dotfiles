@@ -1,5 +1,5 @@
 # Adds ~/.local/bin and my script folder to path.
-export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH:$HOME/.local/bin/siemens-scripts:/home/knj/.gem/ruby/2.7.0/bin:$HOME/.npm-global/bin"
+export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH:$HOME/.local/bin/siemens-scripts:/home/knj/.gem/ruby/2.7.0/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin"
 export NODE_PATH=~/.npm-global/lib/node_modules
 
 # Set config home dir.
@@ -8,8 +8,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="kek_browser"
-export READER="zathura"
+export BROWSER="firefox"
+export READER="okular"
 
 # Get cam to work in teams
 export XLIB_SKIP_ARGB_VISUALS=1
@@ -26,6 +26,3 @@ export ZSH_CUSTOM="$ZDOTDIR/custom"
 export WINIT_X11_SCALE_FACTOR=1
 
 export _JAVA_AWT_WM_NONREPARENTING=1
-
-# ssh-agent
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
