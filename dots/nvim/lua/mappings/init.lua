@@ -53,8 +53,10 @@ map('n', 'Y', 'y$', { noremap = true})
 map('n', '<F6>', [[:let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>]], opts)
 
 -- Snippet key mappings
-map('i', '<C-l>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-l>"', {noremap = false, expr = true})
-map('s', '<C-l>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-l>"', {noremap = false, expr = true})
+map('i', '<C-s>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-l>"', {noremap = false, expr = true})
+map('s', '<C-s>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-l>"', {noremap = false, expr = true})
+
+map('n', '<F2>', 'K', opts)
 
 -- LSP Trouble bindings
 map("n", "<leader>xx", "<cmd>LspTroubleToggle<cr>", opts)
@@ -67,7 +69,7 @@ map("n", "gR", "<cmd>LspTrouble lsp_references<cr>", opts)
 -- tree-nvim
 map("n", "<leader>d", "<cmd>NvimTreeToggle<CR>", {noremap = true})
 
--- Mappings.
+-- LSP Mappings.
 map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
 map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -85,5 +87,16 @@ map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 map('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
+-- create splits
+map('n', '<leader>,', '<cmd>vsplit<CR>', opts)
+map('n', '<leader>.', '<cmd>split<CR>', opts)
+
+-- navigate splits
+map('n', '<C-h>', '<C-w>h', opts)
+map('n', '<C-j>', '<C-w>j', opts)
+map('n', '<C-k>', '<C-w>k', opts)
+map('n', '<C-l>', '<C-w>l', opts)
+
 -- Buffer shenanigans
-map("n", "gb", ":BufferPick<CR>", opts)
+map("n", "<leader>bf", ":BufferPick<CR>", opts)
+map("n", "<leader>bd", ":BufferClose<CR>", opts)

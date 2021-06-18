@@ -85,19 +85,30 @@ return require("packer").startup(function(use)
   use {
     "ray-x/lsp_signature.nvim"
   }
+  --use {
+  --  "romgrk/barbar.nvim",
+  --  requires = {
+  --    "kyazdani42/nvim-web-devicons",
+  --    config = [[require("plugins.config.devicons")]],
+  --  },
+  --}
   use {
-    "romgrk/barbar.nvim",
-    requires = {
-      "kyazdani42/nvim-web-devicons",
-      config = [[require("plugins.config.devicons")]],
-    },
-  }
-  use {
-    "lewis6991/spellsitter.nvim",
+    "nymann/spellsitter.nvim",
     config = [[require("plugins.config.spellsitter")]],
   }
   use {
     "lervag/vimtex",
     config = [[require("plugins.config.vimtex")]]
   }
+  use {
+    "folke/lua-dev.nvim"
+  }
+  use {
+    "junegunn/gv.vim",
+    requires = {
+      "tpope/vim-fugitive",
+    },
+  }
 end)
+
+

@@ -131,33 +131,29 @@ lspconfig.jdtls.setup {
   capabilities = capabilities
 }
 
-lspconfig.sumneko_lua.setup {
-  cmd = {"lua-language-server"},
-  autostart = false,
+lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = vim.split(package.path, ';'),
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
-      },
-    },
+  capabilities = capabilities
+}
+
+lspconfig.bashls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
+local luadev = require("lua-dev").setup {
+  library = {
+    vimruntime = true, -- runtime path
+    types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+    plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+  },
+  -- pass any additional options that will be merged in the final lsp config
+  lspconfig = {
+    cmd = {"lua-language-server"},
+    on_attach = on_attach
   },
 }
+lspconfig.sumneko_lua.setup(luadev)
 
 lspconfig.efm.setup {
   cmd = {"efm-langserver"},
