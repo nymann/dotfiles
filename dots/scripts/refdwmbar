@@ -7,6 +7,7 @@ ps -ef | grep "dwm_corona" | awk '{print $2}' | xargs kill -9
 ps -ef | grep "dwm_unpaid_eth" | awk '{print $2}' | xargs kill -9
 ps -ef | grep "dwm_reviews" | awk '{print $2}' | xargs kill -9
 ps -ef | grep "dwm_to_dos" | awk '{print $2}' | xargs kill -9
+ps -ef | grep "dwm_timetrace" | awk '{print $2}' | xargs kill -9
 
 #ps -ef | grep "dwm_mpd" | awk '{print $2}' | xargs kill -9
 #ps -ef | grep "dwm_calcurse" | awk '{print $2}' | xargs kill -9
@@ -16,6 +17,7 @@ $HOME/.local/bin/scripts/dwm/dwm_corona &
 $HOME/.local/bin/scripts/dwm/dwm_unpaid_eth &
 $HOME/.local/bin/scripts/dwm/dwm_reviews &
 $HOME/.local/bin/scripts/dwm/dwm_to_dos &
+$HOME/.local/bin/scripts/dwm/dwm_timetrace &
 
 #$HOME/.local/bin/scripts/dwm/dwm_mpd &
 #$HOME/.local/bin/scripts/dwm/dwm_calcurse &
