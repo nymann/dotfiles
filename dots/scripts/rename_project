@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-rename_to=${1:?"Specify what the project should be renamed to."}
-rename_from=${2:-fastapi_template}
+rename_to=${2:?"Specify what the project should be renamed to."}
+rename_from=${1:-fastapi_template}
 
 grep -rl "${rename_from}" | parallel sed -i "s#${rename_from}#${rename_to}#g" {}
 mv "src/${rename_from}" "src/${rename_to}"
