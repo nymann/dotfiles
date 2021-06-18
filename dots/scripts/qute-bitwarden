@@ -49,6 +49,7 @@ import shlex
 import subprocess
 import sys
 
+import pyotp
 import tldextract
 
 argument_parser = argparse.ArgumentParser(
@@ -156,6 +157,13 @@ def pass_(domain, encoding, auto_lock):
 
     return out
 
+def get_totp_secret(candidate):
+    return candidate["login"]["totp"]
+
+def set_totp_clipboard(totp_secret: str):
+    secret = totp_secret.replace(" ", "")
+    token = pyotp.TOTP(s=secret).now()
+    subprocess.Popen(["/bin/sh", "-c", f'echo {token} | xclip -in -sel clip'])
 
 def dmenu(items, invocation, encoding):
     command = shlex.split(invocation)
@@ -220,6 +228,9 @@ def main(arguments):
     if not selection:
         return ExitCodes.SUCCESS
 
+    totp_secret = get_totp_secret(candidate=selection)
+    if totp_secret:
+        set_totp_clipboard(totp_secret)
     username = selection['login']['username']
     password = selection['login']['password']
     if arguments.username_only:
