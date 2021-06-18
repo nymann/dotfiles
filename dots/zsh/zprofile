@@ -26,3 +26,4 @@ export ZSH_CUSTOM="$ZDOTDIR/custom"
 export WINIT_X11_SCALE_FACTOR=1
 
 export _JAVA_AWT_WM_NONREPARENTING=1
+$HOME/.cache/bw_session
