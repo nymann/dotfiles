@@ -76,12 +76,6 @@ map('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 map('n', '<leader>,', '<cmd>vsplit<CR>', opts)
 map('n', '<leader>.', '<cmd>split<CR>', opts)
 
--- navigate splits
-map('n', '<C-h>', '<C-w>h', opts)
-map('n', '<C-j>', '<C-w>j', opts)
-map('n', '<C-k>', '<C-w>k', opts)
-map('n', '<C-l>', '<C-w>l', opts)
-
 -- Buffer shenanigans
 map("n", "<leader>bf", ":BufferPick<CR>", opts)
 map("n", "<leader>bd", ":BufferClose<CR>", opts)
