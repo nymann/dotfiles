@@ -19,9 +19,9 @@ map('n', '<leader>gm', ':Gmove<Space>', opts)
 map('n', '<leader>go', ':Git checkout<Space>', opts)
 
 -- Cycle forward and backward in completion list using tab and s-tab.
-map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
-map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
-map("i" , "<CR>"      , "compe#confirm({ 'keys': '<Plug>delimitMateCR', 'mode': '' })" , { noremap = true , expr = true , silent = true })
+--map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
+--map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
+--map("i" , "<CR>"      , "compe#confirm({ 'keys': '<Plug>delimitMateCR', 'mode': '' })" , { noremap = true , expr = true , silent = true })
 
 --Remap for dealing with word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true})
@@ -100,3 +100,18 @@ map('n', '<C-l>', '<C-w>l', opts)
 -- Buffer shenanigans
 map("n", "<leader>bf", ":BufferPick<CR>", opts)
 map("n", "<leader>bd", ":BufferClose<CR>", opts)
+
+-- telescope
+map("n", "<leader>f", [[<cmd>lua require("telescope.builtin").find_files()<cr>]], opts)
+map("n", "<leader><space>", [[<cmd>lua require("telescope.builtin").buffers()<cr>]], opts)
+map("n", "<leader>l", [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<cr>]], opts)
+map("n", "<leader>t", [[<cmd>lua require("telescope.builtin").tags()<cr>]], opts)
+map("n", "<leader>?", [[<cmd>lua require("telescope.builtin").oldfiles()<cr>]], opts)
+map("n", "<leader>sd", [[<cmd>lua require("telescope.builtin").grep_string()<cr>]], opts)
+map("n", "<leader>sp", [[<cmd>lua require("telescope.builtin").live_grep()<cr>]], opts)
+map("n", "<leader>o", [[<cmd>lua require("telescope.builtin").tags{ only_current_buffer = true }<cr>]], opts)
+map("n", "<leader>gc", [[<cmd>lua require("telescope.builtin").git_commits()<cr>]], opts)
+map("n", "<leader>gb", [[<cmd>lua require("telescope.builtin").git_branches()<cr>]], opts)
+map("n", "<leader>gs", [[<cmd>lua require("telescope.builtin").git_status()<cr>]], opts)
+map("n", "<leader>gp", [[<cmd>lua require("telescope.builtin").git_bcommits()<cr>]], opts)
+map("n", "<leader>wb", [[<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>]], opts)

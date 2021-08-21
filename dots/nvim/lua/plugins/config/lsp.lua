@@ -17,10 +17,8 @@ local function document_highlight()
 	]], false)
 end
 
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")
 local on_attach = function()
-  document_highlight()
-
   protocol.CompletionItemKind = {
     '';             -- Text          = 1;
     'ƒ';             -- Method        = 2;
@@ -64,6 +62,11 @@ local on_attach = function()
   })
 end
 
+local on_attach_highlight = function()
+  on_attach()
+  document_highlight()
+end
+
 local capabilities = protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -90,12 +93,12 @@ vim.fn.sign_define(
     {texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation"}
 )
 
-local servers = {'pyright'}
+local servers = {'pyright', 'tsserver'}
 --local servers = {'jedi_language_server'}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    on_attach = on_attach,
+    on_attach = on_attach_highlight,
     capabilities = capabilities
 }
 end
@@ -122,13 +125,30 @@ end
 --  }
 --}
 
+
 -- java language server
 local root_pattern = lspconfig.util.root_pattern
 lspconfig.jdtls.setup {
   root_dir = root_pattern(".git"),
   cmd = {"jdtls"},
-  on_attach = on_attach,
+  on_attach = on_attach_higlight,
   capabilities = capabilities
+}
+
+lspconfig.svelte.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    svelte = {
+      plugin = {
+        svelte = {
+          compilerWarnings = {
+            ["a11y-no-on-change"] = "ignore"
+          }
+        }
+      }
+    }
+  }
 }
 
 lspconfig.rust_analyzer.setup {

@@ -40,14 +40,16 @@ return require("packer").startup(function(use)
     "neovim/nvim-lspconfig",
     config = [[require("plugins.config.lsp")]],
   }
-  use {
-    "hrsh7th/nvim-compe",
-    requires = {
-      "hrsh7th/vim-vsnip",
-      "hrsh7th/vim-vsnip-integ",
-    },
-    config = [[require("plugins.config.compe")]],
-  }
+  -- packer
+use { 'ms-jpq/coq_nvim', branch = 'coq'} -- main one
+use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets#use {
+  --  "hrsh7th/nvim-compe",
+  --  requires = {
+  --    "hrsh7th/vim-vsnip",
+  --    "hrsh7th/vim-vsnip-integ",
+  --  },
+  --  config = [[require("plugins.config.compe")]],
+  --}
   use {
     "folke/lsp-trouble.nvim",
     requires = {
@@ -73,7 +75,7 @@ return require("packer").startup(function(use)
   use {"Raimondi/delimitMate"}
   use {"junegunn/vim-easy-align"}
   use {"mhartington/formatter.nvim"}
-  use {"rafamadriz/friendly-snippets"}
+  --use {"rafamadriz/friendly-snippets"}
   use {
     "kyazdani42/nvim-tree.lua",
     requires = {
@@ -108,6 +110,17 @@ return require("packer").startup(function(use)
     requires = {
       "tpope/vim-fugitive",
     },
+  }
+  use {
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+        {"nvim-lua/plenary.nvim"},
+        {"nvim-treesitter/nvim-treesitter"},
+    },
+    config = [[require("plugins.config.refactoring")]],
+  }
+  use {
+    "editorconfig/editorconfig-vim",
   }
 end)
 
