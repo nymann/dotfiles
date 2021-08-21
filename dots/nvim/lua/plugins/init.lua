@@ -76,13 +76,13 @@ return require("packer").startup(function(use)
   use {
     "ray-x/lsp_signature.nvim"
   }
-  --use {
-  --  "romgrk/barbar.nvim",
-  --  requires = {
-  --    "kyazdani42/nvim-web-devicons",
-  --    config = [[require("plugins.config.devicons")]],
-  --  },
-  --}
+  use {
+    "romgrk/barbar.nvim",
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+      config = [[require("plugins.config.devicons")]],
+    },
+  }
   use { 'ms-jpq/coq_nvim', branch = 'coq'} -- main one
   use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets
   use {
@@ -112,5 +112,9 @@ return require("packer").startup(function(use)
   }
   use {
     "editorconfig/editorconfig-vim",
+  }
+  use {
+    "windwp/nvim-autopairs",
+    config = [[require("plugins.config.autopairs")]]
   }
 end)

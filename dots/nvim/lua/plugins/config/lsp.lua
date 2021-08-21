@@ -1,12 +1,3 @@
-vim.g.coq_settings = {
-  ["auto_start"] = true,
-  ["keymap.jump_to_mark"] = "<c-n>",
-  ["keymap.bigger_preview"] = "<c-b>",
-  ["clients.buffers.enabled"] = false,
-  ["clients.snippets.enabled"] = false,
-  ["clients.tmux.enabled"] = false,
-  ["clients.tree_sitter.enabled"] = false,
-}
 vim.schedule(function()
   local protocol = require('vim.lsp.protocol')
   local lspconfig = require('lspconfig')
