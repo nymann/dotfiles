@@ -40,16 +40,14 @@ return require("packer").startup(function(use)
     "neovim/nvim-lspconfig",
     config = [[require("plugins.config.lsp")]],
   }
-  -- packer
-use { 'ms-jpq/coq_nvim', branch = 'coq'} -- main one
-use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets#use {
-  --  "hrsh7th/nvim-compe",
-  --  requires = {
-  --    "hrsh7th/vim-vsnip",
-  --    "hrsh7th/vim-vsnip-integ",
-  --  },
-  --  config = [[require("plugins.config.compe")]],
-  --}
+  use {
+    "hrsh7th/nvim-compe",
+    requires = {
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/vim-vsnip-integ",
+    },
+    config = [[require("plugins.config.compe")]],
+  }
   use {
     "folke/lsp-trouble.nvim",
     requires = {
@@ -123,5 +121,3 @@ use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets#use {
     "editorconfig/editorconfig-vim",
   }
 end)
-
-

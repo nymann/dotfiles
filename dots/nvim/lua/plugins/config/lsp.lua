@@ -18,7 +18,7 @@ local function document_highlight()
 end
 
 vim.lsp.set_log_level("debug")
-local on_attach = function()
+local on_attach = function(client, bufnr)
   protocol.CompletionItemKind = {
     '';             -- Text          = 1;
     'ƒ';             -- Method        = 2;
@@ -50,20 +50,19 @@ local on_attach = function()
     bind = true, -- This is mandatory, otherwise border config won't get registered.
                  -- If you want to hook lspsaga or other signature handler, pls set to false
     doc_lines = 10, -- only show one line of comment set to 0 if you do not want API comments be shown
-
     hint_enable = true, -- virtual hint enable
     hint_prefix = "🐼 ",  -- Panda for parameter
     hint_scheme = "String",
 
     handler_opts = {
-      border = "shadow"   -- double, single, shadow, none
+      border = "single"   -- double, single, shadow, none
     },
     decorator = {"**", "**"}  -- or decorator = {"***", "***"}  decorator = {"**", "**"} see markdown help
-  })
+  }, bufnr)
 end
 
-local on_attach_highlight = function()
-  on_attach()
+local on_attach_highlight = function(client, bufnr)
+  on_attach(client, bufnr)
   document_highlight()
 end
 
