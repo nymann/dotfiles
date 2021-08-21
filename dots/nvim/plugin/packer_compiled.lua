@@ -69,6 +69,14 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["coq.artifacts"] = {
+    loaded = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/coq.artifacts"
+  },
+  coq_nvim = {
+    loaded = true,
+    path = "/home/knj/.local/share/nvim/site/pack/packer/start/coq_nvim"
+  },
   delimitMate = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/delimitMate"
@@ -118,11 +126,6 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = false,
     path = "/home/knj/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim"
-  },
-  ["nvim-compe"] = {
-    config = { 'require("plugins.config.compe")' },
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-lspconfig"] = {
     config = { 'require("plugins.config.lsp")' },
@@ -188,14 +191,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-gutentags"
   },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-vsnip"
-  },
-  ["vim-vsnip-integ"] = {
-    loaded = true,
-    path = "/home/knj/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
-  },
   vimtex = {
     config = { 'require("plugins.config.vimtex")' },
     loaded = true,
@@ -209,62 +204,58 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-compe
-time([[Config for nvim-compe]], true)
-require("plugins.config.compe")
-time([[Config for nvim-compe]], false)
--- Config for: vimtex
-time([[Config for vimtex]], true)
-require("plugins.config.vimtex")
-time([[Config for vimtex]], false)
--- Config for: tokyonight.nvim
-time([[Config for tokyonight.nvim]], true)
-require("plugins.config.tokyonight")
-time([[Config for tokyonight.nvim]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-require("plugins.config.lualine")
-time([[Config for lualine.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require("plugins.config.treesitter")
-time([[Config for nvim-treesitter]], false)
--- Config for: which-key.nvim
-time([[Config for which-key.nvim]], true)
-require("plugins.config.which_key")
-time([[Config for which-key.nvim]], false)
--- Config for: refactoring.nvim
-time([[Config for refactoring.nvim]], true)
-require("plugins.config.refactoring")
-time([[Config for refactoring.nvim]], false)
--- Config for: spellsitter.nvim
-time([[Config for spellsitter.nvim]], true)
-require("plugins.config.spellsitter")
-time([[Config for spellsitter.nvim]], false)
 -- Config for: iron.nvim
 time([[Config for iron.nvim]], true)
 require("plugins.config.iron")
 time([[Config for iron.nvim]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require("plugins.config.telescope")
-time([[Config for telescope.nvim]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-require("plugins.config.lsp")
-time([[Config for nvim-lspconfig]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-require("plugins.config.nvim_tree")
-time([[Config for nvim-tree.lua]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-require("plugins.config.gitsigns")
-time([[Config for gitsigns.nvim]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+require("plugins.config.which_key")
+time([[Config for which-key.nvim]], false)
 -- Config for: lsp-trouble.nvim
 time([[Config for lsp-trouble.nvim]], true)
 require("plugins.config.lsptrouble")
 time([[Config for lsp-trouble.nvim]], false)
+-- Config for: nvim-tree.lua
+time([[Config for nvim-tree.lua]], true)
+require("plugins.config.nvim_tree")
+time([[Config for nvim-tree.lua]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require("plugins.config.treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+require("plugins.config.lualine")
+time([[Config for lualine.nvim]], false)
+-- Config for: vimtex
+time([[Config for vimtex]], true)
+require("plugins.config.vimtex")
+time([[Config for vimtex]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+require("plugins.config.lsp")
+time([[Config for nvim-lspconfig]], false)
+-- Config for: tokyonight.nvim
+time([[Config for tokyonight.nvim]], true)
+require("plugins.config.tokyonight")
+time([[Config for tokyonight.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+require("plugins.config.gitsigns")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: refactoring.nvim
+time([[Config for refactoring.nvim]], true)
+require("plugins.config.refactoring")
+time([[Config for refactoring.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require("plugins.config.telescope")
+time([[Config for telescope.nvim]], false)
+-- Config for: spellsitter.nvim
+time([[Config for spellsitter.nvim]], true)
+require("plugins.config.spellsitter")
+time([[Config for spellsitter.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
