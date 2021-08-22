@@ -319,6 +319,8 @@ def apply_default(config: ConfigAPI):
 
 def apply_custom(config: ConfigAPI):
     config.bind("yp", "spawn mpv --force-window yes {url}")
+    config.bind("ya", "spawn --userscript ~/.local/bin/scripts/stream_audio_from_youtube")
+    config.bind("y-", "hint links spawn --userscript ~/.local/bin/scripts/stream_audio_from_youtube")
     config.bind("yh", "hint links spawn mpv --force-window yes {hint-url}")
     config.bind("<Ctrl-s>", "download")
     config.bind("<Ctrl-i>", "inspector")

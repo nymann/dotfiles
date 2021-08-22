@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+import typer
+
+def main(word: str):
+    d =  {
+        'A': 'Alpha',  'B': 'Bravo',   'C': 'Charlie',
+        'D': 'Delta',  'E': 'Echo',    'F': 'Foxtrot',
+        'G': 'Golf',   'H': 'Hotel',   'I': 'India',
+        'J': 'Juliett','K': 'Kilo',    'L': 'Lima',
+        'M': 'Mike',   'N': 'November','O': 'Oscar',
+        'P': 'Papa',   'Q': 'Quebec',  'R': 'Romeo',
+        'S': 'Sierra', 'T': 'Tango',   'U': 'Uniform',
+        'V': 'Victor', 'W': 'Whiskey', 'X': 'X-ray',
+        'Y': 'Yankee', 'Z': 'Zulu'}
+    f: str = ""
+    for chr in word.upper():
+        w = d.get(chr, chr)
+        f += f" {w} "
+    typer.echo(f)
+
+
+
+
+if __name__ == "__main__":
+    typer.run(main)

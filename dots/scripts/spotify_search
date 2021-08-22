@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+import typer
+import requests
+from devtools import debug
+
+def main(q: str, auth: str):
+    artist, song = q.split(" - ")
+    spotify = Spotify(auth=auth)
+    a = spotify.find_artist(artist=artist)
+    b = spotify.find_song(title=song)
+    debug(a.json())
+
+class Spotify:
+    def __init__(self, auth) -> None:
+        self.auth = auth
+
+    def find_artist(self, artist: str):
+        params = {"type": "artist", "q": artist}
+        response = self._send_request(params=params).json()
+        response
+
+    def find_song(self, title: str):
+        params = {"type": "track", "q": title}
+        return self._send_request(params=params)
+    
+    def _send_request(self, params):
+        url = "https://api.spotify.com/v1/search"
+        headers = {"Authorization": f"Bearer {self.auth}"}
+        return requests.get(url=url, headers=headers, params=params)
+    
+
+
+
+
+if __name__ == "__main__":
+    typer.run(main)
