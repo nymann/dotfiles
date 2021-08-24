@@ -11,9 +11,13 @@ g.coq_settings = {
   ["clients.buffers.enabled"] = false,
   ["clients.snippets.enabled"] = false,
   ["clients.tmux.enabled"] = false,
+  ["clients.tags.enabled"] = false,
   ["clients.tree_sitter.enabled"] = false,
+  ["clients.lsp.resolve_timeout"] = 0.100,
   ["limits.completion_manual_timeout"] = 0.150,
+  ["display.preview.positions.south"] = nil,
 }
+
 
 WriteServerName = function()
   local file = assert(io.open("/tmp/current_nvim_servername", "w"))
@@ -32,6 +36,14 @@ cmd([[
   augroup FormatAutogroup
     autocmd!
     autocmd BufWritePost *.java FormatWrite
+  augroup end
+]], true)
+
+cmd([[
+  augroup BlackFormat
+    autocmd!
+    autocmd BufWritePost *.py silent !black --quiet % && isort
+    autocmd BufWritePost *.py redraw!
   augroup end
 ]], true)
 

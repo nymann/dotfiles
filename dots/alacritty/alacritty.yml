@@ -163,6 +163,7 @@ schemes:
       - { index: 16, color: '0xff9e64' }
       - { index: 17, color: '0xdb4b4b' }
 colors: *ref_0
+background_opacity: 0.7
 font:
   normal:
     family: RobotoMono Nerd Font
