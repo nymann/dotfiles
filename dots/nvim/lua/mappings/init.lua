@@ -115,3 +115,6 @@ function _G.CR()
   end
 end
 map("i", "<CR>", "v:lua.CR()", { expr = true, noremap = true })
+map("n", "vx", ':lua require"knj-refactor".select()<CR>', opts)
+map("n", "dx", ':lua require"knj-refactor".delete()<CR>', opts)
+map("n", "cx", ':lua require"knj-refactor".change()<CR>', opts)

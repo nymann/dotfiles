@@ -13,7 +13,8 @@ is_work_url() {
 }
 
 if is_work_url "$1"; then
-    qutebrowser --target tab "$1"
+    firefox-developer-edition -new-tab "$1"
 else
-    qutebrowser --target tab "$1"
+    firefox-developer-edition -new-tab "$1"
+    #qutebrowser --target tab "$1"
 fi

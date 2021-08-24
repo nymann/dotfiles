@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+import asyncio
+import aiohttp
+import typer
+from datetime import datetime
+import matplotlib.pyplot as plt
+
+def main(
+    url: str,
+    requests_per_second: int = typer.Option(50, min=1),  # type: ignore
+    run_time_seconds: int = typer.Option(5, min=0),  # type: ignore
+):
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(_send_requests(requests_per_second, run_time_seconds, url))
+    loop.close()
+
+
+async def _send_requests(requests_per_second, run_time_seconds, url):
+    i = 0
+    status_code_batches = []
+    async with aiohttp.ClientSession() as session:
+        while i < run_time_seconds:
+            tasks = []
+            for n in range(requests_per_second):
+                tasks.append(_fetch(session, url, i, n))
+            i += 1
+            status_codes = await asyncio.gather(*tasks)
+            status_code_batches.extend(status_codes)
+            await asyncio.sleep(1)
+    bad = 0
+    total = 0
+    x = []
+    y = []
+    status_codes_sorted = sorted(status_code_batches, key=lambda tup: tup[0])
+    for (dt, code) in status_codes_sorted:
+        if code == 429:
+            bad += 1
+            y.append(1)
+        else:
+            y.append(0)
+        x.append(dt)
+        total += 1
+    p = (bad / total) * 100
+    typer.echo(f"{p}% ({bad} out of {total})")
+    plt.plot(x,y)
+    plt.xlabel('time')
+    plt.ylabel('requests')
+    plt.show()
+
+
+async def _fetch(session: aiohttp.ClientSession, url: str, i, n) -> tuple:
+    async with session.get(url) as response:
+        status_code = response.status
+        await response.text()
+        return datetime.now(), status_code
+
+if __name__ == "__main__":
+    typer.run(main)
