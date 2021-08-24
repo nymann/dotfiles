@@ -12,6 +12,11 @@ return require("packer").startup(function(use)
     run = ":TSUpdate",
     config = [[require("plugins.config.treesitter")]]
   }
+  use {
+    "nvim-treesitter/playground",
+    run = ":TSInstall query",
+    config = [[require("plugins.config.playground")]],
+  }
   use {"ludovicchabant/vim-gutentags"}
   use {
     "nvim-telescope/telescope.nvim",

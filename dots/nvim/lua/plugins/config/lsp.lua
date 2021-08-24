@@ -125,7 +125,7 @@ vim.schedule(function()
       on_attach = on_attach
     },
   }
-  lspconfig.sumneko_lua.setup(luadev)
+  lspconfig.sumneko_lua.setup(require("coq")().lsp_ensure_capabilities(luadev))
   lspconfig.efm.setup {
     cmd = {"efm-langserver"},
     init_options = {documentFormatting = true, codeAction = false},
