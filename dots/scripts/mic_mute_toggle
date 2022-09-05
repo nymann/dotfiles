@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+ID="$(pactl list sources short | awk '/RUNNING/ { print $1 }')"
+if pactl get-source-mute "$ID" | grep "Mute: yes"; then
+        notify-send " unmuted"
+        pactl set-source-mute "$ID" 0
+else
+        notify-send " muted"
+        pactl set-source-mute "$ID" 1
+fi
+

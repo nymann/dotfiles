@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+PAGE_COUNT="$(grep -a "\/Type \/Pages" "$1" -A 1 | tail -n 1 | awk '{ print $2 }')"
+bn="$(basename "$1")"
+out="/tmp/$bn"
+decrypted="${out}.decrypted"
+qpdf --decrypt "$1" "$decrypted"
+pdftk "$decrypted" output "$out" uncompress
+
+grep -a Length "$out" | \
+    sort | \
+    uniq -c | \
+    sort -h #| \
+    #awk -v pat="$PAGE_COUNT" '$1 == pat { print $2 " " $3 }'
+#echo "$NEEDLE"
+
+#block_pruner --start=" obj" --end "endobj" --needle="$NEEDLE"  "$out"

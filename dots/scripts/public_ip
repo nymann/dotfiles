@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+ip_info="$(curl -s ipinfo.io)"
+s="$(echo "$ip_info" | jq '.ip' | sed 's#"##g')"
+printf "%s" "$s"

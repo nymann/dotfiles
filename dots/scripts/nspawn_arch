@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+CONTAINER="${1:-arch}"
+
+[ "$(id -u)" -eq 0 ] || exec sudo "$0" "$CONTAINER"
+
+FOLDER="/var/lib/machines/$CONTAINER"
+mkdir -p "$FOLDER"
+printf "List optional extra packages: "
+read -r extra_packages
+PACKAGES="$extra_packages base"
+printf "\ninstalling: %s\n\n" "$PACKAGES"
+pacstrap -icMGd "$FOLDER" $PACKAGES
+echo "machinectl start $CONTAINER"
+echo "machinectl shell $CONTAINER"

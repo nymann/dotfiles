@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+echo -n ""
+calcurse -n | sed -e 's/next appointment\://g' | tr '\n' ' ' | xargs | awk -v len=100 '{ if (length($0) == 0) print(""); else if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'

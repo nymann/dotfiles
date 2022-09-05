@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+from typing import Iterable
+
+import pydantic
+import typer
+from gtts import gTTS
+from moviepy.audio.AudioClip import CompositeAudioClip
+from moviepy.audio.io.AudioFileClip import AudioFileClip
+from moviepy.editor import CompositeVideoClip, TextClip, VideoFileClip
+from moviepy.video.tools.subtitles import SubtitlesClip
+
+
+class Item(pydantic.BaseModel):
+    type: str
+    prop: str
+    source: str
+    descriptor: str
+    description: str
+    prop_type: str
+    them_or_it: str
+
+
+def main(
+    item_type: str = "card",
+    item_property: str = "bone",
+    item_source: str = "the printers",
+    descriptor: str = "lettering",
+    description: str = "Silian Rail",
+    property_type: str = "coloring",
+    them_or_it: str = "them",
+    generate_gif: bool = False,
+):
+    item = Item(
+        type=item_type,
+        prop=item_property,
+        source=item_source,
+        descriptor=descriptor,
+        description=description,
+        prop_type=property_type,
+        them_or_it=them_or_it,
+    )
+    subs = _generate_subs(item=item)
+    if generate_gif:
+        _save_audio_to_files(item=item)
+        _add_subs_to_mov(subs=subs)
+    else:
+        _print_subs(subs=subs)
+
+
+class Subtitle(pydantic.BaseModel):
+    text: str
+    begin_sec: int
+    end_sec: int
+
+
+def _save_audio_to_files(item: Item) -> None:
+    gTTS(item.type).save("/tmp/item_type.mp3")
+    gTTS(item.prop).save("/tmp/item_prop.mp3")
+    gTTS(item.prop_type).save("/tmp/item_prop_type.mp3")
+    gTTS(item.source).save("/tmp/item_source.mp3")
+    gTTS(item.descriptor).save("/tmp/item_descriptor.mp3")
+    gTTS(item.description).save("/tmp/item_description.mp3")
+
+
+def text_clip_gen(txt: str) -> TextClip:
+    color = "white"
+    if ": " in txt:
+        name, txt = txt.split(": ")[:2]
+        if name == "**BRYCE**":
+            color = "yellow"
+        elif name == "**VAN PATTEN**":
+            color = "red"
+
+    return TextClip(
+        txt=txt,
+        fontsize=36,
+        color=color,
+        font="RobotoMono",
+        align="south",
+        method="caption",
+        size=(600, None),
+    )
+
+
+def _add_subs_to_mov(
+    subs: Iterable[Subtitle],
+    movie_path: str = "/home/knj/american-psycho-card.mkv",
+):
+    video = VideoFileClip(movie_path)
+    video = video.subclip(0, 20.1)
+    moviepy_subs = [((sub.begin_sec, sub.end_sec), sub.text) for sub in subs]
+    subtitles_clip = SubtitlesClip(moviepy_subs, text_clip_gen)
+    clip_with_subs = CompositeVideoClip(
+        [video, subtitles_clip.set_position(("center", "bottom"), relative=True)],
+    )
+    item_type = AudioFileClip("/tmp/item_type.mp3")
+    item_source = AudioFileClip("/tmp/item_source.mp3")
+    item_prop_type = AudioFileClip("/tmp/item_prop_type.mp3")
+    item_prop = AudioFileClip("/tmp/item_prop.mp3")
+    item_descriptor = AudioFileClip("/tmp/item_descriptor.mp3")
+    item_description = AudioFileClip("/tmp/item_description.mp3")
+    orig_audio = video.audio
+    orig_audio = orig_audio.cutout(5.3, 5.9)
+    OFFSET = 0.3
+    new_audio = CompositeAudioClip(
+        [
+            orig_audio,
+            item_type.set_start(5.4 - OFFSET),
+            item_source.set_start(13.7 - OFFSET),
+            item_prop_type.set_start(15.5 - OFFSET),
+            item_prop.set_start(16.3 - OFFSET),
+            item_descriptor.set_start(17.7 - OFFSET),
+            item_description.set_start(19.1 - OFFSET),
+        ]
+    )
+    clip_with_subs.audio = new_audio
+    clip_with_subs.write_videofile(
+        "/tmp/kek.webm", fps=video.fps, remove_temp=True, bitrate="500K"
+    )
+
+
+def _print_subs(subs: Iterable[Subtitle]) -> None:
+    for sub in subs:
+        typer.echo(sub.text)
+
+
+SubtitlesClip
+
+
+def _generate_subs(item: Item) -> Iterable[Subtitle]:
+    return [
+        Subtitle(
+            text=f"**BATEMAN**: New {item.type}. What do you think?",
+            begin_sec=4,
+            end_sec=8,
+        ),
+        Subtitle(
+            text=f"**BRYCE**: Whoa. Very nice. Look at that.",
+            begin_sec=9,
+            end_sec=13,
+        ),
+        Subtitle(
+            text=f"**BATEMAN**: Picked {item.them_or_it} up from {item.source} yesterday.",
+            begin_sec=13,
+            end_sec=15,
+        ),
+        Subtitle(
+            text=f"**VAN PATTEN**: Good {item.prop_type}.",
+            begin_sec=14,
+            end_sec=16,
+        ),
+        Subtitle(
+            text=f"**BATEMAN**: That's {item.prop}. And the {item.descriptor} is something called {item.description}.",
+            begin_sec=16,
+            end_sec=20,
+        ),
+    ]
+
+
+if __name__ == "__main__":
+    typer.run(main)

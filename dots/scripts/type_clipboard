@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+sh -c 'sleep 1.0; xdotool type "$(xclip -o -selection clipboard)"'
+
+#xclip -selection clipboard -out | \
+#        tr \\n \\r | \
+#        xdotool selectwindow windowfocus type --clearmodifiers --delay 25 --window %@ --file -

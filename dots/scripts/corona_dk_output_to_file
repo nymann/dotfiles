@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+/home/knj/.local/bin/scripts/corona dk > /home/knj/.cache/covid_dk_output.txt
+exit 0

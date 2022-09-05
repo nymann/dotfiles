@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+
+import os
+from pathlib import Path
+
+import typer
+
+CHAR_MAP = {
+    " ": "_",
+    "&": "and",
+}
+
+
+def zero_prepend(file: Path, digits: int) -> Path:
+    count = 0
+    name = file.name
+    for c in name:
+        if c.isdigit():
+            count += 1
+        else:
+            break
+    zeros_to_prepend = digits - count
+    if zeros_to_prepend <= 0:
+        return file
+    for _ in range(zeros_to_prepend):
+        name = f"0{name}"
+    return file.parent.joinpath(name)
+
+
+def make_lowercase(file: Path) -> Path:
+    return file.parent.joinpath(file.name.lower())
+
+
+def substitue_unwanted_chars(file: Path) -> Path:
+    name = file.name
+    for c in name:
+        if c not in CHAR_MAP:
+            continue
+        name = name.replace(c, CHAR_MAP[c])
+    return file.parent.joinpath(name)
+
+
+def rename(file: Path, new_file: Path) -> None:
+    os.rename(file, new_file)
+
+
+def main(files: list[Path]):
+    for file in files:
+        new_file = zero_prepend(file=file, digits=2)
+        new_file = make_lowercase(file=new_file)
+        new_file = substitue_unwanted_chars(file=new_file)
+        rename(file=file, new_file=new_file)
+
+
+if __name__ == "__main__":
+    typer.run(main)

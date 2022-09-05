@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+import itertools
+import re
+from collections.abc import Iterable
+from pathlib import Path
+
+import pdf2image
+import pytesseract
+import typer
+from PIL.Image import Image
+
+
+class Common:
+    def __init__(self) -> None:
+        self.heading: str = ""
+        self.text: str = ""
+
+
+class SubSection(Common):
+    pass
+
+
+class Section(Common):
+    def __init__(self) -> None:
+        super().__init__()
+        self.sub_sections: list[SubSection] = []
+
+
+class Chapter(Common):
+    def __init__(self) -> None:
+        self.sections: dict[str, Section] = {}
+
+    def extract_sections(self, page: str) -> None:
+        for line in page.splitlines():
+            if "getting" in line.lower() and "started" in line.lower():
+                print(line)
+            results = re.findall(r"^[0-9]\.[0-9]", line.lstrip())
+            if results:
+                print(results)
+                print(line)
+
+
+class Book:
+    def __init__(self, pdf_file: Path) -> None:
+        self.chapters: dict[str, Chapter] = {}
+        self.pdf_file = pdf_file
+        self.markdown = ""
+
+    def pdf_to_text(self) -> Iterable[str]:
+        for page in itertools.count(1):
+            images: list[Image] = pdf2image.convert_from_path(
+                pdf_path=self.pdf_file,
+                first_page=page,
+                last_page=page,
+            )
+            for image in images:
+                yield pytesseract.image_to_string(image=image, lang="eng")
+
+    def parse_book(self):
+        for page_number, page_text in enumerate(self.pdf_to_text()):
+            self.parse_page(page_text=page_text, page_number=page_number)
+
+    def parse_page(self, page_number: int, page_text: str) -> None:
+        lines = [page for page in page_text.splitlines() if page]
+        if not lines:
+            return
+        line = lines[0]
+
+        if "CHAPTER " in line and page_number:
+            results = re.findall(r"CHAPTER\ \d+", line)
+            if not results:
+                if "CHAPTER |" in line:
+                    chapter = "1"
+                elif "CHAPTER §" in line:
+                    chapter = "5"
+                else:
+                    raise Exception(line)
+            else:
+                chapter = results[0].split(" ")[1]
+            if chapter not in self.chapters:
+                self.chapters[chapter] = Chapter()
+            self.chapters[chapter].extract_sections(page_text)
+        if "PREFACE" in line:
+            if "PREFACE" not in self.chapters:
+                self.chapters["PREFACE"] = Chapter()
+            self.chapters["PREFACE"].extract_sections(page_text)
+
+    def __str__(self) -> str:
+        return self.markdown
+
+
+def main(pdf_files: list[Path]):
+    for pdf in pdf_files:
+        book = Book(pdf_file=pdf)
+        book.parse_book()
+        print(str(book))
+
+
+if __name__ == "__main__":
+    typer.run(main)

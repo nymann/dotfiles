@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+YEAR=$(date +%Y)
+WEEKNUMBER=$(date +%-U)
+WEEKDAY=$(($(date +%w) - 1))
+
+download_file()
+{
+    # download_file week_number year
+    # download_file 47 2020
+    curl -s "https://sreballerup.iss.dk/api/v1/iss-menu-plan/menus/$1/$2/lunch" > "$HOME/.cache/canteen_w$1_$2"
+}
+
+download_file "${WEEKNUMBER}" "${YEAR}"
+MENU=$(jq -re --arg WEEKDAY $WEEKDAY '.data | .attributes | .daily_menus[$WEEKDAY|tonumber] | .menu_items[0] | .name' < "$HOME/.cache/canteen_w${WEEKNUMBER}_${YEAR}")
+
+if [ $? -eq 0 ]; then
+    echo "$MENU"
+else
+    echo "No menu found"
+fi

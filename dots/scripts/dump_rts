@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+OUTPUT=${1:-"rts_db.sql"}
+
+docker exec -it $(docker ps | awk '/rts_db/ {print $1}') pg_dump -U postgres -d rts_db > $OUTPUT

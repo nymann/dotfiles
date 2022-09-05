@@ -1,0 +1,3 @@
+#!/bin/sh
+
+youtube-dl --add-metadata -i -x -f bestaudio/best "ytsearch:$1"

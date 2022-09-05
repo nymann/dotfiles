@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+msgconvert --outfile - "$1" | ripmime -i -

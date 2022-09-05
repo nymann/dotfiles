@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+test -e /dev/video0 && mpv av://v4l2:/dev/video0 || echo "No cam plugged into /dev/video0"

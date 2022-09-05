@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+aria2c -d ~/dl --seed-time=0 "$(xclip -o -sel clip)"

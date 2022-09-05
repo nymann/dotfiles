@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+set -e
+
+US="US ALTGR INTL (no deadkeys)"
+COLEMAK="US COLEMAK"
+DK="DK"
+SEL="$(printf "%s\n%s\n%s" "$US" "$COLEMAK" "$DK" | rofi -dmenu -i -sort -p "Keyboard" -no-custom)"
+
+case "$SEL" in
+        "$US")  
+                setxkbmap -layout us -variant altgr-intl -option nodeadkeys
+                ;;
+        "$COLEMAK")
+                setxkbmap -layout us -variant colemak
+                ;;
+        "$DK")
+                setxkbmap -layout dk
+                ;;
+        *)
+                exit 1
+                ;;
+esac
+

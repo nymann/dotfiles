@@ -1,0 +1,83 @@
+#!/usr/bin/env sh
+
+set -e
+
+CHOICE=$(show_git_emoji_selection | rofi -i -p  "Please select an appropriate symbol for this commit message" -dmenu | grep -o '^.*:' | sed 's/://')
+PREFIX=""
+
+case $CHOICE in
+    1) PREFIX=":art:"; ;;
+    2) PREFIX=":zap:"; ;;
+    3) PREFIX=":fire:"; ;;
+    4) PREFIX=":bug:"; ;;
+    5) PREFIX=":ambulance:"; ;;
+    6) PREFIX=":sparkles:"; ;;
+    7) PREFIX=":pencil:"; ;;
+    8) PREFIX=":rocket:"; ;;
+    9) PREFIX=":lipstick:"; ;;
+    10) PREFIX=":tada:"; ;;
+    11) PREFIX=":white_check_mark:"; ;;
+    12) PREFIX=":lock:"; ;;
+    13) PREFIX=":bookmark:"; ;;
+    14) PREFIX=":rotating_light:"; ;;
+    15) PREFIX=":construction:"; ;;
+    16) PREFIX=":green_heart:"; ;;
+    17) PREFIX=":arrow_down:"; ;;
+    18) PREFIX=":arrow_up:"; ;;
+    19) PREFIX=":pushpin:"; ;;
+    20) PREFIX=":construction_worker:"; ;;
+    21) PREFIX=":chart_with_upwards_trend:"; ;;
+    22) PREFIX=":recycle:"; ;;
+    23) PREFIX=":heavy_plus_sign:"; ;;
+    24) PREFIX=":heavy_minus_sign:"; ;;
+    25) PREFIX=":wrench:"; ;;
+    26) PREFIX=":hammer:"; ;;
+    27) PREFIX=":globe_with_meridians:"; ;;
+    28) PREFIX=":pencil2:"; ;;
+    29) PREFIX=":poop:"; ;;
+    30) PREFIX=":rewind:"; ;;
+    31) PREFIX=":twisted_rightwards_arrows:"; ;;
+    32) PREFIX=":package:"; ;;
+    33) PREFIX=":alien:"; ;;
+    34) PREFIX=":truck:"; ;;
+    35) PREFIX=":page_facing_up:"; ;;
+    36) PREFIX=":boom:"; ;;
+    37) PREFIX=":bento:"; ;;
+    38) PREFIX=":wheelchair:"; ;;
+    39) PREFIX=":bulb:"; ;;
+    40) PREFIX=":beers:"; ;;
+    41) PREFIX=":speech_balloon:"; ;;
+    42) PREFIX=":card_file_box:"; ;;
+    43) PREFIX=":loud_sound:"; ;;
+    44) PREFIX=":mute:"; ;;
+    45) PREFIX=":busts_in_silhouette:"; ;;
+    46) PREFIX=":children_crossing:"; ;;
+    47) PREFIX=":building_construction:"; ;;
+    48) PREFIX=":iphone:"; ;;
+    49) PREFIX=":clown_face:"; ;;
+    50) PREFIX=":egg:"; ;;
+    51) PREFIX=":see_no_evil:"; ;;
+    52) PREFIX=":camera_flash:"; ;;
+    53) PREFIX=":alembic:"; ;;
+    54) PREFIX=":mag:"; ;;
+    55) PREFIX=":label:"; ;;
+    56) PREFIX=":seedling:"; ;;
+    57) PREFIX=":triangular_flag_on_post:"; ;;
+    58) PREFIX=":goal_net:"; ;;
+    59) PREFIX=":dizzy:"; ;;
+    60) PREFIX=":wastebasket:"; ;;
+esac
+
+COMMIT_TITLE=$(echo "" | rofi -dmenu -i -p "Commit title" -lines 0  -separator-style "none")
+
+if [ ${#COMMIT_TITLE} -gt 50 ]; then
+    printf "\e[1;33mWarning. Commit message is too long (> 50 characters)\e[0m\n\n"
+fi
+
+cat > .git/COMMIT_EDITMSG << EOF
+$PREFIX $COMMIT_TITLE
+EOF
+
+$EDITOR .git/COMMIT_EDITMSG
+
+git commit -m "$(cat .git/COMMIT_EDITMSG)"

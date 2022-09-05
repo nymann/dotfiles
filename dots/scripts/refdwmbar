@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+rm $HOME/.cache/dwmbar/*
+
+ps -ef | grep "dwm_clock" | awk '{print $2}' | xargs kill -9
+
+$HOME/.local/bin/scripts/dwm/dwm_clock &

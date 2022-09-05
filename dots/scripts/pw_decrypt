@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+bn="$(basename "$1" | sed "s#\.enc##")"
+gpg -o "${bn}" --cipher-algo AES256 -d "$1"

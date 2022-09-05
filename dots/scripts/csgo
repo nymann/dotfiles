@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+screen-toggle
+steam steam://rungameid/730

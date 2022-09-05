@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+xrandr --output DP-0 --mode 5120x1440 --refresh 120 --primary

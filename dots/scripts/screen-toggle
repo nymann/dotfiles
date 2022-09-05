@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+if xrandr | awk '/ connected/ { print $4 }' | grep -q 5120x1440; then
+    nvidia-settings -a CurrentMetaMode="DFP-1: 5120x1440 { ViewPortIn=2560x1440, ViewPortOut=2560x1440+1280+0, Panning=2560x1440 }"
+    steam steam://rungameid/730
+else
+    nvidia-settings -a CurrentMetaMode="DFP-1: 5120x1440 { ViewPortIn=5120x1440, ViewPortOut=5120x1440+0+0, Panning=5120x1440 }"
+    ps -ef | awk  '/csgo/ { print $2 }' | xargs kill -9
+fi

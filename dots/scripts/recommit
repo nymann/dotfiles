@@ -1,0 +1,2 @@
+#!/bin/sh
+git commit -F .git/COMMIT_EDITMSG

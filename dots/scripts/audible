@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+AAXtoMP3 -A 13de001f $@

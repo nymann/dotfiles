@@ -1,0 +1,30 @@
+# Adds ~/.local/bin and my script folder to path.
+export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH:$HOME/.local/bin/work-scripts:/home/knj/.gem/ruby/3.0.0/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:/opt/android-sdk/tools/bin/"
+export NODE_PATH=~/.npm-global/lib/node_modules
+
+# Set config home dir.
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Default programs:
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="firefox-developer-edition"
+export READER="zathura"
+
+# Get cam to work in teams
+# export XLIB_SKIP_ARGB_VISUALS=1
+
+# Cleanup ~/
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Program related stuff
+export LANG=en_US.UTF-8
+export ZSH="$ZDOTDIR/oh-my-zsh"
+export ZSH_CUSTOM="$ZDOTDIR/custom"
+
+# Fix for Alacritty on ultra wide monitors
+export WINIT_X11_SCALE_FACTOR=1
+export JAVA_HOME="/usr/lib/jvm/java-18-openjdk/"
+export ANDROID_SDK_ROOT='/opt/android-sdk'
+export _JAVA_AWT_WM_NONREPARENTING=1
+export MPD_HOST="$HOME/.config/mpd/socket"

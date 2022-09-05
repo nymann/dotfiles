@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+
+# Get the connected monitor count
+available_count=$(xrandr | grep -wc connected)
+
+case $available_count in
+    1)
+        # 1 monitor available, call it with --auto.
+        MONITOR="$(xrandr | awk -e '/ connected/ { print $1 }')"
+        xrandr --output "$MONITOR" --auto
+        ;;
+    2)
+        xrandr --output DP-6 --off
+        xrandr --output DP-0.2 --auto
+        ;;
+    3)
+        # 3 monitors available
+        xrandr \
+            --output DP-6 --off 
+            #--output DP-0.1 --auto \
+            #--output DP-0.2 --auto \
+            #--output DP-6 --left-of DP-0.1 \
+            #--output DP-0.1 --left-of DP-0.2 \
+            #--output DP-0.1 --primary
+        ;;
+    *)
+        echo "No setups configured with $available_count displays."
+        exit 1;;
+esac

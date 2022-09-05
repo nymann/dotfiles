@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+CONTAINER="${1:-debian}"
+[ "$(id -u)" -eq 0 ] || exec sudo "$0" "$CONTAINER"
+
+FOLDER="/var/lib/machines/$CONTAINER"
+mkdir -p "$FOLDER"
+printf "List optional extra packages: "
+read -r extra_packages
+PACKAGES="dbus,$(echo "$extra_packages" | sed 's#\ #,#g')"
+printf "\nInstalling: %s\n\n" "$PACKAGES"
+
+# shellcheck disable=2086
+debootstrap --include $PACKAGES stable "/var/lib/machines/$CONTAINER"
+# shellcheck disable=2086
+machinectl start $CONTAINER
+# shellcheck disable=2086
+machinectl shell $CONTAINER

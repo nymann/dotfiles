@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+grep -B 1 -A 5 $1 ~/.ssh/config.d/*

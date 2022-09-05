@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+import requests
+from bs4 import BeautifulSoup
+from devtools import debug
+
+page = requests.get("https://www.bulk.com/dk/todays-offers-eu.html")
+soup = BeautifulSoup(page.content, "html.parser")
+
+results = soup.find_all("ol", class_="product-items")
+debug(results)

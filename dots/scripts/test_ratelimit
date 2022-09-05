@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+import asyncio
+from typing import Iterable
+
+import aiohttp
+import matplotlib.pyplot as plt
+import typer
+from aiohttp.client import ClientSession
+
+
+class RateLimitResponse:
+    def __init__(self, status: int, request_number_within_second: int) -> None:
+        self.status: int = status
+        self.request_number_within_second: int = request_number_within_second
+
+    def limited(self):
+        return self.status == 429 or self.status == 503
+
+    def ok(self):
+        return self.status == 200
+
+    def request_number(self, elapsed_second: int) -> int:
+        return elapsed_second * self.request_number_within_second
+
+
+def main(
+    url: str,
+    requests_per_second: int = typer.Option(50, min=1),  # type: ignore
+    run_time_seconds: int = typer.Option(5, min=0),  # type: ignore
+):
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(
+        handler(
+            requests_per_second=requests_per_second,
+            run_time_seconds=run_time_seconds,
+            url=url,
+        )
+    )
+    loop.close()
+
+
+async def handler(run_time_seconds: int, requests_per_second: int, url: str):
+    a: dict[int, Iterable[RateLimitResponse]] = {}
+    async with ClientSession() as session:
+        for i in range(run_time_seconds + 1):
+            responses: Iterable[RateLimitResponse] = await _send_requests(
+                session=session, number_of_requests=requests_per_second, url=url
+            )
+            a[i] = responses
+            typer.echo(i)
+            await asyncio.sleep(1)
+    b: dict[int, float] = {}
+    for second, responses in a.items():
+        total = 0
+        bad = 0
+        for response in responses:
+            if response.limited():
+                bad += 1
+            elif not response.ok():
+                typer.echo(response.status)
+
+            total += 1
+        percent = (bad / total) * 100
+        b[second] = percent
+    plot(responses_by_second=b, url=url, per_second=requests_per_second)
+
+
+async def _send_requests(
+    number_of_requests: int, url: str, session: ClientSession
+) -> Iterable[RateLimitResponse]:
+    tasks = []
+    for request_number in range(0, number_of_requests):
+        tasks.append(_fetch(session, url, request_number))
+    responses: Iterable[RateLimitResponse] = await asyncio.gather(*tasks)
+    typer.echo(f"Number of requests sent: {number_of_requests}")
+    return responses
+
+
+def plot(responses_by_second: dict[int, float], url: str, per_second: int):
+    x = responses_by_second.keys()
+    y = responses_by_second.values()
+    plt.plot(x, y)
+    plt.ylabel("rate-limited requests %")
+    plt.xlabel("seconds")
+    plt.title(f"{url} - ({per_second}/sec)")
+    plt.show()
+
+
+async def _fetch(
+    session: aiohttp.ClientSession, url: str, request_number: int
+) -> RateLimitResponse:
+    async with session.get(url) as response:
+        return RateLimitResponse(
+            status=response.status, request_number_within_second=request_number
+        )
+
+
+if __name__ == "__main__":
+    typer.run(main)

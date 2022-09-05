@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+WIDTH=128
+HEIGHT=128
+
+for var in "$@"
+do
+    let out
+    out="${var##*/}"
+    convert -resize ${WIDTH}x${HEIGHT} -background transparent $var "${out}.png" 
+done
+

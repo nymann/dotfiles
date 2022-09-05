@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+maim -s pic-selected-"$(date '+%y%m%d-%H%M-%S').png"

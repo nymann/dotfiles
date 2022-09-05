@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+rename_project "muh_dev_app" "{{cookiecutter.project_slug}}" 
+rename_project "muh_src_dir" "{{cookiecutter.src_dir}}" 
+mv "muh_dev_app/muh_src_dir/muh_dev_app" "muh_dev_app/muh_src_dir/{{cookiecutter.project_slug}}" 
+mv "muh_dev_app/muh_src_dir" "muh_dev_app/{{cookiecutter.src_dir}}"
+mv "muh_dev_app" "{{cookiecutter.project_slug}}"

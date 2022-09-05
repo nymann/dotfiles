@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+grep -rl ${1} . | parallel sed -i "s/${1}/${2}/g" {}
+

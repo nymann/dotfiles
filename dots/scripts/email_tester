@@ -1,0 +1,122 @@
+#!/usr/bin/env python3
+
+import imaplib
+import smtplib
+from dataclasses import dataclass
+from email.message import EmailMessage
+from typing import Any, Iterator
+
+import typer
+
+
+@dataclass
+class EmailSettings:
+    username: str
+    password: str
+    imap_port: int
+    smtp_port: int
+
+
+MessageTuple = tuple[str, Any]
+
+
+@dataclass
+class Message:
+    from_address: str
+    to: str
+    body: str
+
+
+class Email:
+    def __init__(
+        self,
+        settings: EmailSettings,
+    ) -> None:
+        self.settings = settings
+        self.imap_server = imaplib.IMAP4_SSL(
+            host="mail.nymann.dev",
+            port=self.settings.imap_port,
+        )
+        self.imap_authenticated = True
+        try:
+            self.imap_server.login(
+                user=self.settings.username,
+                password=self.settings.password,
+            )
+        except imaplib.IMAP4.error:
+            self.imap_authenticated = False
+
+        if self.imap_authenticated:
+            self.imap_server.select()
+
+        self.smtp_server = smtplib.SMTP_SSL(
+            host="mail.nymann.dev", port=self.settings.smtp_port
+        )
+        self.smtp_authenticated = True
+        try:
+            self.smtp_server.login(
+                user=self.settings.username,
+                password=self.settings.password,
+            )
+        except Exception:
+            self.smtp_authenticated = False
+
+    def fetch(self) -> Iterator[str]:
+        if not self.imap_authenticated:
+            return
+        _, message_numbers_raw = self.imap_server.search(None, "ALL")
+        for message_number in message_numbers_raw[0].split():
+            messageTuple: MessageTuple = self.imap_server.fetch(
+                message_number, "(RFC822)"
+            )
+            msg = messageTuple[1]
+            if msg is None:
+                continue
+            if msg[0] is None:
+                continue
+            yield str(msg[0][1])
+
+    def send(self) -> bool:
+        if not self.smtp_authenticated:
+            return False
+        msg = EmailMessage()
+        msg.add_header("To", "noreply@nymann.dev")
+        msg.add_header("From", self.settings.username)
+        msg.add_header("Subject", "Test")
+        msg.set_content("Testing")
+        self.smtp_server.send_message(msg=msg)
+        return True
+
+
+def main(username: str, password: str, imap_port: int = 993, smtp_port: int = 465):
+    settings = EmailSettings(
+        username=username,
+        password=password,
+        imap_port=imap_port,
+        smtp_port=smtp_port,
+    )
+    email = Email(settings=settings)
+    if test_fetch(email=email):
+        typer.echo("IMAPS Server ✅")
+    else:
+        typer.echo("IMAPS Server ❌")
+    if test_send(email=email):
+        typer.echo("SMTPS Server ✅")
+    else:
+        typer.echo("SMTPS Server ❌")
+
+
+def test_send(email: Email) -> bool:
+    return email.send()
+
+
+def test_fetch(email: Email) -> bool:
+    try:
+        next(email.fetch())
+    except StopIteration:
+        return False
+    return True
+
+
+if __name__ == "__main__":
+    typer.run(main)

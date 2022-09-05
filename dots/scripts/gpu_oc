@@ -1,0 +1,14 @@
+#!/bin/sh
+
+sudo nvidia-smi -pm 1
+sudo nvidia-smi -i 0 -pl 230
+sudo nvidia-settings -a '[gpu:0]/GPUPowerMizerMode=1'
+sudo nvidia-settings -a '[gpu:0]/GPUFanControlState=1'
+sudo nvidia-settings -a '[fan:0]/GPUTargetFanSpeed=80'
+sudo nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[2]=1450'
+sudo nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[3]=1450'
+sudo nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[4]=1450'
+sudo nvidia-settings -a '[gpu:0]/GPUGraphicsClockOffset[2]=-150'
+sudo nvidia-settings -a '[gpu:0]/GPUGraphicsClockOffset[3]=-150'
+sudo nvidia-settings -a '[gpu:0]/GPUGraphicsClockOffset[4]=-150'
+#pkill Xorg

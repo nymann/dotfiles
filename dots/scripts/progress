@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Little progress bar utility
+# $1 = characters covered by bar
+# $2 = total characters
+# $ progress 2 10
+# [==--------]
+# Please no non-numeric strings, negative numbers or $1 > $2
+
+past="$1"
+total="$2"
+future=$(($total - $past))
+
+test "$past" -gt 0 && yes '-' | tr -d '\n' | head -c $past
+echo -n '|'
+test "$future" -gt 0 && yes '-' | tr -d '\n' | head -c $future

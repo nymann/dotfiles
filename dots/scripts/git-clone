@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+URL="$1"
+
+case "$URL" in
+    *https*) DIR_PATH="$(echo "$URL" | sed 's#https://##')" ;;
+    *@*) DIR_PATH="$(echo "$URL" | sed 's#git@## ; s#:#/#')" ;;
+    *) exit 1 ;;
+esac
+DIR_PATH="$HOME/code/$(echo "$DIR_PATH" | sed 's![^/]*$!!')"
+mkdir -p "$DIR_PATH"
+cd "$DIR_PATH" || exit 1
+git clone "$URL"
+cd "$(basename "$URL" .git)" || exit 1

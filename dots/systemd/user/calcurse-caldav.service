@@ -1,0 +1,6 @@
+[Unit]
+Description=Sync calcurse calendar
+
+[Service]
+Type=oneshot
+ExecStart=calcurse-caldav

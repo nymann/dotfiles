@@ -1,0 +1,21 @@
+#!/bin/sh
+
+TOKEN="$(cat ~/.cache/spotify_token)"
+get_url() {
+    SPOTIFY_RESPONSE="$(curl -sG \
+        --data-urlencode "q=$1" \
+        "https://api.spotify.com/v1/search?type=artist%2Ctrack&limit=1&offset=0" \
+        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
+        -H "Authorization: Bearer ${TOKEN}")"
+    
+    ARTIST="$(echo "$SPOTIFY_RESPONSE" | jq -r '.tracks.items[0].artists[0].name')"
+    TITLE="$(echo "$SPOTIFY_RESPONSE" | jq -r '.tracks.items[0].name')"
+    
+    echo "$ARTIST - $TITLE"
+}
+
+FILENAME="$1"
+while read line; do 
+    echo "$(get_url "$line")" >> "$2"
+done < "$FILENAME"

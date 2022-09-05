@@ -1,0 +1,3 @@
+#!/bin/sh
+
+gpick -o --no-newline -s -p | xclip -selection clipboard

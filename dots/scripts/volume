@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+vol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk -F"/" '{ gsub(/ /, ""); print $2 }')
+printf "%s" "$vol"

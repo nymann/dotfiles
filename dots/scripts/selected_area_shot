@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+maim -u -s | xclip -selection clipboard -t image/png
+#maim -s /tmp/pic-selected-"$(date '+%y%m%d-%H%M-%S').png"

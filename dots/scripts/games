@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+CHOICE=$(lutris -l | awk -F'|' '{ gsub(/^[ \t]+|[ \t]+$/, ""); print $1":" $2 }' | rofi -i -p "Select a game to play" -dmenu | awk -F':' '{ print $1 }')
+if [ -z "$CHOICE" ]; then
+    exit 0
+fi
+echo "$CHOICE"
+lutris lutris:rungameid/${CHOICE}

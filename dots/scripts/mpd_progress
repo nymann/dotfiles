@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+# Print a progress bar for the song currently playing in mpd
+
+# Progress bar length
+# Default length is 30, but overridden by $1
+length=${1:-"30"}
+
+# Parse cmus status message, extracting seconds played and total seconds
+status=$(mpc)
+percentage=$(mpc | awk 'NR==2 {print}' | grep -o '(.*)' | tr -d '(%)')
+
+# Exit if both variables are empty, i.e. if cmus isn't running
+[[ -z "$percentage" ]] && exit 1
+
+# Calculate how many progress bar characters have passed
+elapsed=$(echo "($percentage / 100)" \* $length | bc -l | cut -d. -f1)
+
+# Set past to 0 if empty because bc writes '.25' instead of '0.25', so
+# if the percentage is between 0 and 1, we end up with an empty string
+# when applying the above 'floor function'
+# [[ -z "$past" ]] && past=0
+
+exec progress $elapsed $length

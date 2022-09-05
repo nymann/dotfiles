@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+import csv
+import subprocess
+import pathlib
+import datetime
+
+import typer
+
+def main(timestamps_file: str, input_video: str):
+    typer.echo(f"Processing {timestamps_file} for {input_video}")
+    cuts = Cuts(filename=timestamps_file)
+    cuts.process(input_video=input_video)
+
+class Cut:
+    def __init__(self, row):
+        self.output_filename = row['name']
+        self.from_ts = row['from']
+        self.to_ts = row['to']
+
+class Cuts:
+    def __init__(self, filename: str):
+        self.cuts = []
+        with open(filename, '+r') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=';')
+            for row in reader:
+                self.cuts.append(Cut(row))
+
+    def process(self, input_video: str):
+        extension = pathlib.Path(input_video).suffix
+        for cut in self.cuts:
+            from_ts = datetime.datetime.strptime(cut.from_ts, "%H:%M:%S")
+            to_ts = datetime.datetime.strptime(cut.to_ts, "%H:%M:%S")
+            elapsed = str(to_ts-from_ts)
+            cmd = f"ffmpeg -i {input_video} -ss {cut.from_ts} -t {elapsed} -async 1 -strict 2 -c copy {cut.output_filename}{extension}"
+            subprocess.call(cmd, shell=True)
+
+if __name__ == "__main__":
+    typer.run(main)

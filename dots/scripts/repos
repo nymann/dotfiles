@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+set -e
+
+BASE_DIR="${1:-$HOME/code}"
+SUB_DIR="$2"
+
+SEARCH_PATH="$BASE_DIR/$SUB_DIR"
+SEL="$(find "$SEARCH_PATH" -type d -name ".venv" -prune -o -name "node_modules" -prune -o -name ".git" ! -path "*/.git/*" -printf "%h\n" | sed "s#$SEARCH_PATH##" | rofi -dmenu -sort -matching normal -p "Repository" -a 0 -no-custom | awk '{print $1}')" &> /dev/null
+if test -z "$SEL"; then
+        exit 1
+fi
+
+PARENT_PROCESS="$(readlink -f /proc/$(ps -o ppid:1= -p $$)/exe)"
+PATH_TERM="$(which $TERM)"
+notify-send "$PATH_TERM"
+if [ "$PARENT_PROCESS" = "$PATH_TERM" ]; then
+        cd "$SEARCH_PATH/$SEL"
+else
+        alacritty --working-directory "$SEARCH_PATH/$SEL"
+fi

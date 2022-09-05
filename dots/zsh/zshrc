@@ -1,0 +1,24 @@
+ZSH_THEME="murilasso"
+COMPLETION_WAITING_DOTS="true"
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
+# History
+HISTSIZE=5000
+SAVEHIST=$HISTSIZE
+HIST_STAMPS="%Y.%m.%d %H:%M:%S"
+HISTFILE="$HOME/.cache/zsh/history"
+
+plugins=(
+    git
+    colored-man-pages
+    sudo
+)
+
+bindkey -v
+source $ZSH/oh-my-zsh.sh
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

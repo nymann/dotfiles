@@ -1,0 +1,399 @@
+#!/usr/bin/bash
+
+PROJECT_NAME=${1:?"Speicify src dir fx. 'fastapi_template' if src/fastapi_template."}
+DOMAIN=${2:?"Specify domain to make fx. 'user' if you want a route called /users."}
+DOMAIN_PLURALIS=${3:?"Specify domain in pluralis fx 'users'"}
+
+cat  << EOF > "src/${PROJECT_NAME}/routers/${DOMAIN_PLURALIS}.py"
+import fastapi
+import pydantic
+from starlette import status
+
+from ${PROJECT_NAME}.core import security, service_factory
+from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_schemas
+
+router = fastapi.APIRouter()
+
+
+@router.get("/", response_model=${DOMAIN}_schemas.Paginated)
+async def get_${DOMAIN_PLURALIS}(page_size: pydantic.conint(ge=1, le=100) = 20,
+                    page: pydantic.conint(ge=1) = 1,
+                    service=fastapi.Depends(service_factory.get_${DOMAIN}_services)):
+    return await service.get_list(page=page, page_size=page_size)
+
+
+@router.post("/",
+             response_model=${DOMAIN}_schemas.DB,
+             status_code=status.HTTP_201_CREATED)
+async def add_${DOMAIN}(${DOMAIN}: ${DOMAIN}_schemas.Create,
+                   service=fastapi.Depends(service_factory.get_${DOMAIN}_services)):
+    return await service.create(${DOMAIN}=${DOMAIN})
+
+
+@router.put("/{identifier}", response_model=${DOMAIN}_schemas.DB)
+async def update_${DOMAIN}(identifier: pydantic.UUID4,
+                      ${DOMAIN}: ${DOMAIN}_schemas.Update,
+                      service=fastapi.Depends(
+                          service_factory.get_${DOMAIN}_services)):
+    ${DOMAIN} = await service.update(identifier=identifier, new_${DOMAIN}=${DOMAIN})
+    if ${DOMAIN}:
+        return ${DOMAIN}
+    raise fastapi.HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"A ${DOMAIN} with id: '{identifier} was not found.",
+    )
+
+
+@router.get("/{identifier}", response_model=${DOMAIN}_schemas.DB)
+async def get_${DOMAIN}(identifier: pydantic.UUID4,
+                   service=fastapi.Depends(service_factory.get_${DOMAIN}_services)):
+    ${DOMAIN} = await service.get_by_id(identifier=identifier)
+    if ${DOMAIN}:
+        return ${DOMAIN}
+    raise fastapi.HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"A ${DOMAIN} with id: '{identifier} was not found.",
+    )
+
+
+@router.delete("/{identifier}", response_model=${DOMAIN}_schemas.DB)
+async def delete_${DOMAIN}(identifier: pydantic.UUID4,
+                      service=fastapi.Depends(
+                          service_factory.get_${DOMAIN}_services)):
+    return await service.delete(identifier=identifier)
+EOF
+
+DIR="src/${PROJECT_NAME}/domain/${DOMAIN_PLURALIS}/"
+mkdir -p "$DIR"
+
+cat << EOF > "$DIR/${DOMAIN}_model.py"
+from ${PROJECT_NAME}.core.db import DB
+
+
+class Model(DB.Model):
+    """Model.
+    """
+
+    __tablename__ = "${DOMAIN_PLURALIS}"
+
+    identifier = DB.Column(DB.UUID(as_uuid=False),
+                           primary_key=True,
+                           server_default=DB.text("uuid_generate_v4()"))
+EOF
+
+cat << EOF > "$DIR/${DOMAIN}_queries.py"
+import datetime
+from typing import List, Tuple
+
+import pydantic
+
+from ${PROJECT_NAME}.core.db import DB
+from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_model, ${DOMAIN}_schemas
+
+CreateSchema = ${DOMAIN}_schemas.Create
+UpdateSchema = ${DOMAIN}_schemas.Update
+Model = ${DOMAIN}_model.Model
+
+
+class Queries():
+
+    async def create(self, ${DOMAIN}: CreateSchema) -> Model:
+        return await Model.create(**${DOMAIN}.__dict__)
+
+    async def get_list(self, page_size: int,
+                       page: int) -> Tuple[List[Model], int]:
+        ${DOMAIN_PLURALIS}: List[Model] = await Model.query.order_by(
+            Model.email.asc()).offset(page_size * (page - 1)
+                                     ).limit(page_size).gino.all()
+
+        count = await DB.func.count(Model.identifier).gino.scalar()
+        return ${DOMAIN_PLURALIS}, count
+
+    async def get_by_id(self, identifier: pydantic.UUID4) -> Model:
+        return await Model.get(identifier)
+
+    async def delete(self, identifier: pydantic.UUID4) -> Model:
+        ${DOMAIN} = await self.get_by_id(identifier)
+        await ${DOMAIN}.delete()
+        return ${DOMAIN}
+
+    async def update(self, old_${DOMAIN}: Model, new_${DOMAIN}: UpdateSchema) -> Model:
+        updated_${DOMAIN} = await old_${DOMAIN}.update(**new_${DOMAIN}.__dict__).apply()
+        return updated_${DOMAIN}._instance
+EOF
+
+cat << EOF > "$DIR/${DOMAIN}_schemas.py"
+from typing import List, Optional
+
+import pydantic
+
+from ${PROJECT_NAME}.domain import base_schemas
+
+
+class _Base(pydantic.BaseModel):
+    pass
+
+
+class Create(_Base):
+    pass
+
+
+class Update(_Base):
+    pass
+
+
+class DB(_Base):
+    identifier: pydantic.UUID4
+
+    class Config:
+        orm_mode = True
+
+
+class Paginated(pydantic.BaseModel):
+    results: List[DB]
+    pagination: base_schemas.Pagination
+EOF
+
+cat << EOF > "$DIR/${DOMAIN}_services.py"
+from typing import List, Optional
+
+import pydantic
+
+from ${PROJECT_NAME}.domain import base_schemas
+from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_queries, ${DOMAIN}_schemas
+
+
+class Service:
+    """Service.
+    """
+
+    def __init__(self, queries: ${DOMAIN}_queries.Queries):
+        self._queries = queries
+
+    async def create(self, ${DOMAIN}: ${DOMAIN}_schemas.Create) -> ${DOMAIN}_schemas.DB:
+        new_${DOMAIN} = await self._queries.create(${DOMAIN}=${DOMAIN})
+        return ${DOMAIN}_schemas.DB.from_orm(new_${DOMAIN})
+
+    async def get_by_id(self, identifier: pydantic.UUID4) -> ${DOMAIN}_schemas.DB:
+        ${DOMAIN} = await self._queries.get_by_id(identifier=identifier)
+        if ${DOMAIN}:
+            return ${DOMAIN}_schemas.DB.from_orm(${DOMAIN})
+        return None
+
+    async def get_list(
+            self,
+            page: pydantic.conint(ge=1),
+            page_size: pydantic.conint(ge=1, le=100),
+    ) -> ${DOMAIN}_schemas.Paginated:
+        ${DOMAIN_PLURALIS}, total = await self._queries.get_list(page=page,
+                                                    page_size=page_size)
+        more = ((total / page_size) - page) > 0
+        results = [${DOMAIN}_schemas.DB.from_orm(${DOMAIN}) for ${DOMAIN} in ${DOMAIN_PLURALIS}]
+        pagination = base_schemas.Pagination(total=total, more=more)
+        return ${DOMAIN}_schemas.Paginated(results=results, pagination=pagination)
+
+    async def update(self, identifier: pydantic.UUID4,
+                     new_${DOMAIN}: ${DOMAIN}_schemas.Update) -> ${DOMAIN}_schemas.DB:
+        old_${DOMAIN} = await self._queries.get_by_id(identifier=identifier)
+        updated_${DOMAIN} = await self._queries.update(old_${DOMAIN}=old_${DOMAIN},
+                                                  new_${DOMAIN}=new_${DOMAIN})
+        return ${DOMAIN}_schemas.DB.from_orm(updated_${DOMAIN})
+
+    async def delete(self, identifier: pydantic.UUID4) -> ${DOMAIN}_schemas.DB:
+        deleted_${DOMAIN} = await self._queries.delete(identifier=identifier)
+        return ${DOMAIN}_schemas.DB.from_orm(deleted_${DOMAIN})
+EOF
+
+
+cat << EOF >> "src/${PROJECT_NAME}/core/service_factory.py"
+from ${PROJECT_NAME}.domain.${DOMAIN_PLURALIS} import ${DOMAIN}_queries, ${DOMAIN}_services
+
+
+def get_${DOMAIN}_services() -> ${DOMAIN}_services.Service:
+    return ${DOMAIN}_services.Service(${DOMAIN}_queries.Queries())
+EOF
+
+TEST_ROOT="tests/test_${DOMAIN_PLURALIS}"
+mkdir -p "$TEST_ROOT" 
+cat << EOF > "${TEST_ROOT}/test_basic_positive.py"
+"""Basic positive tests (happy paths).
+
+This module executes API calls with valid required parameters.
+
+Validation checks:
+    Validate status code: All requests should return 2XX HTTP status codes.
+    Validate payload: Response is a well-formed JSON object.
+    Validate state: GET requests should not change state.
+    Validate headers: Verifies if headers are the same as expected.
+"""
+
+import pydantic
+import pytest
+from requests import exceptions
+
+from tests import test_${DOMAIN_PLURALIS}, utils
+
+
+def test_validate_status_codes(client):
+
+    ${DOMAIN} = test_${DOMAIN_PLURALIS}.mock_${DOMAIN}()
+
+    # Get ${DOMAIN} list should give 200 OK
+    data, status_code = test_${DOMAIN_PLURALIS}.get_${DOMAIN_PLURALIS}(client=client)
+    assert status_code == 200
+
+    # For create methods we expect 201 Created
+    data, status_code = test_${DOMAIN_PLURALIS}.create_${DOMAIN}(client=client,
+                                                      ${DOMAIN}=${DOMAIN})
+    assert status_code == 201
+    identifier = data["identifier"]
+
+    # Retrieve, we expect 200 OK here.
+    data, status_code = test_${DOMAIN_PLURALIS}.get_${DOMAIN}(client=client,
+                                                   identifier=identifier)
+    assert status_code == 200
+
+    # We expect 200 OK from updates.
+    update_${DOMAIN} = ${DOMAIN}
+    update_${DOMAIN}["street_${DOMAIN}"] = "Test Testsen 100"
+    _, status_code = test_${DOMAIN_PLURALIS}.update_${DOMAIN}(client=client,
+                                                   ${DOMAIN}=data,
+                                                   identifier=identifier)
+    assert status_code == 200
+
+    # Delete, since we are returning the deleted ${DOMAIN}, a 200 OK is expected
+    # instead of 204 No Content.
+    data, status_code = test_${DOMAIN_PLURALIS}.delete_${DOMAIN}(client=client,
+                                                      identifier=identifier)
+    assert status_code == 200
+
+
+def test_validate_payload(client):
+    ${DOMAIN} = test_${DOMAIN_PLURALIS}.mock_${DOMAIN}()
+
+    # Check if the payload when creating a ${DOMAIN} matches what we thing.
+    data, _ = test_${DOMAIN_PLURALIS}.create_${DOMAIN}(client=client, ${DOMAIN}=${DOMAIN})
+
+    # API should save the email as lowercase.
+    test_${DOMAIN_PLURALIS}.no_state_change(data=data, ${DOMAIN}=${DOMAIN})
+
+    # Check if the provided identifier (UUID4) is valid
+    identifier = data["identifier"]
+    try:
+        pydantic.UUID4(identifier)
+    except pydantic.ValidationError:
+        pytest.fail("Not a valid UUID4")
+
+    # Check if the state is the same.
+    data, _ = test_${DOMAIN_PLURALIS}.get_${DOMAIN}(client=client, identifier=identifier)
+    test_${DOMAIN_PLURALIS}.no_state_change(data=data,
+                                   ${DOMAIN}=${DOMAIN},
+                                   identifier=identifier)
+
+    # Delete, since we are returning the deleted ${DOMAIN}, a 200 OK is expected
+    data, status_code = test_${DOMAIN_PLURALIS}.delete_${DOMAIN}(client=client,
+                                                      identifier=identifier)
+    test_${DOMAIN_PLURALIS}.no_state_change(data=data,
+                                   ${DOMAIN}=${DOMAIN},
+                                   identifier=identifier)
+
+
+def test_validate_headers(client):
+    pass
+
+
+def test_performance_sanity(client):
+    mock_${DOMAIN} = test_${DOMAIN_PLURALIS}.mock_${DOMAIN}()
+
+    @utils.time_it
+    def create(c, u):
+        return test_${DOMAIN_PLURALIS}.create_${DOMAIN}(client=c, ${DOMAIN}=u)
+
+    ${DOMAIN}, _ = create(c=client, u=mock_${DOMAIN})
+
+    @utils.time_it
+    def get(c, identifier: pydantic.UUID4):
+        return test_${DOMAIN_PLURALIS}.get_${DOMAIN}(client=c, identifier=identifier)
+
+    get(c=client, identifier=${DOMAIN}["identifier"])
+
+    @utils.time_it
+    def delete(c, identifier: pydantic.UUID4):
+        return test_${DOMAIN_PLURALIS}.delete_${DOMAIN}(client=c, identifier=identifier)
+EOF
+
+cat << EOF > "${TEST_ROOT}/__init__.py"
+import random
+import string
+from typing import Any, Dict, Tuple
+
+import pydantic
+import pytest
+from requests import exceptions
+
+from tests import utils
+
+ROUTE = "/${DOMAIN_PLURALIS}/"
+
+
+def raise_for_status(func):
+
+    def wrapper(*args, **kwargs) -> Tuple[Dict[str, Any], int]:
+        print(f"Called wrapper with function: '{func.__name__}'.")
+        print(f"args: '{args}', kwargs '{kwargs}'.")
+        response = func(*args, **kwargs)
+        print(f"response saved, status code: {response.status_code}")
+        response.raise_for_status()
+        return response.json(), response.status_code
+
+    return wrapper
+
+
+@raise_for_status
+def create_${DOMAIN}(client, ${DOMAIN}: dict):
+    return client.post(ROUTE, json=${DOMAIN})
+
+
+@raise_for_status
+def update_${DOMAIN}(client, ${DOMAIN}: dict, identifier: pydantic.UUID4):
+    return client.put(ROUTE + identifier, json=${DOMAIN})
+
+
+@raise_for_status
+def delete_${DOMAIN}(client, identifier: pydantic.UUID4):
+    return client.delete(ROUTE + identifier)
+
+
+@raise_for_status
+def get_${DOMAIN}(client, identifier: pydantic.UUID4):
+    return client.get(ROUTE + identifier)
+
+
+@raise_for_status
+def get_${DOMAIN_PLURALIS}(client, page: int = 1, page_size: int = 50):
+    return client.get(ROUTE, params=dict(page=page, page_size=page_size))
+
+
+def mock_${DOMAIN}(street_${DOMAIN}: str = None, zip_number: int = None):
+    if street_${DOMAIN} is None:
+        street_${DOMAIN} = f"{utils.random_string(length=10)} {utils.random_string(length=8)} 101"
+
+    if zip_number is None:
+        zip_number = random.randint(1000, 10000)
+
+    return dict(street_${DOMAIN}=street_${DOMAIN}, zip_number=zip_number)
+
+
+def no_state_change(data: Dict[str, Any],
+                    ${DOMAIN}: Dict[str, Any],
+                    identifier: pydantic.UUID4 = None) -> None:
+    assert ${DOMAIN}["street_${DOMAIN}"] == data["street_${DOMAIN}"]
+    assert ${DOMAIN}["zip_number"] == data["zip_number"]
+    if identifier:
+        assert identifier == data["identifier"]
+EOF
+touch "${TEST_ROOT}/test_destructive.py"
+touch "${TEST_ROOT}/__init__.py"
+touch "${TEST_ROOT}/test_extended_positive.py"
+touch "${TEST_ROOT}/test_invalid_input_negative.py"
+touch "${TEST_ROOT}/test_valid_input_negative.py"

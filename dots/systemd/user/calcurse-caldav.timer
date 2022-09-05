@@ -1,0 +1,10 @@
+[Unit]
+Description=Update calcurse caldav every 5 minutes.
+
+[Timer]
+OnUnitActiveSec=5min
+OnBootSec=2m
+Unit=calcurse-caldav.service
+
+[Install]
+WantedBy=timers.target

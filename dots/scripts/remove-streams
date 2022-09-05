@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+from collections.abc import Iterable
+from pathlib import Path
+
+from _typeshed import ReadableBuffer
+
+
+class StreamRemover:
+    def __init__(self, pdf: Path, line_to_look_for: str) -> None:
+        self.needle = line_to_look_for
+        self.pdf = pdf
+        name = self.needle.split(" ")[1]
+        self.output = Path(os.getcwd()).joinpath(f"{name}_{pdf.name}")
+        self.find_next_stream: bool = False
+        self.inside_block = False
+        self.keep_block = True
+        self.removing: bool = False
+        self.temp: Iterable[ReadableBuffer] = []
+
+    def remove(self) -> None:
+        with open(self.pdf, "rb") as file_input:
+            content = file_input.read().splitlines(keepends=True)
+        with open(self.output, mode="w+b") as new_file:
+            lines_to_append = self._feeder(content=content)
+            new_file.writelines(lines_to_append)
+
+    def _should_write(self, line: bytes) -> bool:
+        try:
+            utf8_line = line.decode()
+        except UnicodeDecodeError:
+            utf8_line = ""
+        if self.needle in utf8_line:
+            self.find_next_stream = True
+        if self.removing:
+            if "endstream" in utf8_line:
+                self.removing = False
+                return False
+        if self.find_next_stream and "stream" in utf8_line:
+            self.find_next_stream = False
+            self.removing = True
+            return False
+        return True
+
+    def _feeder(self, content: list[bytes]) -> Iterable[ReadableBuffer]:
+        temp: Iterable[ReadableBuffer] = []
+        for line in content:
+            utf8 = self.utf8(line=line)
+
+        yield from temp
+
+    def utf8(self, line) -> str:
+        try:
+            return line.decode()
+        except UnicodeDecodeError:
+            return ""
+
+
+if __name__ == "__main__":
+    pdf = Path(sys.argv[1])
+    for line in sys.stdin:
+        sr = StreamRemover(pdf=pdf, line_to_look_for=line.strip())
+        sr.remove()
+        sys.stdout.write(f"{sr.output}\n")

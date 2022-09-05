@@ -1,0 +1,50 @@
+shift + super + s
+    maimpick
+
+super + Return
+    alacritty
+
+super + d
+    j4-dmenu-desktop
+
+super + {_,shift + }q
+    bspc node -{c,k}
+
+super + {_,shift + }{0-9}
+    bspc {desktop -f,node -d} {0-9}
+
+super + w
+    bspc monitor -f next
+
+super + shift + r
+    . ~/.config/bspwm/bspwmrc
+
+alt + Escape
+    pkill -USR1 -x sxhkd
+
+super + f
+    bspc node -t \~fullscreen
+
+XF86AudioRaiseVolume
+    pactl set-sink-volume @DEFAULT_SINK@  +10% 
+
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@  -10% 
+
+XF86AudioMute
+    pactl list sinks | grep -q Mute:.no && pactl set-sink-mute 0 1 || pactl set-sink-mute 0 0
+
+super + t
+    bspc node -t floating
+
+ctrl + shift + Right
+    pactl set-sink-volume @DEFAULT_SINK@  +10% 
+
+ctrl + shift + Left
+    pactl set-sink-volume @DEFAULT_SINK@  -10% 
+
+ctrl + shift + x
+    betterlockscreen -l dim
+
+ctrl + shift + p
+    pavucontrol

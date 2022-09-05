@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+
+import json
+from pathlib import Path
+from datetime import datetime
+import itertools
+import requests
+import typer
+
+
+def main(
+    base_url: str = typer.Option(...),
+    output: Path = typer.Option(...),
+    from_dt: datetime = typer.Option(...),
+    to_dt: datetime = typer.Option(...),
+):
+    session = requests.Session()
+    session.verify = False
+    json_reports = _fetch(url=base_url, session=session, from_dt=from_dt, to_dt=to_dt)
+    with open(output, "w") as f:
+        json.dump(json_reports, f)
+
+
+
+
+def _fetch(url: str, session, from_dt: datetime, to_dt: datetime):
+    for page in itertools.count(1):
+        response = session.get(
+            url,
+            params={
+                "page": page,
+                "page_size": 500,
+                "from": from_dt.isoformat(),
+                "to": to_dt.isoformat(),
+            },  # type: ignore
+        )
+        response.raise_for_status()
+        yield response.content
+        if not response.json()["pagination"]["more"]:
+            return
+
+
+if __name__ == "__main__":
+    typer.run(main)

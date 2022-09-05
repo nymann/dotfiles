@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Take in a chm file, expand it to figure out as much detail as possible, then re-package it into a epub file
+Requires p7zip (7z command line) to available in the system
+"""
+import argparse
+import logging
+import os
+import sys
+
+import lxml
+import utils
+
+DESC = "chm to epub conversion"
+
+CONTAINER = r"""<?xml version="1.0" encoding="UTF-8" ?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
+  </rootfiles>
+</container>"""
+
+
+def parseargs(description: str = "") -> argparse.Namespace:
+    """Parse the command line arguments pasing to this script
+    Args:
+        description (str): Description to print in help messages
+    Returns:
+        result of ArgumentParser.parse_args() against the command line
+    """
+    parser = argparse.ArgumentParser(
+        description=description,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument("chmfile", help="input CHM file")
+    parser.add_argument("epubfile", help="output EPUB file")
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="More logging to console",
+    )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Launch debugger on exception",
+    )
+    args = parser.parse_args()
+    if args.debug:
+        utils.exception_hook("debug")
+    args.loglevel = logging.DEBUG if args.verbose else logging.INFO
+    return args
+
+
+def build_epub(basedir):
+    "Build the epub file system"
+    # mimetype file
+    with open(os.path.join(basedir, "mimetype"), "w") as fp:
+        fp.write("application/epub+zip")
+    # meta container
+    os.makedirs(os.path.join(basedir, "META-INF"), exist_ok=True)
+    with open(os.path.join(basedir, "META-INF", "container.xml"), "w") as fp:
+        fp.write(CONTAINER)
+    # content directory
+    contentdir = os.path.join(basedir, "OEBPS")
+    os.makedirs(contentdir, exist_ok=True)
+    return contentdir
+
+
+def buildtoc(data: dict):
+    """data pass in as dict, and return the XML for the toc.ncx"""
+
+
+def main():
+    args = parseargs(DESC)
+    logger = utils.get_logger("chm2epub", args.loglevel)
+
+
+if __name__ == "__main__":
+    pass
