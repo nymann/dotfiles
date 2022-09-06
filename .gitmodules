@@ -10,7 +10,7 @@
 
 [submodule "dwm"]
     path = dots/dwm
-    url = git@github.com:nymann/dwm
+    url = https://github.com/nymann/dwm
     ignore = dirty
 
 [submodule "fzf"]
