@@ -1,163 +1,163 @@
 [submodule "dotbot"]
     path = dotbot
-    url = https://github.com/anishathalye/dotbot
+    url = ../../anishathalye/dotbot
     ignore = dirty
 
 [submodule "oh-my-zsh"]
     path = dots/oh-my-zsh
-    url = https://github.com/ohmyzsh/ohmyzsh
+    url = ../../ohmyzsh/ohmyzsh
     ignore = dirty
 
 [submodule "dwm"]
     path = dots/dwm
-    url = https://github.com/nymann/dwm
+    url = ../dwm
     ignore = dirty
 
 [submodule "fzf"]
     path = dots/nvim/plugged/fzf
-    url = https://github.com/junegunn/fzf
+    url = ../../junegunn/fzf
 
 [submodule "fzf.vim"]
     path = dots/nvim/plugged/fzf.vim
-    url = https://github.com/junegunn/fzf.vim
+    url = ../../junegunn/fzf.vim
 
 [submodule "markdown-preview"]
     path = dots/nvim/plugged/markdown-preview.nvim
-    url = https://github.com/iamcco/markdown-preview.nvim
+    url = ../../iamcco/markdown-preview.nvim
 
 [submodule "goyou.nvim"]
     path = dots/nvim/plugged/goyo.vim
-    url = https://github.com/junegunn/goyo.vim
+    url = ../../junegunn/goyo.vim
 
 [submodule "nerdcommenter"]
     path = dots/nvim/plugged/nerdcommenter
-    url = https://github.com/preservim/nerdcommenter
+    url = ../../preservim/nerdcommenter
 
 [submodule "nerdtree-git-plugin"]
     path = dots/nvim/plugged/nerdtree-git-plugin
-    url = https://github.com/Xuyuanp/nerdtree-git-plugin
+    url = ../../Xuyuanp/nerdtree-git-plugin
 
 [submodule "nerdtree"]
     path = dots/nvim/plugged/nerdtree
-    url = https://github.com/scrooloose/nerdtree
+    url = ../../scrooloose/nerdtree
 
 [submodule "vim-snippets"]
     path = dots/nvim/plugged/vim-snippets
-    url = https://github.com/nymann/vim-snippets
+    url = ../../nymann/vim-snippets
 
 [submodule "nvim-colorizer.lua"]
     path = dots/nvim/plugged/nvim-colorizer.lua
-    url = https://github.com/norcalli/nvim-colorizer.lua
+    url = ../../norcalli/nvim-colorizer.lua
 
 [submodule "vim-nerdtree-syntax-highlight"]
     path = dots/nvim/plugged/vim-nerdtree-syntax-highlight
-    url = https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
+    url = ../../tiagofumo/vim-nerdtree-syntax-highlight
 
 [submodule "onedark.vim"]
     path = dots/nvim/plugged/onedark.vim
-    url = https://github.com/joshdick/onedark.vim
+    url = ../../joshdick/onedark.vim
 
 [submodule "rainbow_parentheses.vim"]
     path = dots/nvim/plugged/rainbow_parentheses.vim
-    url = https://github.com/kien/rainbow_parentheses.vim
+    url = ../../kien/rainbow_parentheses.vim
 
 [submodule "vim-coloresque"]
     path = dots/nvim/plugged/vim-coloresque
-    url = https://github.com/gko/vim-coloresque
+    url = ../../gko/vim-coloresque
 
 [submodule "semshi"]
     path = dots/nvim/plugged/semshi
-    url = https://github.com/numirias/semshi
+    url = ../../numirias/semshi
 
 [submodule "seoul256.vim"]
     path = dots/nvim/plugged/seoul256.vim
-    url = https://github.com/junegunn/seoul256.vim
+    url = ../../junegunn/seoul256.vim
 
 [submodule "syntastic"]
     path = dots/nvim/plugged/syntastic
-    url = https://github.com/vim-syntastic/syntastic
+    url = ../../vim-syntastic/syntastic
 
 [submodule "ultisnips"]
     path = dots/nvim/plugged/ultisnips
-    url = https://github.com/SirVer/ultisnips
+    url = ../../SirVer/ultisnips
 
 [submodule "vim-airline"]
     path = dots/nvim/plugged/vim-airline
-    url = https://github.com/bling/vim-airline
+    url = ../../bling/vim-airline
 
 
 [submodule "vim-devicons"]
     path = dots/nvim/plugged/vim-devicons
-    url = https://github.com/ryanoasis/vim-devicons
+    url = ../../ryanoasis/vim-devicons
 
 [submodule "vim-gitgutter"]
     path = dots/nvim/plugged/vim-gitgutter
-    url = https://github.com/airblade/vim-gitgutter
+    url = ../../airblade/vim-gitgutter
 
 [submodule "vim-python-pep8-indent"]
     path = dots/nvim/plugged/vim-python-pep8-indent
-    url = https://github.com/Vimjas/vim-python-pep8-indent
+    url = ../../Vimjas/vim-python-pep8-indent
 
 [submodule "vista.vim"]
     path = dots/nvim/plugged/vista.vim
-    url = https://github.com/liuchengxu/vista.vim
+    url = ../../liuchengxu/vista.vim
 
 [submodule "vim-pydocstring"]
     path = dots/nvim/plugged/vim-pydocstring
-    url = https://github.com/heavenshell/vim-pydocstring
+    url = ../../heavenshell/vim-pydocstring
 
 [submodule "vim-fugitive"]
     path = dots/nvim/plugged/vim-fugitive
-    url = https://github.com/tpope/vim-fugitive
+    url = ../../tpope/vim-fugitive
 
 [submodule "nord-vim"]
     path = dots/nvim/plugged/nord-vim
-    url = https://github.com/arcticicestudio/nord-vim
+    url = ../../arcticicestudio/nord-vim
 
 [submodule "vim-gitbranch"]
     path = dots/nvim/plugged/vim-gitbranch
-    url = https://github.com/itchyny/vim-gitbranch
+    url = ../../itchyny/vim-gitbranch
 
 [submodule "completion-nvim"]
     path = dots/nvim/plugged/completion-nvim
-    url = https://github.com/haorenW1025/completion-nvim
+    url = ../../haorenW1025/completion-nvim
 
 [submodule "diagnostic-nvim"]
     path = dots/nvim/plugged/diagnostic-nvim
-    url = https://github.com/haroenW1025/diagnostic-nvim
+    url = ../../haroenW1025/diagnostic-nvim
 
 [submodule "indentLine"]
     path = dots/nvim/plugged/indentLine
-    url = https://github.com/Yggdroot/indentLine
+    url = ../../Yggdroot/indentLine
 
 [submodule "lsp-status.nvim"]
     path = dots/nvim/plugged/lsp-status.nvim
-    url = https://github.com/wbthomason/lsp-status.nvim
+    url = ../../wbthomason/lsp-status.nvim
 
 [submodule "nvim-lsp"]
     path = dots/nvim/plugged/nvim-lsp
-    url = https://github.com/neovim/nvim-lsp
+    url = ../../neovim/nvim-lsp
 
 [submodule "vim-autoformat"]
     path = dots/nvim/plugged/vim-autoformat
-    url = https://github.com/Chiel92/vim-autoformat
+    url = ../../Chiel92/vim-autoformat
 
 [submodule "vim-rhubarb"]
     path = dots/nvim/plugged/vim-rhubarb
-    url = https://github.com/tpope/vim-rhubarb
+    url = ../../tpope/vim-rhubarb
 
 [submodule "vim-signify"]
     path = dots/nvim/plugged/vim-signify
-    url = https://github.com/mhinz/vim-signify
+    url = ../../mhinz/vim-signify
 
 [submodule "vim-smoothie"]
     path = dots/nvim/plugged/vim-smoothie
-    url = https://github.com/psliwka/vim-smoothie
+    url = ../../psliwka/vim-smoothie
 
 
 [submodule "colorizer"]
     path = dots/nvim/plugged/colorizer
-    url = https://github.com/lilydjwg/colorizer
+    url = ../../lilydjwg/colorizer
 
 
 
