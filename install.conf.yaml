@@ -7,6 +7,9 @@
 - link:
     ~/.config/zsh/.zshrc: dots/zsh/zshrc
     ~/.config/zsh/.zprofile: dots/zsh/zprofile
+    ~/.themes/nordic:
+      path: dots/nordic-gtk-theme
+      use_glob: true
     ~/.config/zsh/custom:
       path: dots/zsh/custom
       use_glob: true

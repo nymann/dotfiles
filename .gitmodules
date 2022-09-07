@@ -161,3 +161,6 @@
 
 
 
+[submodule "dots/nordic-gtk-theme"]
+	path = dots/nordic-gtk-theme
+	url = ../../EliverLara/Nordic

@@ -24,7 +24,9 @@ export ZSH_CUSTOM="$ZDOTDIR/custom"
 
 # Fix for Alacritty on ultra wide monitors
 export WINIT_X11_SCALE_FACTOR=1
+
 export JAVA_HOME="/usr/lib/jvm/java-18-openjdk/"
 export ANDROID_SDK_ROOT='/opt/android-sdk'
 export _JAVA_AWT_WM_NONREPARENTING=1
 export MPD_HOST="$HOME/.config/mpd/socket"
+export GTK_THEME=nordic
