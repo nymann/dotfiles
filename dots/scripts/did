@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+docker ps | awk -v pat="$1" '$0 ~ pat { print $1 }'

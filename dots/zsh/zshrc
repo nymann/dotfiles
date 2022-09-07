@@ -1,4 +1,4 @@
-ZSH_THEME="murilasso"
+ZSH_THEME="nymann"
 COMPLETION_WAITING_DOTS="true"
 autoload -Uz compinit
 zstyle ':completion:*' menu select

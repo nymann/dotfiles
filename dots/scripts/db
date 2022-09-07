@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+docker_id="$(did "$1")"
+docker exec -u postgres -it "$docker_id" psql -d "$1"
