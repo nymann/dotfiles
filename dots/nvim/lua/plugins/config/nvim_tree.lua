@@ -20,7 +20,7 @@ require'nvim-tree'.setup {
     custom = {".git", ".pyc", ".pytest_cache"},
   },
   git = {
-    ignore = true,
+    ignore = false,
   },
   diagnostics = {
     enable = false,

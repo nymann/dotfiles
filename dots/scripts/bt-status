@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+if bluetoothctl show | grep -q "Powered: yes"; then
+    echo ""
+fi

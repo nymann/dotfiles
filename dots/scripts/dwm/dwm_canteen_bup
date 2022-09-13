@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-mkdir -p $HOME/.cache/dwmbar/
-
-while :; do
-    $HOME/.local/bin/scripts/canteen_bup > $HOME/.cache/dwmbar/top_0005_canteen_bup
-    sleep 600;
-done

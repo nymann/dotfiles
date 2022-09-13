@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+bluetoothctl power on
+bluetoothctl connect "$1"

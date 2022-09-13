@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-rm $HOME/.cache/dwmbar/*
+rm -r "$HOME"/.cache/dwmbar/ 2> /dev/null
 
-ps -ef | grep "dwm_clock" | awk '{print $2}' | xargs kill -9
+ps -ef | awk '/dwm_/ {print $2}' | xargs kill -9
 
-$HOME/.local/bin/scripts/dwm/dwm_clock &
+run-parts "$HOME"/.local/bin/scripts/dwm/ &

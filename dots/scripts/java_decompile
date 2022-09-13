@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+JAR_TO_DECOMPILE="$(basename "$1")"
+
+docker run -it --rm \
+    -v "$(pwd)":/mnt \
+    --user "$(id -u)":"$(id -g)" \
+    kwart/jd-cli \
+    /mnt/"$JAR_TO_DECOMPILE" \
+    -od /mnt/deccompiled-src

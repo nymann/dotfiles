@@ -1,8 +1,0 @@
-#!/bin/sh
-
-mkdir -p $HOME/.cache/dwmbar/
-
-while :; do
-	timetrace status | awk -F'|' 'NR == 4 {gsub(/ /, "", $0); print $2 " " $3}' > "$HOME/.cache/dwmbar/top_0008_timetrace"
-        sleep 1
-done
