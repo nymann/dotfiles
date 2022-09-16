@@ -1,8 +1,7 @@
 #!/usr/bin/env sh
+LOG_DIR="$HOME"/.local/share/dwm/logs
 
+mkdir -p "$LOG_DIR"
 while true; do
-    # Log stderror to a file 
-    dwm 2> /var/log/dwm/log
-    # No error logging
-    #dwm >/dev/null 2>&1
+    dwm > "$LOG_DIR/log" 2> "${LOG_DIR}/error.log"
 done
