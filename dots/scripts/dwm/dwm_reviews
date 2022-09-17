@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-
-mkdir -p $HOME/.cache/dwmbar/
-
-while :; do
-    A=" $(gitlab_assigned_reviewer) Reviews "
-    echo "$A" > $HOME/.cache/dwmbar/top_0006_gitlab_assigned_reviewer
-    sleep 30;
-done

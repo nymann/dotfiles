@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-mkdir -p $HOME/.cache/dwmbar/
-
-while :; do
-    gitlab_todos > $HOME/.cache/dwmbar/top_0007_gitlab_to_dos
-    sleep 30;
-done
