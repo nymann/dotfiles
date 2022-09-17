@@ -121,6 +121,7 @@ return require("packer").startup(function(use)
   }
   use {
     "andythigpen/nvim-coverage",
+    requires = "nvim-lua/plenary.nvim",
     config = [[require("plugins.config.coverage")]],
   }
 end)
