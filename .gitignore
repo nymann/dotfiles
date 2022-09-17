@@ -1,9 +1,10 @@
 __pycache__
-tags
-dots/qtile/.cache/
 dots/nvim/.netrwhist
-dots/qutebrowser/autoconfig.yml
-dots/qutebrowser/quickmarks
-dots/nvim/plugin/packer_compiled.vim
-dots/qutebrowser/qsettings/QtProject.conf
 dots/nvim/plugin/packer_compiled.lua
+dots/nvim/plugin/packer_compiled.vim
+dots/qtile/.cache/
+dots/qutebrowser/autoconfig.yml
+dots/qutebrowser/bookmarks/
+dots/qutebrowser/qsettings/QtProject.conf
+dots/qutebrowser/quickmarks
+tags

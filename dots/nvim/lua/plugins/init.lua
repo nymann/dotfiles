@@ -119,4 +119,9 @@ return require("packer").startup(function(use)
     "nymann/nvim-lspconfig",
     config = [[require("plugins.config.lsp")]],
   }
+  use {
+    "andythigpen/nvim-coverage",
+    requires = "nvim-lua/plenary.nvim",
+    config = [[require("plugins.config.coverage")]],
+  }
 end)
