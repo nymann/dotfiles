@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+translate_me="$(xclip -o -sel clip | sed 's#_# #g')"
+trans -b -no-warn "$translate_me" | sed 's# #_#g' | tr -d '\n' | sed 's/.*/\L&/' | xclip -sel clip

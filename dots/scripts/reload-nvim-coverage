@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 
+<<<<<<< HEAD
 from pathlib import Path
+=======
+>>>>>>> f50194e9a14d19adc4ad7d70929e73ad6e3f19fe
 from time import sleep
 
 from pynvim import attach
 
 
+<<<<<<< HEAD
 def main(path: Path):
+=======
+def main(path: str):
+>>>>>>> f50194e9a14d19adc4ad7d70929e73ad6e3f19fe
     nvim = attach(session_type="socket", path=path)
     nvim.command("CoverageLoad")
     sleep(0.2)
@@ -14,4 +21,8 @@ def main(path: Path):
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main(path=Path.cwd().joinpath(".nvim-sock"))
+=======
+    main(path="/tmp/kek")
+>>>>>>> f50194e9a14d19adc4ad7d70929e73ad6e3f19fe

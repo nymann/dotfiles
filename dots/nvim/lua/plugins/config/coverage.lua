@@ -18,4 +18,3 @@ require("coverage").setup({
 		-- customize language specific settings
 	},
 })
-

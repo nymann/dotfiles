@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+while read -r line
+do
+    translate_me="$(echo "${line}" | sed 's#_# #g')"
+    trans -b "$translate_me" | sed 's# #_#g' | tr -d '\n' | sed 's/.*/\L&/'
+done < "${1:-/dev/stdin}"
