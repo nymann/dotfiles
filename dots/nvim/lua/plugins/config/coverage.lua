@@ -1,5 +1,5 @@
 require("coverage").setup({
-	commands = true, -- create commands
+  auto_reload = false,
 	highlights = {
 		-- customize highlight groups created by the plugin
 		covered = { fg = "#73DACA" },   -- supports style, fg, bg, sp (see :h highlight-gui)
@@ -14,7 +14,8 @@ require("coverage").setup({
 		-- customize the summary pop-up
 		min_coverage = 80.0,      -- minimum coverage threshold (used for highlighting)
 	},
-	lang = {
-		-- customize language specific settings
-	},
+  load_coverage_cb = function(ftype)
+    vim.notify("Loaded" .. ftype .. " coverage")
+  end,
+  auto_reload_timeout_ms = 2000,
 })
