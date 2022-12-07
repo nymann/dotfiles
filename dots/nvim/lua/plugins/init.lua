@@ -76,7 +76,7 @@ return require("packer").startup(function(use)
     config = [[require("plugins.config.lsptrouble")]],
   }
   use {
-    "folke/lua-dev.nvim"
+    "folke/neodev.nvim"
   }
   use {
     "folke/tokyonight.nvim",

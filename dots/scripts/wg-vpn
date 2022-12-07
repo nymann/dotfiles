@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+[ $(id -u) -eq 0 ] || exec sudo $0
+umask 0022
+
+DNS=8.8.8.8
+GW=10.200.200.1
+
+systemctl restart dnsmasq
+add_gateway_route() {
+    ip route add "$1" via ${GW}
+}
+add_gateway_route 35.186.238.0/24

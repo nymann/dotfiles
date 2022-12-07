@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+if [ "$#" -ne 2 ] ; then
+    echo "USAGE: $0 <m3u8_url> <out_file>"; exit
+fi
+base=$(echo "$1" | rev | cut -d'/' -f2- | rev)
+curl -s $1 | grep -v "^#" | sed -e "s>^>$base/>" | xargs curl -s | ffmpeg -i pipe:0 -c:v copy -c:a copy $2

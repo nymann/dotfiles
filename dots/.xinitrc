@@ -14,4 +14,5 @@ xinput --set-prop $(xinput list | awk '/Logitech G Pro.*slave  pointer/ { print 
 #qtile start
 ~/.local/bin/scripts/dwmbar &
 feh --bg-center ~/pics/background.jpg &
+systemctl --user start unclutter
 ~/.local/bin/scripts/startdwm

@@ -4,5 +4,5 @@ Documentation=man:dirmngr(8)
 Requires=dirmngr.socket
 
 [Service]
-ExecStart=/usr/bin/dirmngr --supervised
+ExecStart=/usr/bin/dirmngr --supervised --no-use-tor
 ExecReload=/usr/bin/gpgconf --reload dirmngr

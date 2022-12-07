@@ -13,6 +13,7 @@ plugins=(
     git
     colored-man-pages
     sudo
+    ssh-agent
 )
 
 bindkey -v
