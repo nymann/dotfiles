@@ -109,7 +109,7 @@ end
 local servers = { 'pyright', 'refacto', 'tsserver', 'rust_analyzer', 'bashls', 'intelephense', 'solargraph', 'ccls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
-    on_attach = on_attach,
+    on_attach = on_attach_highlight,
     capabilities = capabilities
   })
 end

@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+
+import rofi_menu
+
+bt_devices = {
+    "WH-1000XM4": "94:DB:56:7A:99:5A",
+    "Jabra Elite 7 Active": "50:C2:ED:EC:CF:9B",
+    "Philips TAW6205": "60:B6:06:25:24:36",
+}
+
+
+class BluetoothMenu(rofi_menu.Menu):
+    prompt = "Connect to Bluetooth device"
+    items = [
+        rofi_menu.ShellItem(key, f"bt-connect '{mac}'")
+        for key, mac in bt_devices.items()
+    ]
+
+
+def main():
+    rofi_menu.run(BluetoothMenu())
+
+
+if __name__ == "__main__":
+    main()
