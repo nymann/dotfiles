@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+import rofi_menu
+
+streams = {
+    "lofi hip hop radio - beats to relax/study to ": "https://youtu.be/jfKfPfyJRdk"
+}
+
+
+class AudioStreamsPickerMenu(rofi_menu.Menu):
+    prompt = "Connect to Bluetooth device"
+    items = [
+        rofi_menu.ShellItem(key, f"mpv --no-video '{mac}'")
+        for key, mac in streams.items()
+    ]
+
+
+def main():
+    rofi_menu.run(AudioStreamsPickerMenu())
+
+
+if __name__ == "__main__":
+    main()

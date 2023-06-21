@@ -1,0 +1,12 @@
+#!/bin/sh
+
+run_tests() {
+    pytest tests/unit_tests
+}
+
+run_tests
+
+while inotifywait -qqre modify src tests; do
+    clear
+    run_tests
+done

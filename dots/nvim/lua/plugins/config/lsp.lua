@@ -71,7 +71,7 @@ cmp.setup {
 }
 
 local capabilities = protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 
 --- Document highlights
@@ -109,7 +109,7 @@ end
 local servers = { 'pyright', 'refacto', 'tsserver', 'rust_analyzer', 'bashls', 'intelephense', 'solargraph', 'ccls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
-    on_attach = on_attach,
+    on_attach = on_attach_highlight,
     capabilities = capabilities
   })
 end
@@ -193,7 +193,7 @@ lspconfig.svelte.setup {
     }
   }
 }
-local luadev = require("lua-dev").setup {
+local luadev = require("neodev").setup {
   library = {
     vimruntime = true, -- runtime path
     types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
