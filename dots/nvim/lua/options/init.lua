@@ -74,7 +74,7 @@ o.shortmess = vim.o.shortmess .. "c"
 
 
 --Add map to enter paste mode
-o.pastetoggle="<F3>"
+-- o.pastetoggle="<F3>"
 
 g.indent_blankline_char = "┊"
 g.indent_blankline_filetype_exclude = { 'help', 'packer' }
@@ -97,17 +97,6 @@ g.python_highlight_space_errors = 0
 
 -- Set completeopt to have a better completion experience
 o.completeopt="menuone,noinsert,noselect"
-
-local bufferline = {
-	icons = true,
-	animation = true,
-	semantic_letters = true,
-	clickable = false,
-	letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
-  maximum_padding = 4,
-}
-
-g.bufferline = bufferline
 
 o.swapfile = false
 o.smarttab = true

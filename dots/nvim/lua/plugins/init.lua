@@ -83,12 +83,6 @@ return require("packer").startup(function(use)
     config = [[require("plugins.config.tokyonight")]]
   }
   use {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && yarn install",
-    cmd = "MarkdownPreview",
-    ft = "markdown",
-  }
-  use {
     "kyazdani42/nvim-tree.lua",
     requires = {
       "kyazdani42/nvim-web-devicons",
@@ -102,6 +96,7 @@ return require("packer").startup(function(use)
       "kyazdani42/nvim-web-devicons",
       config = [[require("plugins.config.devicons")]],
     },
+    config = [[require("plugins.config.barbar")]],
   }
   use {
     "lervag/vimtex",
@@ -123,5 +118,11 @@ return require("packer").startup(function(use)
     "andythigpen/nvim-coverage",
     requires = "nvim-lua/plenary.nvim",
     config = [[require("plugins.config.coverage")]],
+  }
+  use {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && yarn install",
+    cmd = "MarkdownPreview",
+    ft = "markdown",
   }
 end)

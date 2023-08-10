@@ -20,7 +20,6 @@
     ~/.config/nvim:
       path: dots/nvim
       use_glob: true
-    ~/.mbsyncrc: dots/isync/mbsyncrc
     ~/.config/sxhkd/sxhkdrc: dots/sxhkd/sxhkdrc
     ~/.config/mpd/mpd.conf: dots/mpd/mpd.conf
     ~/.xinitrc: dots/.xinitrc

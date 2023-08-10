@@ -1,5 +1,5 @@
 # Adds ~/.local/bin and my script folder to path.
-export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH:$HOME/.local/bin/work-scripts:/home/knj/.gem/ruby/3.0.0/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:/opt/android-sdk/tools/bin/"
+export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH:$HOME/.local/bin/work-scripts:/home/knj/.gem/ruby/3.0.0/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:/opt/android-sdk/tools/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export NODE_PATH=~/.npm-global/lib/node_modules
 
 # Set config home dir.
