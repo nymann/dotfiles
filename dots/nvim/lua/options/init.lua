@@ -52,9 +52,6 @@ o.clipboard = "unnamedplus"
 --Enable break indent
 o.breakindent = true
 
---Save undo history
-cmd[[ set undofile ]]
-
 --Case insensitive searching UNLESS /C or capital in search
 o.ignorecase = true
 o.smartcase = true
