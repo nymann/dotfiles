@@ -10,6 +10,9 @@
     ~/.themes/nordic:
       path: dots/nordic-gtk-theme
       use_glob: true
+    ~/.config/alacritty:
+      path: dots/alacritty
+      use_glob: true
     ~/.config/zsh/custom:
       path: dots/zsh/custom
       use_glob: true
