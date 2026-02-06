@@ -1,3 +1,4 @@
+[general]
 import = [
  "~/.config/alacritty/themes/tokyo-night.toml"
 ]
@@ -25,3 +26,8 @@ opacity = 0.7
 [window.padding]
 x = 5
 y = 5
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
