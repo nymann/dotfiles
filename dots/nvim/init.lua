@@ -10,3 +10,9 @@ end
 require('mappings')
 require('options')
 require('plugins')
+
+-- Auto-compile packer if compiled file is missing
+local compile_path = fn.stdpath('config') .. '/plugin/packer_compiled.lua'
+if fn.empty(fn.glob(compile_path)) > 0 then
+  require('packer').compile()
+end
