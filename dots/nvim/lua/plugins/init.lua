@@ -44,11 +44,6 @@ return require("packer").startup(function(use)
     config = [[require("plugins.config.treesitter")]]
   }
   use {
-    "nvim-treesitter/playground",
-    run = ":TSInstall query",
-    config = [[require("plugins.config.playground")]],
-  }
-  use {
     "ray-x/lsp_signature.nvim",
   }
   use {"ludovicchabant/vim-gutentags"}
